@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Debt Calculator — How Much Sleep You Owe Your Body | DoctorBiohacks</title>
+<meta name="description" content="Add up a week of short nights into one honest number. Get your sleep debt total, a night-by-night recovery plan, and when tiredness becomes a medical problem.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/sleep-debt/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sleep Debt Calculator — How Much Sleep You Owe Your Body">
+<meta property="og:description" content="Add up a week of short nights into one honest number. Get your sleep debt total, a night-by-night recovery plan, and when tiredness becomes a medical problem.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/sleep-debt/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Can you really pay back sleep debt, or is lost sleep gone forever?","acceptedAnswer":{"@type":"Answer","text":"You can partially repay it. Studies show that extending sleep over several nights recovers reaction time, mood, and subjective alertness. However, some cognitive effects of chronic restriction recover slowly, and a single long weekend sleep does not fully undo weeks of short nights. The most reliable strategy is small nightly extensions (30 to 90 extra minutes) over one to two weeks."}},
+  {"@type":"Question","name":"Is sleeping in on weekends a good way to catch up?","acceptedAnswer":{"@type":"Answer","text":"It helps a little, but sleeping in by several hours shifts your circadian rhythm — researchers call this social jet lag — making Sunday night harder and Monday morning worse. A better approach is to go to bed slightly earlier each night and keep wake time consistent."}},
+  {"@type":"Question","name":"How much sleep do adults actually need?","acceptedAnswer":{"@type":"Answer","text":"The American Academy of Sleep Medicine recommends 7 or more hours per night for adults. Individual need varies: most people need 7 to 9 hours. Teenagers need 8 to 10, and older adults often need slightly less than middle-aged adults, though rarely less than 7."}},
+  {"@type":"Question","name":"Does napping reduce sleep debt?","acceptedAnswer":{"@type":"Answer","text":"Short naps (10 to 20 minutes) reduce subjective sleepiness and improve alertness without much sleep inertia. They count toward total sleep but do not fully replace consolidated nighttime sleep, which provides the deep and REM stages in the right proportions."}},
+  {"@type":"Question","name":"When is constant tiredness a medical problem?","acceptedAnswer":{"@type":"Answer","text":"See a doctor if you sleep 7 to 9 hours yet still feel exhausted, if you snore loudly or gasp at night (possible sleep apnoea), fall asleep unintentionally during the day, or if fatigue persists for weeks despite better sleep habits. Persistent daytime sleepiness is a symptom, not a personality trait."}},
+  {"@type":"Question","name":"Why do I feel worse after a 12-hour catch-up sleep?","acceptedAnswer":{"@type":"Answer","text":"Very long sleep bouts cause sleep inertia — grogginess from waking out of deep sleep — and they fragment your circadian rhythm. Oversleeping beyond about 10 hours is also associated with worse, not better, daytime function in population studies. Moderate, consistent extensions work better than one heroic lie-in."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Sleep Debt Calculator</nav>
+<h1>Sleep Debt Calculator</h1>
+<p class="lede">Seven short nights add up to a number most people never calculate. Enter your actual sleep for the past week and your personal sleep need — this tool totals the debt, designs a night-by-night repayment plan, and tells you when the problem has outgrown home fixes.</p>
+<div class="tool-card">
+<form id="debtForm" aria-label="Sleep debt calculator">
+<div class="form-grid">
+<div class="field"><label for="need">Your nightly sleep need (hours)</label><input type="number" id="need" min="4" max="12" step="0.5" value="8"><div class="hint">Most adults need 7–9. Teenagers need 8–10. Use 8 if unsure.</div></div>
+<div class="field"><label for="n1">Night 1 — hours slept</label><input type="number" class="night" id="n1" min="0" max="16" step="0.5" value="6"></div>
+<div class="field"><label for="n2">Night 2 — hours slept</label><input type="number" class="night" id="n2" min="0" max="16" step="0.5" value="6"></div>
+<div class="field"><label for="n3">Night 3 — hours slept</label><input type="number" class="night" id="n3" min="0" max="16" step="0.5" value="7"></div>
+<div class="field"><label for="n4">Night 4 — hours slept</label><input type="number" class="night" id="n4" min="0" max="16" step="0.5" value="5"></div>
+<div class="field"><label for="n5">Night 5 — hours slept</label><input type="number" class="night" id="n5" min="0" max="16" step="0.5" value="6"></div>
+<div class="field"><label for="n6">Night 6 — hours slept</label><input type="number" class="night" id="n6" min="0" max="16" step="0.5" value="8"></div>
+<div class="field"><label for="n7">Night 7 — hours slept</label><input type="number" class="night" id="n7" min="0" max="16" step="0.5" value="7"></div>
+</div>
+<button type="button" class="btn" id="calcBtn">Calculate my sleep debt</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+
+<h2>What sleep debt actually is</h2>
+<p>Sleep debt is the gap between the sleep your body needed and the sleep it got, added up over time. Miss one hour a night for a week and you are not "a bit tired" — you are carrying seven hours of debt, roughly equivalent to pulling an all-nighter, except you barely notice because the decline is gradual. That is the insidious part: in the famous Van Dongen sleep-restriction study, people sleeping six hours a night rated themselves as only slightly sleepy by day six, while their cognitive test scores had deteriorated to the level of someone awake for 24 to 48 hours straight. Subjective sleepiness adapts; objective performance does not.</p>
+<p>Your brain tracks the deficit biochemically. Adenosine, a byproduct of neural activity, accumulates the longer you are awake and creates sleep pressure. Caffeine does not clear adenosine — it only blocks the receptors that detect it, which is why the crash lands the moment it wears off. A full night of deep sleep washes adenosine away; a short night only partially drains it. Night after night, the residue compounds. This calculator makes that invisible ledger visible: every night below your need adds hours to the pile, and only genuine extra sleep — not coffee, not willpower — subtracts from it.</p>
+
+<h2>How much sleep you really need</h2>
+<p>The default of eight hours is a population average, not a prescription. Genuine individual variation exists: a small fraction of people carry gene variants that let them function on six hours, while others truly need nine or ten. The honest way to find your number is to track two weeks of unrestricted sleep (a holiday works well) and average it — most adults land between seven and nine. Age matters too:</p>
+<table>
+<tr><th>Age group</th><th>Recommended nightly sleep</th></tr>
+<tr><td>Teenagers (13–17)</td><td>8–10 hours</td></tr>
+<tr><td>Young adults (18–25)</td><td>7–9 hours</td></tr>
+<tr><td>Adults (26–64)</td><td>7–9 hours</td></tr>
+<tr><td>Older adults (65+)</td><td>7–8 hours</td></tr>
+</table>
+<p>These bands come from the American Academy of Sleep Medicine and the Sleep Research Society consensus. If you consistently need the top of your band to feel functional, that is your need — set it honestly in the calculator, because underestimating need is the most common way people fool the maths.</p>
+
+<h2>The maths behind this calculator</h2>
+<p>For each of the seven nights, the tool computes need minus actual sleep. Nights where you slept less than your need add the full shortfall. Nights where you overslept subtract credit — but capped at one hour, because sleeping ten hours does not truly bank three spare hours for later; long lie-ins repay far less than their face value and disrupt your rhythm. The total is floored at zero: this tool measures debt, not surplus.</p>
+<p>The recovery plan then divides the debt into nightly catch-up portions. The rule is simple: add up to one and a half extra hours per night (never more — overshooting fragments your sleep schedule), so a debt of eleven hours is repaid as roughly eight nights of an extra ninety minutes. That steady-drip approach matches what the research supports: gradual repayment over one to two weeks restores performance far better than a single marathon sleep.</p>
+
+<h2>How to pay back sleep debt without wrecking your rhythm</h2>
+<p>The cardinal rule is to keep your wake time fixed and move bedtime earlier. Your circadian clock anchors primarily to light exposure and wake time, so a consistent wake-up — even on weekends — stabilises everything else. Shift bedtime earlier in 20 to 30 minute steps every few nights rather than jumping two hours at once; your body cannot fall asleep on command hours before its habit.</p>
+<p>Make the extra sleep count. Sleep debt repayment works best when the additional sleep is high quality: a cool, dark room; no alcohol within three hours of bed (alcohol fragments sleep architecture and suppresses REM even as it helps you fall asleep); screens off or filtered an hour before bed; and no caffeine after early afternoon. A 20-minute afternoon nap can take the edge off daytime sleepiness while you repay, but nap before 15:00 and keep it short — long late naps steal sleep pressure from the coming night and slow the whole repayment.</p>
+<p>Expect the recovery to feel slow at first. Paradoxically, the first nights of extended sleep often feel worse — you wake groggy because you are finally reaching deep sleep stages your body has been starved of, and waking from deep sleep causes sleep inertia. Give it three to four nights. Track your afternoon alertness (the 14:00 to 16:00 dip is the most sensitive indicator) rather than your morning grogginess.</p>
+
+<h2>Naps, weekends, and the catch-up myth</h2>
+<p>Weekend catch-up sleep has been studied directly, and the verdict is nuanced: two nights of recovery sleep after five restricted nights restores some metabolic markers and subjective energy, but reaction-time performance and inflammatory markers do not fully normalise. Partial repayment is real, but it is not a full reset — which is exactly why the "I will sleep in on Saturday" strategy slowly loses ground over months.</p>
+<p>Naps are genuinely useful but limited. A 10 to 20 minute nap improves alertness and mood for a few hours with minimal grogginess; a 90-minute nap completes a full sleep cycle and is more restorative but risks serious sleep inertia. Neither replaces the deep slow-wave sleep of the first half of the night, which is when growth hormone release and much of the brain's metabolic clearance happen. Think of naps as interest payments: they reduce the pain, but only nighttime sleep retires the principal.</p>
+
+<h2>Sleep debt in real life: shift work, parenting, and jet lag</h2>
+<p>Not all sleep debt is a lifestyle choice. Shift workers, new parents, and frequent travellers accumulate debt structurally, and the repayment rules bend for them. Shift workers face the hardest problem: rotating schedules fight the circadian clock itself, so the priority is anchoring one consistent sleep window on days off and using bright light strategically — bright light during the first half of a night shift, sunglasses on the morning commute home. Studies of night-shift nurses show that even partial schedule regularity measurably reduces the cognitive penalty.</p>
+<p>New parents should lower their standards on purpose. Fragmented infant sleep means debt accumulates in 90-minute chunks; the evidence-backed tactics are sleeping when the baby sleeps for at least one full cycle, trading off full nights with a partner in shifts, and treating the first six months as damage control rather than optimisation. Caffeine timing matters more here: an early-afternoon cutoff protects the few consolidated hours you get.</p>
+<p>After jet lag, debt and circadian misalignment stack. The fastest recovery combines the repayment plan above with timed light exposure — morning light when travelling east, evening light when travelling west — because light is what resets the clock that decides when your extra sleep actually consolidates. Melatonin (0.5 to 3 mg, taken at the destination bedtime) has modest evidence for eastward travel; discuss it with your doctor rather than self-prescribing indefinitely.</p>
+
+<h2>When sleep debt is a medical problem</h2>
+<p>This calculator flags any debt above twenty hours with a prompt to see a doctor — and there are situations where you should not wait for the maths. If you sleep seven to nine hours nightly and still feel exhausted, the problem may not be debt at all: obstructive sleep apnoea, restless legs syndrome, thyroid disorders, depression, and several medications all masquerade as "not enough sleep." Loud snoring with witnessed pauses in breathing, falling asleep unintentionally during the day, or a partner noticing gasping are red flags worth a sleep study.</p>
+<p>Persistent insomnia — trouble falling or staying asleep three or more nights a week for three months — also deserves professional help rather than more calculator sessions. Cognitive behavioural therapy for insomnia (CBT-I) is the first-line treatment and outperforms sleeping pills long-term. Sleep debt you can repay yourself; a sleep disorder you should not try to.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Can you really pay back sleep debt, or is lost sleep gone forever?</summary><div class="a"><p>You can partially repay it. Studies show that extending sleep over several nights recovers reaction time, mood, and subjective alertness. However, some cognitive effects of chronic restriction recover slowly, and a single long weekend sleep does not fully undo weeks of short nights. The most reliable strategy is small nightly extensions (30 to 90 extra minutes) over one to two weeks.</p></div></details>
+<details><summary>Is sleeping in on weekends a good way to catch up?</summary><div class="a"><p>It helps a little, but sleeping in by several hours shifts your circadian rhythm — researchers call this social jet lag — making Sunday night harder and Monday morning worse. A better approach is to go to bed slightly earlier each night and keep wake time consistent.</p></div></details>
+<details><summary>How much sleep do adults actually need?</summary><div class="a"><p>The American Academy of Sleep Medicine recommends 7 or more hours per night for adults. Individual need varies: most people need 7 to 9 hours. Teenagers need 8 to 10, and older adults often need slightly less than middle-aged adults, though rarely less than 7.</p></div></details>
+<details><summary>Does napping reduce sleep debt?</summary><div class="a"><p>Short naps (10 to 20 minutes) reduce subjective sleepiness and improve alertness without much sleep inertia. They count toward total sleep but do not fully replace consolidated nighttime sleep, which provides the deep and REM stages in the right proportions.</p></div></details>
+<details><summary>When is constant tiredness a medical problem?</summary><div class="a"><p>See a doctor if you sleep 7 to 9 hours yet still feel exhausted, if you snore loudly or gasp at night (possible sleep apnoea), fall asleep unintentionally during the day, or if fatigue persists for weeks despite better sleep habits. Persistent daytime sleepiness is a symptom, not a personality trait.</p></div></details>
+<details><summary>Why do I feel worse after a 12-hour catch-up sleep?</summary><div class="a"><p>Very long sleep bouts cause sleep inertia — grogginess from waking out of deep sleep — and they fragment your circadian rhythm. Oversleeping beyond about 10 hours is also associated with worse, not better, daytime function in population studies. Moderate, consistent extensions work better than one heroic lie-in.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+function fmt(n){return (Math.round(n*10)/10).toString();}
+document.getElementById('calcBtn').addEventListener('click',function(){
+  var need=parseFloat(document.getElementById('need').value);
+  if(isNaN(need)||need<4||need>12){alert('Please enter a sleep need between 4 and 12 hours.');return;}
+  var nights=[];var ok=true;
+  document.querySelectorAll('.night').forEach(function(el){var v=parseFloat(el.value);if(isNaN(v)||v<0||v>16){ok=false;}nights.push(v||0);});
+  if(!ok){alert('Please enter 0–16 hours for each night.');return;}
+  var debt=0;
+  nights.forEach(function(a){var d=need-a;if(d>0){debt+=d;}else{debt+=Math.max(d,-1);}});
+  debt=Math.max(0,Math.round(debt*10)/10);
+  var extra=Math.min(debt/7,1.5);extra=Math.round(extra*10)/10;
+  var nightsTo=extra>0?Math.ceil(debt/extra):0;
+  var avg=Math.round(nights.reduce(function(s,v){return s+v;},0)/7*10)/10;
+  var html='<div class="big">'+fmt(debt)+'<span class="unit"> hours of sleep debt</span></div>';
+  html+='<p class="interpret">Repayment plan: go to bed '+fmt(extra)+'h earlier each night for about '+nightsTo+' nights.</p>';
+  html+='<p class="note">Your 7-night average: '+fmt(avg)+'h vs your need of '+fmt(need)+'h. Keep your wake time fixed and shift bedtime earlier in 20–30 minute steps. Short naps (≤20 min, before 15:00) can ease daytime sleepiness while you repay.</p>';
+  if(debt>20){html+='<p class="interpret" style="color:#b00020">Debt above 20 hours is substantial — if you feel exhausted despite trying to catch up, talk to your doctor. Persistent tiredness can signal sleep apnoea or other sleep disorders.</p>';}
+  else if(debt===0){html+='<p class="interpret">No debt — you are meeting your sleep need. Nice work.</p>';}
+  var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+});
+})();
+</script>
+</body>
+</html>
