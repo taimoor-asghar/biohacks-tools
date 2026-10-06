@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One-Rep Max Calculator | DoctorBiohacks</title>
+<meta name="description" content="Estimate your one-rep max from any submaximal set using the Epley and Brzycki formulas. Get your estimated 1RM plus a training percentage table (90%–50%) with example rep ranges.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/one-rep-max/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="One-Rep Max Calculator | DoctorBiohacks">
+<meta property="og:description" content="Estimate your one-rep max from any submaximal set using the Epley and Brzycki formulas. Get your estimated 1RM plus a training percentage table (90%–50%) with example rep ranges.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/one-rep-max/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.result .compare{font-size:.95rem;background:#fff;border:1px solid var(--border);border-radius:4px;padding:10px 14px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"How accurate is a one-rep max estimate?","acceptedAnswer":{"@type":"Answer","text":"Within the 3–8 rep range, the Epley and Brzycki formulas typically land within a few percent of a genuinely tested 1RM. Above about 10 reps the estimates diverge and become unreliable, because high-rep performance is limited by muscular endurance rather than maximal strength."}},
+  {"@type":"Question","name":"What is the Epley formula for 1RM?","acceptedAnswer":{"@type":"Answer","text":"The Epley formula is 1RM = weight × (1 + reps ÷ 30). For example, 100 kg lifted for 5 reps gives 100 × (1 + 5/30) = 116.7 kg. It assumes each additional rep implies a maximum roughly 3.3% above the weight lifted."}},
+  {"@type":"Question","name":"Why do the Epley and Brzycki formulas give different answers?","acceptedAnswer":{"@type":"Answer","text":"They are different statistical regressions fitted to groups of lifters. Brzycki (1RM = weight ÷ (1.0278 − 0.0278 × reps)) tends to be slightly more conservative than Epley. The difference is small in the 3–8 rep range and grows at higher reps."}},
+  {"@type":"Question","name":"Should I test my true 1RM instead of estimating it?","acceptedAnswer":{"@type":"Answer","text":"Only occasionally, and only with a competent spotter (plus safety bars for squats and bench press). A true max attempt carries real injury risk when technique breaks down. For planning training loads, a submaximal estimate is safer and accurate enough."}},
+  {"@type":"Question","name":"What training percentages should I use from my 1RM?","acceptedAnswer":{"@type":"Answer","text":"Common guidelines: 90–100% for maximal strength (1–3 reps), 80–90% for heavy strength work (3–6 reps), 70–80% for strength-hypertrophy blends (6–10 reps), 60–70% for volume work (8–12 reps), and 50–60% for warm-ups and technique practice."}},
+  {"@type":"Question","name":"Can I use this calculator for dumbbell or machine exercises?","acceptedAnswer":{"@type":"Answer","text":"Yes, but the estimates are looser. The formulas were developed mainly from barbell lift data, and strength–endurance relationships differ on machines and dumbbells. Treat those results as rough starting points."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; One-Rep Max Calculator</nav>
+<h1>One-Rep Max Calculator</h1>
+<p class="lede">Estimate your one-rep max (1RM) from a submaximal set — no dangerous max attempt required. Enter the weight you lifted and the reps you performed, and get an Epley estimate, a Brzycki comparison, and a training percentage table.</p>
+<div class="tool-card">
+<form id="orm-form" novalidate>
+<div class="form-grid">
+<div class="field">
+<label for="orm-weight">Weight lifted (kg)</label>
+<input type="number" id="orm-weight" name="weight" min="1" max="500" step="0.5" value="100" required aria-describedby="orm-weight-hint">
+<div class="hint" id="orm-weight-hint">The weight on the bar, e.g. 100</div>
+</div>
+<div class="field">
+<label for="orm-reps">Reps performed (1&ndash;12)</label>
+<input type="number" id="orm-reps" name="reps" min="1" max="12" step="1" value="5" required aria-describedby="orm-reps-hint">
+<div class="hint" id="orm-reps-hint">Best estimates come from 3&ndash;8 reps</div>
+</div>
+</div>
+<button type="submit" class="btn">Estimate my 1RM</button>
+</form>
+<div class="result" id="orm-result" role="status" aria-live="polite">
+<div class="big"><span id="orm-epley">0</span> <span class="unit">kg estimated 1RM (Epley)</span></div>
+<div class="compare" id="orm-brzycki-wrap">Brzycki estimate: <strong><span id="orm-brzycki">0</span> kg</strong> <span class="unit">— shown for comparison only</span></div>
+<p class="interpret">Training percentage table</p>
+<table aria-label="Training loads as percentages of estimated 1RM">
+<thead><tr><th>% of 1RM</th><th>Weight (kg)</th><th>Typical rep range</th><th>Best for</th></tr></thead>
+<tbody id="orm-table"></tbody>
+</table>
+<p class="note" id="orm-note"></p>
+</div>
+</div>
+
+<h2>What is a one-rep max, and why estimate it?</h2>
+<p>Your <strong>one-rep max (1RM)</strong> is the heaviest weight you can lift for a single complete repetition of a given exercise with good technique. It is the standard benchmark of maximal strength, and it is the anchor point for almost every serious strength-training programme: training loads are prescribed as percentages of 1RM (for example, 5 sets of 5 reps at 80% of your 1RM), progress is tracked by how the number changes over weeks and months, and most research on strength adaptation reports results in 1RM terms.</p>
+<p>The problem is that actually testing a true 1RM is demanding and risky. A genuine max attempt requires a long warm-up, multiple near-max sets, a competent spotter, and the willingness to grind through a rep that may take five seconds or more. For a trained lifter on a familiar barbell lift, a properly run 1RM test is a reasonable thing to do occasionally. For a beginner, someone returning from injury, someone training alone in a home gym, or anyone working around a cranky shoulder or back, a true max attempt is simply a bad idea: the injury risk rises sharply when technique breaks down under a maximal load, and one bad rep can cost months of training.</p>
+<p>That is where 1RM <strong>estimation</strong> comes in. Instead of lifting the maximum, you lift a moderately heavy weight for several reps and then use a validated formula to project what your single-rep maximum would be. Take a weight you can handle for, say, 5 solid reps, plug it into the calculator above, and you get a working estimate of your 1RM that is close enough to plan training from — without ever needing to gamble on a true max. Coaches, researchers, and competitive lifters use this approach routinely; many formal strength assessments are actually submaximal tests converted to 1RM by formula.</p>
+
+<h2>The formulas behind the calculator</h2>
+<p>This calculator shows you the two most widely used 1RM formulas so you can see both and understand why they sometimes disagree.</p>
+<h3>Epley (1985)</h3>
+<p>The Epley formula is the most common one you will meet: <strong>1RM = weight &times; (1 + reps &divide; 30)</strong>. It says, in plain language, that each additional rep you can perform implies your maximum is about 3.3% higher than the weight in your hands. Five reps at 100 kg gives 100 &times; (1 + 5/30) = 116.7 kg. Epley is popular because it is simple, it is easy to remember, and across the 3&ndash;8 rep range it lines up well with what lifters actually test in the gym.</p>
+<h3>Brzycki (1993)</h3>
+<p>The Brzycki formula takes a slightly different mathematical path: <strong>1RM = weight &divide; (1.0278 &minus; 0.0278 &times; reps)</strong>. For the same 100 kg for 5 reps, Brzycki gives 100 &divide; 0.8888 = 112.5 kg — a few kilograms lower than Epley's answer. Brzycki tends to be a little more conservative, which some coaches prefer for beginners, since it is better to undershoot a training load than to overshoot it.</p>
+<h3>Why do they disagree, and which should you trust?</h3>
+<p>Honest answer: neither is "the truth". These are statistical regressions fitted to groups of lifters, and individuals scatter around them. In the sweet spot of roughly 3&ndash;8 reps, the two formulas typically land within a few percent of each other and within a few percent of a real tested max. Below 3 reps there is barely any projecting to do (a double at 110 kg tells you your max is probably 112&ndash;115 kg), and the formulas agree closely.</p>
+<p>Above about 10 reps, the estimates <strong>diverge and degrade</strong>. The maths still runs, but the physiology changes: at high reps, your result is limited by muscular endurance, cardiovascular fatigue, and tolerance for the burn, not by the maximal force your muscles can produce. A set of 12 reps at 60 kg involves so many confounding factors that any single-rep projection is a rough guess at best — and the two formulas can differ by 10% or more. That is why this calculator caps reps at 12 and flags the comparison when your set was longer than 10 reps: for programming purposes, treat high-rep estimates as a starting guess and adjust by feel.</p>
+
+<h2>How to read the percentage table</h2>
+<p>Once you have an estimated 1RM, the percentage table does the useful work. Training at fixed percentages of your max is how programmes control <strong>intensity</strong> — the most important variable in strength training. Roughly:</p>
+<ul>
+<li><strong>90&ndash;100% of 1RM:</strong> maximal strength work. Sets of 1&ndash;3 reps. Used to peak for competition or test true maxes. High neural demand, needs long rests and a spotter.</li>
+<li><strong>80&ndash;90%:</strong> heavy strength work. Sets of 3&ndash;6 reps. The classic "get stronger" zone for squats, deadlifts, presses, and rows.</li>
+<li><strong>70&ndash;80%:</strong> the strength-hypertrophy blend. Sets of 6&ndash;10 reps. Most muscle growth per unit of fatigue happens here, and technique stays honest.</li>
+<li><strong>60&ndash;70%:</strong> moderate loads, sets of 8&ndash;12. Good for volume accumulation, technique practice, and deload weeks.</li>
+<li><strong>50&ndash;60%:</strong> light work: warm-ups, speed work, learning new lifts, and recovery sessions.</li>
+</ul>
+<p>The table above pairs each percentage with typical rep ranges, but treat these as starting points rather than rules. Your individual relationship between percentage and reps depends on the exercise (people grind more reps at a given percentage on leg press than on overhead press), on your training history, and on the day.</p>
+
+<h2>How to use your estimate in a real programme</h2>
+<p>A 1RM estimate is most useful as a <strong>planning number</strong>, not a bragging number. Here is how coaches typically put it to work:</p>
+<ol>
+<li><strong>Pick a submaximal test set.</strong> Warm up thoroughly, then work up to one hard-but-not-grinding set of 3&ndash;8 reps on the lift you want to test. Stop the set when you have one or two reps left in the tank — you do not need to go to failure, and going to failure regularly is a recovery tax you do not need to pay.</li>
+<li><strong>Calculate, then round down.</strong> Run the weight and reps through the calculator. If it says 116.7 kg, call your working max 115 kg. Rounding down buys you a small safety margin and keeps your programmed loads honest.</li>
+<li><strong>Programme your percentages off that number.</strong> A programme calling for 5&times;5 at 80% means 5 sets of 5 at 92 kg (80% of 115). Re-test every 8&ndash;12 weeks, or whenever the prescribed sets start feeling consistently easy.</li>
+<li><strong>Adjust by performance.</strong> If 80% for 5&times;5 is suddenly a grind every session, your true max may have dipped (fatigue, poor sleep, stress) — drop the working number 5% rather than forcing it. If it is all flying up, add 2.5&ndash;5 kg to the working max. The formula gives you the anchor; your body gives you the fine print.</li>
+</ol>
+
+<h2>Safety: read this before you chase a number</h2>
+<p>The whole point of estimating your 1RM is to <em>avoid</em> testing a true max. If you decide to test one anyway — for a competition, a milestone, or curiosity — respect the risk:</p>
+<ul>
+<li><strong>Never test a true 1RM alone.</strong> You need a competent spotter, and for bench press and squats that means someone who actually knows how to spot, plus safety bars or a power rack. Home-gym lifters have been seriously injured grinding alone under a barbell.</li>
+<li><strong>Warm up like it matters, because it does.</strong> A proper ramp — empty bar, then ascending sets of 5, 3, 2, 1 reps with growing rests — takes 15&ndash;25 minutes and is non-negotiable before heavy attempts. Cold muscles and stiff joints are how strains happen.</li>
+<li><strong>Do not test through pain.</strong> A 1RM test is not the time to discover what that shoulder twinge becomes under maximal load. If something hurts, the test is over.</li>
+<li><strong>Respect the calendar.</strong> True max tests are occasional events — a few times a year at most for most lifters. Testing monthly just accumulates fatigue and injury risk for numbers that the estimate already gives you.</li>
+</ul>
+<p>A useful alternative many lifters prefer is <strong>RPE (rate of perceived exertion)</strong>: rating how many reps you had left in the tank and adjusting loads by feel. RPE-based training sidesteps the whole estimation problem because you never need a fixed 1RM — you regulate the day's load by the day's performance. If your training feels erratic week to week, RPE may serve you better than any percentage table.</p>
+
+<h2>Limitations — what this calculator cannot do</h2>
+<p>To stay honest, here is what the estimate is not:</p>
+<ul>
+<li>It is not a substitute for a tested max in competition contexts. A powerlifting meet opener is chosen from <em>tested</em> numbers and recent heavy singles, not from a formula.</li>
+<li>It assumes a standard strength-endurance relationship. Very endurance-trained people will out-rep their estimated max (the formula undershoots them); very explosive, low-endurance lifters will underperform their rep predictions (the formula overshoots them).</li>
+<li>It does not transfer between lifts. Your bench-press 1RM estimate tells you nothing about your squat. Test each lift separately.</li>
+<li>It does not account for technique. Five sloppy reps at 100 kg and five crisp reps at 100 kg produce the same number from the formula, but very different real maxes. Garbage reps in, garbage estimate out.</li>
+<li>Machine and dumbbell lifts behave differently from barbells; estimates for these are looser.</li>
+</ul>
+<p>None of this makes the calculator useless — it makes it a tool with a defined job. For planning training loads, tracking progress, and comparing your strength across time without risking a max test, a submaximal estimate in the 3&ndash;8 rep range is genuinely one of the most practical numbers in strength training. Use it as an anchor, adjust by feel, and keep the ego out of it.</p>
+
+<h2>The bottom line</h2>
+<p>Your one-rep max is a planning tool, not a trophy. Estimate it from a comfortable submaximal set, round the number down, programme your percentages off it, and re-test when the weights start feeling easy. Treat anything above 10 reps as a rough guess, never chase a true max without a spotter, and remember that the best 1RM is the one that lets you train productively next week too. If you have a heart condition, uncontrolled blood pressure, or any condition where straining under load could be dangerous, talk to your doctor before doing any maximal or near-maximal strength testing.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How accurate is a one-rep max estimate?</summary><div class="a"><p>Within the 3&ndash;8 rep range, the Epley and Brzycki formulas typically land within a few percent of a genuinely tested 1RM. Above about 10 reps the estimates diverge and become unreliable, because high-rep performance is limited by muscular endurance rather than maximal strength.</p></div></details>
+<details><summary>What is the Epley formula for 1RM?</summary><div class="a"><p>The Epley formula is 1RM = weight &times; (1 + reps &divide; 30). For example, 100 kg lifted for 5 reps gives 100 &times; (1 + 5/30) = 116.7 kg. It assumes each additional rep implies a maximum roughly 3.3% above the weight lifted.</p></div></details>
+<details><summary>Why do the Epley and Brzycki formulas give different answers?</summary><div class="a"><p>They are different statistical regressions fitted to groups of lifters. Brzycki (1RM = weight &divide; (1.0278 &minus; 0.0278 &times; reps)) tends to be slightly more conservative than Epley. The difference is small in the 3&ndash;8 rep range and grows at higher reps.</p></div></details>
+<details><summary>Should I test my true 1RM instead of estimating it?</summary><div class="a"><p>Only occasionally, and only with a competent spotter (plus safety bars for squats and bench press). A true max attempt carries real injury risk when technique breaks down. For planning training loads, a submaximal estimate is safer and accurate enough.</p></div></details>
+<details><summary>What training percentages should I use from my 1RM?</summary><div class="a"><p>Common guidelines: 90&ndash;100% for maximal strength (1&ndash;3 reps), 80&ndash;90% for heavy strength work (3&ndash;6 reps), 70&ndash;80% for strength-hypertrophy blends (6&ndash;10 reps), 60&ndash;70% for volume work (8&ndash;12 reps), and 50&ndash;60% for warm-ups and technique practice.</p></div></details>
+<details><summary>Can I use this calculator for dumbbell or machine exercises?</summary><div class="a"><p>Yes, but the estimates are looser. The formulas were developed mainly from barbell lift data, and strength&ndash;endurance relationships differ on machines and dumbbells. Treat those results as rough starting points.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+  var ZONES = [
+    {pct: 90, range: "1\u20133 reps", use: "Maximal strength / peaking"},
+    {pct: 80, range: "3\u20136 reps", use: "Heavy strength"},
+    {pct: 70, range: "6\u201310 reps", use: "Strength + hypertrophy"},
+    {pct: 60, range: "8\u201312 reps", use: "Volume / technique"},
+    {pct: 50, range: "10+ reps", use: "Warm-up / recovery"}
+  ];
+  function round1(x){ return Math.round(x * 10) / 10; }
+  function epley(w, r){ return w * (1 + r / 30); }
+  function brzycki(w, r){ return w / (1.0278 - 0.0278 * r); }
+  function fmt(x){ return (Math.round(x * 10) / 10).toFixed(1); }
+  var form = document.getElementById("orm-form");
+  var res = document.getElementById("orm-result");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var w = parseFloat(document.getElementById("orm-weight").value);
+    var r = parseInt(document.getElementById("orm-reps").value, 10);
+    if (!isFinite(w) || w <= 0 || w > 1000) {
+      alert("Please enter a valid weight between 1 and 1000 kg.");
+      return;
+    }
+    if (!isFinite(r) || r < 1 || r > 12) {
+      alert("Please enter reps between 1 and 12.");
+      return;
+    }
+    var e = epley(w, r);
+    var b = brzycki(w, r);
+    document.getElementById("orm-epley").textContent = fmt(e);
+    document.getElementById("orm-brzycki").textContent = fmt(b);
+    var tb = document.getElementById("orm-table");
+    tb.innerHTML = "";
+    ZONES.forEach(function(z){
+      var tr = document.createElement("tr");
+      var td1 = document.createElement("td"); td1.textContent = z.pct + "%";
+      var td2 = document.createElement("td"); td2.textContent = fmt(e * z.pct / 100) + " kg";
+      var td3 = document.createElement("td"); td3.textContent = z.range;
+      var td4 = document.createElement("td"); td4.textContent = z.use;
+      tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4);
+      tb.appendChild(tr);
+    });
+    var note = document.getElementById("orm-note");
+    if (r > 10) {
+      note.textContent = "Note: you used " + r + " reps. Estimates from sets above 10 reps are rough — Epley and Brzycki diverge here because endurance, not maximal strength, limits high-rep sets. Treat this as a starting guess.";
+    } else if (r <= 2) {
+      note.textContent = "Note: with " + r + " rep" + (r > 1 ? "s" : "") + ", your tested weight is already very close to your max — treat the estimate as confirmed, not projected.";
+    } else {
+      note.textContent = "This is an estimate from a " + r + "-rep set, which is within the reliable range. Round your working max down slightly for a safety margin.";
+    }
+    res.classList.add("show");
+  });
+  // Expose for automated maths-gate testing
+  window.__orm = { epley: epley, brzycki: brzycki };
+})();
+</script>
+</body>
+</html>
