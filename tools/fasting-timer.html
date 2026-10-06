@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intermittent Fasting Timer — Track Your Fast, Phase by Phase | DoctorBiohacks</title>
+<meta name="description" content="Enter your last meal and protocol (16:8, 18:6, 20:4, OMAD). See your current fasting phase, countdown to the next one, and exactly when your eating window opens.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/fasting-timer/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intermittent Fasting Timer — Track Your Fast, Phase by Phase">
+<meta property="og:description" content="Enter your last meal and protocol (16:8, 18:6, 20:4, OMAD). See your current fasting phase, countdown to the next one, and exactly when your eating window opens.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/fasting-timer/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field input[type=datetime-local],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.phasebar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:1em 0;background:#dfe9ed}
+.phasebar div{height:100%}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Does black coffee break a fast?","acceptedAnswer":{"@type":"Answer","text":"No. Plain black coffee has roughly 2 to 5 kilocalories per cup and does not meaningfully raise insulin, so it does not break a fast for weight-loss or metabolic purposes. Adding milk, sugar, or cream does. If your goal is cellular autophagy, some researchers argue even small calorie inputs may blunt the signal, but there is no human evidence that black coffee stops it."}},
+  {"@type":"Question","name":"Can I drink water and electrolytes while fasting?","acceptedAnswer":{"@type":"Answer","text":"Yes — and you should. Water, sparkling water, black coffee, and plain tea are all fine. A pinch of salt or sugar-free electrolytes help on fasts over 16 hours, especially if you train. Headaches and dizziness during fasting are most often dehydration or low sodium, not a crisis."}},
+  {"@type":"Question","name":"Is 16:8 better than 18:6 or OMAD?","acceptedAnswer":{"@type":"Answer","text":"Longer is not automatically better. Trials show 16:8 and 18:6 produce similar weight loss, and adherence collapses with harder protocols. The best protocol is the longest one you can sustain for months without misery. For most people that is 16:8, often with an earlier eating window."}},
+  {"@type":"Question","name":"Who should not do intermittent fasting?","acceptedAnswer":{"@type":"Answer","text":"Pregnant or breastfeeding women, children and teenagers, people with a history of eating disorders, underweight individuals, and anyone with diabetes on glucose-lowering medication should not fast without medical supervision. Talk to your doctor first if you take any medication or have a chronic condition."}},
+  {"@type":"Question","name":"Will fasting slow my metabolism?","acceptedAnswer":{"@type":"Answer","text":"Short-term fasts (up to 48 hours) do not slow metabolic rate — studies show resting energy expenditure is maintained or slightly increased in the first day or two. Adaptive thermogenesis (metabolic slowdown) appears with prolonged calorie restriction and very low body fat, not with typical time-restricted eating."}},
+  {"@type":"Question","name":"Should I exercise fasted?","acceptedAnswer":{"@type":"Answer","text":"Light to moderate cardio is fine fasted, and some people prefer it. Heavy lifting or intense intervals are better done in or near the eating window, with protein within a few hours afterwards. If performance drops or you feel faint, eat — the workout matters more than the fast."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Intermittent Fasting Timer</nav>
+<h1>Intermittent Fasting Timer</h1>
+<p class="lede">Fasting is a waiting game, and knowing what your body is doing while you wait makes it far easier. Enter your last meal and your protocol — the timer shows your current metabolic phase, counts down to the next one, and tells you exactly when your eating window opens.</p>
+<div class="tool-card">
+<form id="fastForm" aria-label="Intermittent fasting timer">
+<div class="form-grid">
+<div class="field"><label for="protocol">Fasting protocol</label>
+<select id="protocol">
+<option value="16">16:8 — fast 16h, eat 8h</option>
+<option value="18">18:6 — fast 18h, eat 6h</option>
+<option value="20">20:4 — fast 20h, eat 4h</option>
+<option value="23">OMAD — one meal a day (23h)</option>
+</select></div>
+<div class="field"><label for="lastmeal">Last meal finished at</label><input type="datetime-local" id="lastmeal"><div class="hint">The timer updates live every minute while this page is open.</div></div>
+</div>
+<button type="button" class="btn" id="startBtn">Start tracking my fast</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+
+<h2>What happens in your body during a fast</h2>
+<p>Fasting is not one state — it is a sequence of metabolic gears, and the timer above tracks you through all four. Understanding the sequence matters because each phase answers a different question: when does my body stop running on lunch, when does it start burning stored fat, and when do the deeper repair processes kick in?</p>
+<p><strong>Hours 0–4: the fed state.</strong> After your last meal, blood glucose rises and insulin is released to shuttle it into cells. Your body runs almost entirely on the food you just ate. Nothing interesting is happening yet — this is the baseline you live in most of the day if you snack constantly.</p>
+<p><strong>Hours 4–12: the post-absorptive phase.</strong> As the meal clears your gut, insulin falls and glucagon rises. The liver begins releasing stored glucose (glycogenolysis) to keep blood sugar steady. Fat burning ramps up modestly but is not yet the main fuel. Most people feel completely normal here — this phase covers a typical overnight fast.</p>
+<p><strong>Hours 12–16: the fat-burning ramp.</strong> Liver glycogen is now substantially depleted, so the body shifts decisively toward stored fat. Lipolysis accelerates, free fatty acids flood the blood, and many people report a mental clarity lift as the fuel mix changes. This is the phase 16:8 fasters enter in the final hours before their window — and the reason skipping breakfast can feel surprisingly easy once you are adapted.</p>
+<p><strong>Hours 16+: ketosis and repair estimates.</strong> With glycogen low, the liver converts fatty acids into ketone bodies — an alternative brain fuel. Autophagy (cellular cleanup) and growth-hormone pulses increase. Be honest with yourself here: the timelines for ketosis and autophagy are <em>estimates</em> drawn from small studies, and they vary enormously between individuals. The timer labels this phase accordingly. The metabolic benefits of fasting accrue mainly from consistent daily practice, not from heroically long single fasts.</p>
+
+<h2>The protocols: 16:8, 18:6, 20:4, and OMAD</h2>
+<table>
+<tr><th>Protocol</th><th>Fast / eating window</th><th>Who it suits</th></tr>
+<tr><td><strong>16:8</strong></td><td>16h fast, 8h eating</td><td>Beginners; most sustainable long-term</td></tr>
+<tr><td><strong>18:6</strong></td><td>18h fast, 6h eating</td><td>Adapted fasters wanting deeper fat-burning daily</td></tr>
+<tr><td><strong>20:4</strong></td><td>20h fast, 4h eating</td><td>Experienced fasters; harder to hit protein targets</td></tr>
+<tr><td><strong>OMAD</strong></td><td>23h fast, 1 meal</td><td>Advanced; difficult to sustain, watch nutrient gaps</td></tr>
+</table>
+<p>The research consensus is refreshingly unglamorous: when calories are matched, 16:8 and 18:6 produce similar weight loss, and the protocol you can sustain for six months beats the aggressive one you quit in three weeks. Start with 16:8 for at least two weeks before considering anything longer. An earlier eating window (e.g. 08:00–16:00) shows slightly better metabolic markers in trials than a late one (12:00–20:00), because insulin sensitivity is higher in the morning — but a schedule you follow beats an optimal one you abandon.</p>
+
+<h2>What actually breaks a fast</h2>
+<p>The practical rule used in fasting research: anything under about 50 kilocalories with minimal carbohydrate does not meaningfully interrupt the fasted state. That means black coffee, plain tea, water, sparkling water, and zero-calorie electrolytes are fine. What breaks it: milk or cream in coffee, sugar, juice, "just a handful" of nuts (easily 170 kcal), and diet sodas are a grey zone — they do not contain calories, but some people find sweeteners trigger hunger.</p>
+<p>Medications and supplements need individual judgement. Anything that must be taken with food should be taken with food — the fast is never more important than the prescription. Fat-soluble vitamins (D, K2) absorb poorly on an empty stomach; save them for the eating window. Protein powder, BCAAs, and collagen all contain calories and break a fast.</p>
+
+<h2>The evidence — and where it thins out</h2>
+<p>Time-restricted eating has genuine evidence behind it. Randomised trials show it helps with weight loss (mainly by naturally reducing calorie intake), improves insulin sensitivity, and lowers blood pressure in people with metabolic syndrome. The mechanisms are plausible and the adherence is better than continuous calorie counting for many people.</p>
+<p>But the hype outruns the data in several places. <strong>Autophagy</strong> is real biology but has never been measured in humans during a 16-hour fast — the claims come from animal and cell studies. <strong>"Boosted" growth hormone</strong> rises during fasting but there is no evidence it builds muscle in this context. <strong>Detox claims</strong> are meaningless; your liver and kidneys detoxify continuously. And the much-cited longevity benefits come from animal studies of severe calorie restriction, not from humans skipping breakfast. Fasting is a solid, evidence-backed eating pattern — it does not need fairy dust, and you should distrust anyone selling it with fairy dust attached.</p>
+
+<h2>Fasting and sleep: the overlooked interaction</h2>
+<p>When you eat affects how you sleep, and this surprises many fasters. Eating a large meal close to bedtime raises core body temperature and keeps insulin elevated during the first half of the night, both of which fragment sleep — one reason late eating windows (say 14:00–22:00) are consistently linked to worse sleep quality than early ones (08:00–16:00) in crossover trials. If your 16:8 window ends at 21:00 and your sleep is suffering, try shifting the window two hours earlier before blaming the fast itself.</p>
+<p>The reverse direction matters too: short sleep makes fasting harder. One night of restricted sleep raises ghrelin (the hunger hormone) and lowers leptin (the satiety signal) by measurable amounts, which is why willpower collapses the day after a bad night. Fasters who protect their sleep consistently report easier fasts. Treat the two as a system — the fasting timer and a consistent bedtime reinforce each other rather than competing for your discipline.</p>
+
+<h2>Who should NOT fast</h2>
+<p>Intermittent fasting is not for everyone, and this is the section to read before the timer, not after. Do not fast — or fast only under medical supervision — if you are pregnant or breastfeeding, under 18, underweight, have a history of eating disorders or disordered eating, have type 1 diabetes, or take glucose-lowering medication (fasting plus these drugs can cause dangerous hypoglycaemia). People with gout, reflux that worsens on an empty stomach, or physically demanding jobs with no food access should also think carefully. Fasting can be a trigger for binge-restrict cycles in vulnerable people: if skipping meals makes your relationship with food worse, stop.</p>
+
+<h2>Practical fasting: hydration, electrolytes, and training</h2>
+<p>Most fasting discomfort is not hunger — it is dehydration and low sodium. Drink more water than you think you need, and on fasts beyond 16 hours consider sugar-free electrolytes or a pinch of salt in water. Headaches, dizziness, and the infamous "fasting brain fog" usually resolve within an hour of proper hydration.</p>
+<p>Hunger itself comes in waves, typically peaking around your habitual mealtimes and passing within 20 minutes. Black coffee blunts it (caffeine suppresses appetite for most people), as does keeping busy — boredom hunger is the most common fast-killer. For training: light cardio fasted is fine and many prefer it; lift heavy or do intervals in or near your eating window, and get protein within a few hours afterwards. If a workout feels dangerous — dizziness, tunnel vision — eat. The workout always matters more than the streak.</p>
+<p>Breaking the fast deserves as much care as the fast itself. After 16+ hours, start with something gentle — protein and vegetables, not a massive carbohydrate bomb — and eat slowly. Refeeding discomfort (bloating, nausea) after long fasts is common and avoidable with a modest first meal.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Does black coffee break a fast?</summary><div class="a"><p>No. Plain black coffee has roughly 2 to 5 kilocalories per cup and does not meaningfully raise insulin, so it does not break a fast for weight-loss or metabolic purposes. Adding milk, sugar, or cream does. If your goal is cellular autophagy, some researchers argue even small calorie inputs may blunt the signal, but there is no human evidence that black coffee stops it.</p></div></details>
+<details><summary>Can I drink water and electrolytes while fasting?</summary><div class="a"><p>Yes — and you should. Water, sparkling water, black coffee, and plain tea are all fine. A pinch of salt or sugar-free electrolytes help on fasts over 16 hours, especially if you train. Headaches and dizziness during fasting are most often dehydration or low sodium, not a crisis.</p></div></details>
+<details><summary>Is 16:8 better than 18:6 or OMAD?</summary><div class="a"><p>Longer is not automatically better. Trials show 16:8 and 18:6 produce similar weight loss, and adherence collapses with harder protocols. The best protocol is the longest one you can sustain for months without misery. For most people that is 16:8, often with an earlier eating window.</p></div></details>
+<details><summary>Who should not do intermittent fasting?</summary><div class="a"><p>Pregnant or breastfeeding women, children and teenagers, people with a history of eating disorders, underweight individuals, and anyone with diabetes on glucose-lowering medication should not fast without medical supervision. Talk to your doctor first if you take any medication or have a chronic condition.</p></div></details>
+<details><summary>Will fasting slow my metabolism?</summary><div class="a"><p>Short-term fasts (up to 48 hours) do not slow metabolic rate — studies show resting energy expenditure is maintained or slightly increased in the first day or two. Adaptive thermogenesis (metabolic slowdown) appears with prolonged calorie restriction and very low body fat, not with typical time-restricted eating.</p></div></details>
+<details><summary>Should I exercise fasted?</summary><div class="a"><p>Light to moderate cardio is fine fasted, and some people prefer it. Heavy lifting or intense intervals are better done in or near the eating window, with protein within a few hours afterwards. If performance drops or you feel faint, eat — the workout matters more than the fast.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition. Do not fast if you are pregnant, breastfeeding, underweight, have an eating disorder history, or take glucose-lowering medication, without medical supervision.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+var phases=[
+ {until:4,name:"Fed state",desc:"Your body is running on your last meal. Insulin is elevated and fat burning is minimal."},
+ {until:12,name:"Post-absorptive phase",desc:"The meal has cleared. Insulin is falling, the liver is releasing stored glycogen, and fat burning is ramping up."},
+ {until:16,name:"Fat-burning ramp",desc:"Glycogen is substantially depleted and your body is shifting decisively to stored fat as fuel."},
+ {until:Infinity,name:"Ketosis estimates (approximate)",desc:"The liver is converting fatty acids to ketones. Autophagy and repair signals rise. Timelines here are estimates and vary widely between individuals."}
+];
+function pad(n){return (n<10?"0":"")+n;}
+function fmtTime(d){return pad(d.getHours())+":"+pad(d.getMinutes());}
+function fmtDur(ms){var m=Math.floor(ms/60000);var h=Math.floor(m/60);m=m%60;return h+"h "+pad(m)+"m";}
+function compute(lastMeal,now,fastH){
+ var elapsedMs=now-lastMeal;var elapsedH=elapsedMs/3600000;
+ var phase=phases[0],nextAt=null;
+ for(var i=0;i<phases.length;i++){if(elapsedH<phases[i].until){phase=phases[i];nextAt=phases[i].until;break;}if(i===phases.length-1){phase=phases[i];}}
+ var windowOpen=new Date(lastMeal.getTime()+fastH*3600000);
+ var windowClose=new Date(windowOpen.getTime()+(24-fastH)*3600000);
+ return {elapsedH:elapsedH,phase:phase,nextAt:nextAt,windowOpen:windowOpen,windowClose:windowClose};
+}
+function render(){
+ var lm=document.getElementById('lastmeal').value;
+ var fastH=parseFloat(document.getElementById('protocol').value);
+ if(!lm){alert('Please enter the time your last meal finished.');return false;}
+ var lastMeal=new Date(lm);var now=new Date();
+ if(lastMeal>now){alert('Last meal cannot be in the future.');return false;}
+ var r=compute(lastMeal,now,fastH);
+ var frac=Math.min(r.elapsedH/fastH,1);
+ var html='<div class="big">'+fmtDur(now-lastMeal)+'<span class="unit"> fasted</span></div>';
+ html+='<div class="phasebar"><div style="width:'+(frac*100).toFixed(1)+'%;background:var(--primary)"></div></div>';
+ html+='<p class="interpret">Current phase: '+r.phase.name+'</p><p class="note">'+r.phase.desc+'</p>';
+ if(r.nextAt!==null&&r.nextAt!==Infinity){html+='<p class="note">Next phase in <strong>'+fmtDur((r.nextAt-r.elapsedH)*3600000)+'</strong>.</p>';}
+ var wo=r.windowOpen;
+ if(wo>now){html+='<p class="interpret">Eating window opens at '+fmtTime(wo)+' (in '+fmtDur(wo-now)+').</p>';}
+ else{var wc=r.windowClose;html+='<p class="interpret" style="color:#1d7a2f">Eating window is OPEN — it closes at '+fmtTime(wc)+'.</p><p class="note">Break the fast gently: protein and vegetables first, eat slowly.</p>';}
+ html+='<p class="note">Water, black coffee, plain tea and zero-calorie electrolytes are fine. Anything over ~50 kcal (milk, sugar, snacks) ends the fasted state.</p>';
+ var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+ return true;
+}
+document.getElementById('startBtn').addEventListener('click',function(){if(render()){setInterval(function(){if(document.getElementById('lastmeal').value)render();},60000);}});
+window.addEventListener('load',function(){
+ var d=new Date();d.setDate(d.getDate()-1);d.setHours(20,0,0,0);
+ var iso=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());
+ document.getElementById('lastmeal').value=iso;
+});
+})();
+</script>
+</body>
+</html>
