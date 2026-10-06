@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Sleep Estimator — How Much Deep Sleep Are You Really Getting? | DoctorBiohacks</title>
+<meta name="description" content="Estimate your nightly deep (slow-wave) sleep from your age, sleep time, and habits. Get an honest number, a comparison to your age norm, and the levers that actually move it.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/deep-sleep-estimator/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Sleep Estimator — How Much Deep Sleep Are You Really Getting?">
+<meta property="og:description" content="Estimate your nightly deep (slow-wave) sleep from your age, sleep time, and habits. Get an honest number, a comparison to your age norm, and the levers that actually move it.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/deep-sleep-estimator/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"How much deep sleep do adults normally get per night?","acceptedAnswer":{"@type":"Answer","text":"Healthy young adults typically spend about 15 to 25 percent of the night in deep slow-wave sleep, roughly 60 to 110 minutes on a 7 to 8 hour night. The share declines with age: people over 60 often get half the deep sleep they got in their twenties. If your wearable reports deep sleep near zero every night, that is more likely a measurement limitation than a medical crisis — validate against how you feel, and see a doctor if you are genuinely exhausted despite adequate sleep."}},
+  {"@type":"Question","name":"Does alcohol really destroy deep sleep?","acceptedAnswer":{"@type":"Answer","text":"Alcohol is one of the strongest suppressors of deep sleep in the available evidence. It can help you fall asleep faster, but it fragments the second half of the night, suppresses REM, and reduces slow-wave sleep — the classic pattern is falling asleep easily and waking at 3 a.m. wide awake. The effect scales with dose and how close to bedtime you drink. If deep sleep matters to you, evenings with alcohol should be the exception, not the routine."}},
+  {"@type":"Question","name":"Can supplements like magnesium increase deep sleep?","acceptedAnswer":{"@type":"Answer","text":"The evidence is thin. A few small trials suggest magnesium may modestly improve subjective sleep quality in people who are deficient, but there is no strong evidence that it meaningfully increases measured deep-sleep minutes in healthy adults. The same goes for most sleep supplements and gadgets: the marketing runs far ahead of the trials. Regular exercise, consistent timing, and limiting alcohol have far stronger evidence behind them."}},
+  {"@type":"Question","name":"Why does my fitness tracker disagree with my sleep app about deep sleep?","acceptedAnswer":{"@type":"Answer","text":"Because both are estimating, not measuring. Consumer wearables infer sleep stages from movement and heart-rate patterns using proprietary algorithms, and validation studies show only moderate agreement with laboratory polysomnography — especially for deep sleep, which is the hardest stage to classify. Two devices can give wildly different deep-sleep numbers for the same night. Treat the numbers as a trend over weeks, not as a nightly truth."}},
+  {"@type":"Question","name":"Is more deep sleep always better?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Deep sleep is restorative up to a point, but excessively high deep-sleep readings — or suddenly much deeper sleep than usual — can reflect rebound after sleep deprivation, certain medications, or fragmented sleep with many awakenings forcing repeated returns through deep stages. The target is adequate, consolidated sleep of the right duration for your age, not the maximum possible deep-sleep number."}},
+  {"@type":"Question","name":"When is low deep sleep a reason to see a doctor?","acceptedAnswer":{"@type":"Answer","text":"See a doctor if you sleep 7 to 9 hours yet wake unrefreshed day after day, if you snore loudly, gasp, or stop breathing at night (possible sleep apnoea), if you fall asleep unintentionally during the day, or if fatigue persists for weeks despite good habits. A wearable's deep-sleep graph is not a diagnosis — persistent daytime dysfunction is the symptom that warrants professional evaluation, and a sleep study is the only way to measure your sleep stages accurately."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Deep Sleep Estimator</nav>
+<h1>Deep Sleep Estimator &mdash; How Much Deep Sleep Are You Really Getting?</h1>
+<p class="lede">Your tracker says you got 42 minutes of deep sleep last night. Is that good? Bad? Impossible to know? Enter your age, your actual sleep time, and a few habits, and this estimator gives you an honest, evidence-based guess at your nightly deep sleep — compared against what is normal for your age, with the levers that actually move it.</p>
+<div class="tool-card">
+<form id="deepForm" aria-label="Deep sleep estimator">
+<div class="form-grid">
+<div class="field"><label for="age">Your age</label><input type="number" id="age" min="10" max="110" value="35"><div class="hint">Deep sleep share declines with age &mdash; the calculator adjusts for this.</div></div>
+<div class="field"><label for="hours">Total sleep hours per night</label><input type="number" id="hours" min="0.5" max="24" step="0.25" value="7.5"><div class="hint">Actual time asleep, not time in bed. Use your recent average.</div></div>
+<div class="field"><label for="exercise">Do you exercise regularly?</label><select id="exercise"><option value="no">No</option><option value="yes">Yes</option></select><div class="hint">At least 150 minutes of moderate activity per week.</div></div>
+<div class="field"><label for="alcohol">Alcohol evenings per week</label><input type="number" id="alcohol" min="0" max="7" step="1" value="2"><div class="hint">Evenings where you have any alcoholic drinks.</div></div>
+<div class="field"><label for="caffeine">Caffeine after 14:00?</label><select id="caffeine"><option value="no">No</option><option value="yes">Yes</option></select><div class="hint">Coffee, tea, energy drinks, or pre-workout in the afternoon.</div></div>
+<div class="field"><label for="screens">Screens in bed?</label><select id="screens"><option value="no">No</option><option value="yes">Yes</option></select><div class="hint">Scrolling or watching in bed before sleep.</div></div>
+</div>
+<button type="button" class="btn" id="calcBtn">Estimate my deep sleep</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+<h2>What deep sleep actually is</h2>
+<p>Every night you cycle through sleep stages in roughly 90-minute loops: light sleep, deep sleep, and REM. Deep sleep — also called slow-wave sleep, or stage N3 — is the phase where your brain produces big, slow, synchronised delta waves and your body becomes hardest to wake. It is concentrated in the first half of the night; the first two sleep cycles deliver the bulk of it, which is why the hours before midnight matter disproportionately and why a night cut short at 5 a.m. steals less deep sleep than a night that starts at 2 a.m.</p>
+<p>In a healthy young adult, deep sleep makes up roughly 15 to 25 percent of the night. On a 7.5-hour night that is about 65 to 110 minutes. But here is the honest part most sleep content skips: nobody can tell you your exact number without electrodes on your scalp. Every figure you see outside a sleep laboratory — including the one this calculator produces below — is a population-based estimate. Useful for spotting patterns, useless for medical certainty.</p>
+
+<h2>What deep sleep does for you — and what we only think it does</h2>
+<p>The strongest evidence ties deep sleep to three things. First, growth hormone: the majority of the day's growth hormone pulses are released during slow-wave sleep, which is why deep sleep matters for tissue repair and why children, who are growing, get so much of it. Second, memory consolidation: experiments show that slow oscillations during deep sleep help transfer the day's learning from short-term to long-term storage — people deprived specifically of slow-wave sleep perform worse on next-day memory tasks. Third, physical restoration: heart rate and blood pressure drop to their lowest levels, and the immune system does significant housekeeping, including the release of infection-fighting proteins.</p>
+<p>Then there is the glymphatic story, and it deserves honesty. You may have read that deep sleep "flushes toxins from the brain" via the glymphatic system. The core experiments are real and fascinating, but they were done overwhelmingly in mice, and the human evidence is still indirect. It is a plausible and exciting mechanism, not an established fact — any product claiming to "boost glymphatic clearance" is selling you a hypothesis with a price tag. The honest summary: deep sleep is clearly restorative, the exact catalogue of what it restores is still being written, and you should be sceptical of anyone selling certainty about it.</p>
+
+<h2>Deep sleep declines with age — that is normal</h2>
+<p>Slow-wave sleep falls steadily across the lifespan. A man in his twenties may spend close to a fifth of the night in deep sleep; by sixty, that share can be half or less, and some older adults show almost no classic slow-wave activity at all on a single night. The decline is steeper in men than in women, and it tracks the natural atrophy of the prefrontal cortex, which generates those slow waves. This matters for expectations: a 55-year-old chasing the deep-sleep numbers of their 25-year-old self is chasing a physiological impossibility, and the anxiety that creates is itself bad for sleep.</p>
+<p>What is less clear is how much of the decline is pure ageing versus the accumulated baggage of midlife: medications, weight gain, undiagnosed apnoea, alcohol habits, and fragmented schedules all chew away at slow-wave sleep independently. That is genuinely good news, because those are modifiable. The age bands in this calculator represent population averages, not personal ceilings — the modifiers below it are the part you can actually influence.</p>
+
+<h2>What the evidence actually says moves the needle</h2>
+<p>Let us separate the levers with real evidence from the ones with good marketing. <strong>Regular exercise</strong> is the single best-supported deep-sleep intervention in the literature: meta-analyses of randomised trials find that both aerobic and resistance training increase slow-wave sleep and subjective sleep quality, with the largest effects in people who were previously sedentary. Timing is flexible — morning and afternoon sessions both work — though very vigorous exercise within an hour or two of bedtime can delay sleep onset for some people.</p>
+<p><strong>Alcohol</strong> is the strongest suppressor in the other direction. It shortens sleep latency (you fall asleep faster), which is why it feels like a sleep aid, but polysomnography studies consistently show it fragments the second half of the night and reduces both slow-wave and REM sleep. The dose–response is real: the effect in this calculator kicks in at three or more drinking evenings per week, but even one heavy night measurably degrades that night's architecture. If you care about deep sleep, alcohol is the highest-yield habit to change.</p>
+<p><strong>Caffeine after mid-afternoon</strong> costs deep sleep even when it does not stop you falling asleep. With a half-life of five to six hours, an afternoon coffee is still substantially active at midnight, and trials show it reduces slow-wave sleep and total sleep time in a dose-dependent way. The 14:00 cutoff in this calculator is a practical rule of thumb — slow metabolisers may need an earlier one.</p>
+<p><strong>Heat exposure</strong> — saunas and hot baths — has genuinely interesting but still early evidence. The mechanism is plausible: passive body heating followed by the core-temperature drop mimics the natural pre-sleep decline and is associated with more slow-wave sleep in small trials. Calling it proven would be an overstatement; calling it promising is fair. A hot bath 60 to 90 minutes before bed is cheap, safe for most people, and worth trying.</p>
+<p>And now the honest caveats on the fashionable stuff. <strong>Magnesium:</strong> small trials show modest improvements in subjective sleep quality, mostly in older or deficient adults — there is no solid evidence it increases measured deep-sleep minutes in healthy people. <strong>Mouth tape:</strong> essentially no quality evidence for improving sleep architecture; it is a social-media trend, not a therapy, and it can be risky for anyone with nasal obstruction or apnoea. <strong>Gadgets</strong> — acoustic stimulation headbands, "deep sleep" apps, red-light panels — sit on a spectrum from early-but-intriguing (acoustic stimulation has real lab studies) to pure placebo. The pattern is consistent: the boring levers (move daily, drink less, keep a schedule, cool dark room) outperform the expensive ones in every head-to-head the literature offers.</p>
+
+<h2>Why your wearable's deep-sleep number is an educated guess</h2>
+<p>Fitness trackers and rings do not measure brain waves. They infer sleep stages from wrist movement and heart-rate variability using proprietary algorithms, and validation studies against laboratory polysomnography show only moderate agreement — typically 60 to 80 percent epoch-by-epoch accuracy, with deep sleep the hardest stage to classify correctly. Two devices on the same wrist can report wildly different deep-sleep totals for the same night, and a single night's number can swing by 30 minutes based on nothing but algorithm noise.</p>
+<p>None of this makes wearables useless. Their strength is trends: if your estimated deep sleep climbs steadily over a month after you cut evening drinking, that pattern is probably real even if the absolute minutes are approximate. Their weakness is precision: treating a single night's 38-minute reading as a diagnosis is like weighing yourself once and declaring a trend. Use this calculator the same way — as a compass for direction, not a caliper for measurement.</p>
+
+<h2>The maths behind this estimator</h2>
+<p>The model is deliberately simple, and its limits are part of the design. It starts from the population average share of deep sleep for your age band: under 30, about 20 percent of the night; 30–39, 18 percent; 40–49, 16 percent; 50–59, 14 percent; 60 and over, 12 percent. These are rough epidemiological anchors, not personal predictions — individual variation around them is wide.</p>
+<p>Four habit modifiers then adjust the share, sized to match the rough effect sizes seen in the literature: regular exercise adds 2 percentage points; alcohol on three or more evenings a week subtracts 3; caffeine after 14:00 subtracts 2; screens in bed subtracts 1. The result is clamped between 5 and 30 percent so no combination of answers produces a physiologically absurd number.</p>
+<p>Your estimated deep-sleep minutes are your total sleep hours multiplied by that percentage. The "norm" is the same hours multiplied by your age band's base share — in other words, what someone your age with neutral habits would get. If your estimate meets or beats the norm, you are above average for your age; 90 to 100 percent of norm is about average; below 90 percent is below average. The top levers listed with your result are simply your applicable modifiers ranked by size — the biggest drains first — phrased as actions, because an estimate without a next step is just trivia.</p>
+<p>What the model cannot do: account for medications, sleep disorders, shift work, stress, or the simple fact that you may be an outlier. It is a teaching tool built on averages. If your result says "below average" and you feel fine, trust your body over the arithmetic.</p>
+
+<h2>When to stop optimising and see a doctor</h2>
+<p>Biohacking has a failure mode: optimising numbers while ignoring symptoms. No estimator, tracker, or supplement replaces professional evaluation when the red flags appear. See a doctor — ideally one who can refer you for a sleep study — if you sleep seven to nine hours yet wake unrefreshed most days, if you snore loudly or a partner has seen you gasp or stop breathing, if you fall asleep unintentionally during the day, or if fatigue persists for weeks despite genuinely good sleep habits.</p>
+<p>Obstructive sleep apnoea is the great masquerader here: it fragments sleep so thoroughly that deep sleep collapses, and no amount of magnesium or mouth tape fixes a collapsing airway — in fact, mouth tape can be dangerous with untreated apnoea. Persistent insomnia (trouble falling or staying asleep three or more nights a week for three months) also deserves proper care; cognitive behavioural therapy for insomnia is the first-line treatment and outperforms sleeping pills over the long term. Optimise what you can, and hand the rest to a clinician.</p>
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How much deep sleep do adults normally get per night?</summary><div class="a"><p>Healthy young adults typically spend about 15 to 25 percent of the night in deep slow-wave sleep — roughly 60 to 110 minutes on a 7 to 8 hour night. The share declines with age, and people over 60 often get half the deep sleep they got in their twenties. If your wearable reports near-zero deep sleep every night, that is more likely a measurement limitation than a medical crisis — but if you are genuinely exhausted despite adequate sleep, talk to your doctor.</p></div></details>
+<details><summary>Does alcohol really destroy deep sleep?</summary><div class="a"><p>Alcohol is one of the strongest suppressors of deep sleep in the available evidence. It helps you fall asleep faster but fragments the second half of the night and reduces both slow-wave and REM sleep — the classic pattern is falling asleep easily and waking at 3 a.m. wide awake. The effect scales with dose and timing. If deep sleep matters to you, drinking evenings should be the exception, not the routine.</p></div></details>
+<details><summary>Can supplements like magnesium increase deep sleep?</summary><div class="a"><p>The evidence is thin. Small trials suggest magnesium may modestly improve subjective sleep quality in deficient or older adults, but there is no strong evidence it increases measured deep-sleep minutes in healthy people. The same goes for most sleep supplements and gadgets: the marketing runs far ahead of the trials. Exercise, consistent timing, and limiting alcohol have far stronger evidence behind them.</p></div></details>
+<details><summary>Why does my fitness tracker disagree with my sleep app about deep sleep?</summary><div class="a"><p>Because both are estimating, not measuring. Wearables infer sleep stages from movement and heart-rate patterns, and validation studies show only moderate agreement with laboratory polysomnography — deep sleep is the hardest stage to classify. Two devices can give very different numbers for the same night. Treat the figures as a trend over weeks, not a nightly truth.</p></div></details>
+<details><summary>Is more deep sleep always better?</summary><div class="a"><p>Not necessarily. Deep sleep is restorative up to a point, but unusually high readings — or suddenly deeper sleep than usual — can reflect rebound after deprivation, certain medications, or fragmented sleep that keeps forcing you back through deep stages. The target is adequate, consolidated sleep of the right duration for your age, not the maximum possible deep-sleep number.</p></div></details>
+<details><summary>When is low deep sleep a reason to see a doctor?</summary><div class="a"><p>See a doctor if you sleep 7 to 9 hours yet wake unrefreshed day after day, if you snore loudly, gasp, or stop breathing at night (possible sleep apnoea), if you fall asleep unintentionally during the day, or if fatigue persists for weeks despite good habits. A wearable's deep-sleep graph is not a diagnosis — persistent daytime dysfunction is the symptom that warrants evaluation, and a sleep study is the only way to measure your sleep stages accurately.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+document.getElementById('calcBtn').addEventListener('click',function(){
+  var age=parseInt(document.getElementById('age').value,10);
+  if(isNaN(age)||age<10||age>110){alert('Please enter an age between 10 and 110.');return;}
+  var hours=parseFloat(document.getElementById('hours').value);
+  if(isNaN(hours)||hours<=0||hours>24){alert('Please enter total sleep hours between 0 and 24.');return;}
+  var exercise=document.getElementById('exercise').value==='yes';
+  var alcohol=parseInt(document.getElementById('alcohol').value,10);
+  if(isNaN(alcohol)||alcohol<0||alcohol>7){alert('Please enter 0 to 7 alcohol evenings per week.');return;}
+  var caffeine=document.getElementById('caffeine').value==='yes';
+  var screens=document.getElementById('screens').value==='yes';
+
+  var base;
+  if(age<30){base=20;}else if(age<40){base=18;}else if(age<50){base=16;}else if(age<60){base=14;}else{base=12;}
+
+  var levers=[];
+  var pct=base;
+  if(alcohol>=3){pct-=3;levers.push({size:3,text:'Cut back alcohol to fewer than 3 evenings a week — it suppresses deep sleep by about 3 percentage points, the biggest lever on this page.'});}
+  if(exercise){pct+=2;levers.push({size:2,text:'Keep exercising regularly — it is the best-supported way to add deep sleep, worth roughly +2 percentage points.'});}
+  if(caffeine){pct-=2;levers.push({size:2,text:'Stop caffeine by 14:00 — late caffeine costs roughly 2 percentage points of deep sleep even when you fall asleep fine.'});}
+  if(screens){pct-=1;levers.push({size:1,text:'Get screens out of bed — worth about 1 percentage point of deep sleep, plus faster sleep onset.'});}
+  if(!exercise){levers.push({size:2,text:'Start exercising regularly (150+ min/week of moderate activity) — the best-supported deep-sleep lever, worth roughly +2 percentage points.'});}
+  if(alcohol<3){levers.push({size:1,text:'Keep alcohol to fewer than 3 evenings a week — staying low protects the deep sleep you are already getting.'});}
+  if(!caffeine){levers.push({size:1,text:'Keep the no-caffeine-after-14:00 habit — it protects about 2 percentage points of deep sleep.'});}
+  if(!screens){levers.push({size:1,text:'Keep screens out of bed — it protects about 1 percentage point of deep sleep.'});}
+
+  pct=Math.min(30,Math.max(5,pct));
+  var estMin=Math.round(hours*pct/100*60);
+  var normMin=Math.round(hours*base/100*60);
+  var verdict;
+  if(estMin>=normMin){verdict='above average for your age';}
+  else if(normMin>0&&(estMin/normMin)>=0.9){verdict='about average for your age';}
+  else{verdict='below average for your age';}
+
+  levers.sort(function(a,b){return b.size-a.size;});
+  var top=levers.slice(0,3);
+
+  var html='<div class="big">'+estMin+'<span class="unit"> minutes of estimated deep sleep ('+pct+'% of your night)</span></div>';
+  html+='<p class="interpret">That is '+verdict+' — typical for age '+age+' would be about '+normMin+' minutes.</p>';
+  html+='<p class="note">This is a population-based estimate, not a measurement. Individual variation is wide — a sleep study is the only way to know your real number.</p>';
+  html+='<p class="interpret">Your top levers:</p><ol>';
+  top.forEach(function(l){html+='<li>'+l.text+'</li>';});
+  html+='</ol>';
+  if(verdict==='below average for your age'){html+='<p class="note">If you sleep enough hours yet wake unrefreshed most days, or you snore loudly or gasp at night, talk to your doctor — persistent exhaustion can signal sleep apnoea, which no habit tweak fixes.</p>';}
+  var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+});
+})();
+</script>
+</body>
+</html>
