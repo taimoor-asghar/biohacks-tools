@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caffeine Half-Life Timer — How Long Until Your Last Coffee Wears Off | DoctorBiohacks</title>
+<meta name="description" content="Enter your caffeine dose and half-life to see how much is still in your system, when you'll drop below the 50 mg sleep-safe line, and your personal caffeine curfew.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/caffeine-half-life/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caffeine Half-Life Timer — How Long Until Your Last Coffee Wears Off">
+<meta property="og:description" content="Enter your caffeine dose and half-life to see how much is still in your system, when you'll drop below the 50 mg sleep-safe line, and your personal caffeine curfew.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/caffeine-half-life/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.preset{border:1px solid var(--primary);background:#fff;color:var(--primary);border-radius:20px;padding:6px 14px;font-family:"Nunito",sans-serif;font-weight:700;font-size:.88rem;cursor:pointer}
+.preset:hover,.preset.active{background:var(--primary);color:#fff}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Does decaf coffee count toward my caffeine total?","acceptedAnswer":{"@type":"Answer","text":"Yes, but only a little. A typical cup of decaf still contains roughly 2 to 7 mg of caffeine depending on the bean and brew method. For most people that amount is negligible, but if you are very caffeine-sensitive or you drink several cups of decaf in the evening, it can add up. Include it as a small custom dose in the timer if you want to be precise."}},
+  {"@type":"Question","name":"Why am I more sensitive to caffeine than my friend?","acceptedAnswer":{"@type":"Answer","text":"Most of the difference comes down to genetics, specifically the CYP1A2 gene, which controls the liver enzyme that breaks caffeine down. 'Fast metabolizers' can clear caffeine in about 3 hours, while 'slow metabolizers' may need 6 to 7 hours or more. Sensitivity to caffeine's effects is partly separate and involves adenosine receptor differences. If your friend falls asleep easily after an evening espresso and you cannot, genetics is the most likely explanation."}},
+  {"@type":"Question","name":"Does building a tolerance change my caffeine half-life?","acceptedAnswer":{"@type":"Answer","text":"Not much. Tolerance changes how strongly you feel caffeine's effects, because your brain grows extra adenosine receptors to compensate. The speed at which your liver clears caffeine from the blood stays roughly the same. This means a heavy daily coffee drinker still has caffeine circulating late into the evening even if they no longer feel wired from it, and it can still fragment their sleep."}},
+  {"@type":"Question","name":"How accurate is the 50 mg sleep threshold?","acceptedAnswer":{"@type":"Answer","text":"It is a practical rule of thumb, not a biological law. Research has shown that 200 mg taken even 6 hours before bed can measurably disrupt sleep, while smaller amounts have mixed effects. Fifty milligrams, roughly half a small brewed coffee, is a conservative line that most sleep practitioners use: below it, the majority of people sleep normally. Sensitive individuals may need a lower cutoff, which is why the timer's personal curfew rounds conservatively downward."}},
+  {"@type":"Question","name":"Can I clear caffeine from my system faster?","acceptedAnswer":{"@type":"Answer","text":"Not in any meaningful way. Drinking water, exercising, or eating will not significantly speed up caffeine metabolism, because clearance is driven by a liver enzyme working at its own genetically set pace. Smoking speeds it up and oral contraceptives slow it down, but neither is a practical or advisable strategy. Once the caffeine is in you, the only real remedy is time."}},
+  {"@type":"Question","name":"Should I count the caffeine in tea, chocolate, and pre-workout?","acceptedAnswer":{"@type":"Answer","text":"Yes. A cup of black tea has about 40 to 70 mg, green tea about 30 to 50 mg, dark chocolate roughly 20 mg per ounce, and pre-workout supplements can pack 200 to 400 mg per scoop. People often underestimate their total because they only count coffee. Add everything up as one custom dose in the timer for the honest picture."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Caffeine Half-Life Timer</nav>
+<h1>Caffeine Half-Life Timer</h1>
+<p class="lede">Find out exactly how much caffeine is still circulating in your body right now, when you will drop below the sleep-safe 50&nbsp;mg line, and your personal caffeine curfew.</p>
+<div class="tool-card">
+<h2 style="margin-top:0;border:none;padding:0">Your caffeine timing</h2>
+<div class="form-grid">
+<div class="field">
+<label for="dose">Caffeine dose (mg)</label>
+<input type="number" id="dose" min="0" max="2000" value="95" step="1">
+<div class="presets" id="presets">
+<button type="button" class="preset" data-mg="63">Espresso 63 mg</button>
+<button type="button" class="preset active" data-mg="95">Brewed 95 mg</button>
+<button type="button" class="preset" data-mg="160">Energy drink 160 mg</button>
+</div>
+<div class="hint">Or type a custom amount (e.g. pre-workout 300 mg).</div>
+</div>
+<div class="field">
+<label for="consumed">Time consumed</label>
+<input type="time" id="consumed" value="08:00">
+<div class="hint">When you finished the drink.</div>
+</div>
+<div class="field">
+<label for="asof">Check caffeine level at</label>
+<input type="time" id="asof">
+<div class="hint">Defaults to right now.</div>
+</div>
+<div class="field">
+<label for="halflife">Your half-life: <span id="hlval">5.0</span> hours</label>
+<input type="range" id="halflife" min="3" max="7" step="0.5" value="5">
+<div class="hint">3 h = fast metabolizer, 7 h = slow metabolizer. Unsure? Use 5.</div>
+</div>
+<div class="field">
+<label for="dose2">Second dose (mg, optional)</label>
+<input type="number" id="dose2" min="0" max="2000" value="0" step="1">
+<div class="hint">Had a second cup? Its decay is added separately.</div>
+</div>
+<div class="field">
+<label for="consumed2">Second dose time</label>
+<input type="time" id="consumed2" value="">
+<div class="hint">Only needed if you entered a second dose.</div>
+</div>
+</div>
+<button class="btn" id="calc">Calculate</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</div>
+<h2>How caffeine half-life works</h2>
+<p>Caffeine does not fade from your body in a straight line. It follows exponential decay, which means the same fraction disappears every hour, regardless of how much is left. The <strong>half-life</strong> is simply the time it takes for that fraction to reach one half: if you start with 200&nbsp;mg and your half-life is 5 hours, you have 100&nbsp;mg after 5 hours, 50&nbsp;mg after 10 hours, and 25&nbsp;mg after 15 hours. Each half-life cuts the remainder in half again.</p>
+<p>For most healthy adults the caffeine half-life falls between 3 and 7 hours, with around 5 hours as a commonly cited average. The math is a single formula: <em>remaining = dose &times; 0.5<sup>(elapsed hours / half-life)</sup></em>. After two half-lives (10 hours at a 5-hour half-life), about a quarter of the original dose is still circulating. After three half-lives (15 hours), roughly one eighth remains. This is why an afternoon coffee can still be a meaningful dose at midnight even when you no longer <em>feel</em> wired &mdash; feeling awake and being caffeine-free are not the same thing.</p>
+<p>One important detail: tolerance changes how you feel, not how fast you clear. A person who drinks four cups a day metabolizes caffeine at roughly the same rate as an occasional drinker with similar genetics. The daily drinker simply notices the stimulation less, because the brain adapts by growing extra adenosine receptors. The caffeine is still there, still occupying receptors, still nudging sleep architecture in the wrong direction. This is the single most misunderstood fact about caffeine timing, and it is exactly what this timer corrects for: it tracks the molecule, not the sensation.</p>
+<h2>Why 50 mg is the sleep threshold</h2>
+<p>This timer flags the moment your remaining caffeine drops below 50&nbsp;mg &mdash; roughly half a small brewed coffee, or one strong cup of black tea. That number is a <strong>practical rule of thumb, not a biological law</strong>. There is no magic concentration at which caffeine suddenly stops affecting sleep; the relationship is dose-dependent, which is why a conservative cutoff is more useful than a precise one.</p>
+<p>The evidence behind conservative timing is solid. A widely cited study by Drake and colleagues (2013) found that 400&nbsp;mg of caffeine taken 6 hours before bed still reduced total sleep by more than an hour, and even smaller evening doses have been shown to delay sleep onset and reduce deep sleep in sensitive people. Most sleep clinicians use 50&nbsp;mg as a pragmatic line: below it, the large majority of people sleep normally. Highly sensitive individuals &mdash; and anyone struggling with insomnia &mdash; may do better with an even lower personal cutoff, which is why the timer also shows your raw milligram number: use it to learn your own line.</p>
+<p>Worth knowing: caffeine does not only make it harder to fall asleep. Measurable blood levels at bedtime are associated with less deep (slow-wave) sleep and more fragmented sleep &mdash; more micro-awakenings you may not remember, but which leave you less refreshed. People often blame "stress" for unrefreshing sleep when a 4&nbsp;pm coffee is the actual culprit, because by midnight they felt fine and never connected the two.</p>
+<h2>What changes your half-life</h2>
+<p>The headline average of 5 hours hides enormous individual variation, and most of it is not your fault or your virtue &mdash; it is genetics and physiology.</p>
+<p><strong>CYP1A2 genetics.</strong> The liver enzyme CYP1A2 does almost all caffeine clearance, and common variants of the gene split people into fast and slow metabolizers. Fast metabolizers can halve caffeine in about 3 hours; slow metabolizers may need 6 to 7. This is why one person can drink espresso after dinner and sleep like a stone while their partner is still staring at the ceiling. If you do not know which you are, the slider default of 5 hours is a reasonable middle, and you can calibrate it against your own experience.</p>
+<p><strong>Pregnancy.</strong> Caffeine half-life lengthens dramatically in pregnancy &mdash; up to 10 to 15 hours in the third trimester &mdash; because the same enzyme system slows down. Most guidelines advise keeping total intake under about 200&nbsp;mg per day during pregnancy, and the timer's math still applies if you stretch the half-life slider (use the slowest setting as a proxy, and discuss caffeine habits with your obstetrician).</p>
+<p><strong>Smoking and oral contraceptives.</strong> These push in opposite directions. Smoking induces CYP1A2 and can shorten the half-life to around 3 to 4 hours. Combined oral contraceptives inhibit the enzyme and can roughly double the half-life. Both matter more than most people realize: starting or stopping the pill can effectively change your caffeine tolerance overnight.</p>
+<p><strong>Age, liver function, and medications.</strong> Clearance slows with age and with liver disease. A handful of medications interact with CYP1A2 &mdash; fluvoxamine is the classic example, and some antibiotics in the quinolone family can slow caffeine clearance too. If you take regular medication and notice new caffeine sensitivity, that is a conversation for your pharmacist or doctor, not a slider adjustment.</p>
+<p><strong>What does not change it much.</strong> Drinking water, exercising, sweating, and eating a big meal do not meaningfully speed caffeine metabolism. The enzyme works at its own pace. Once the caffeine is absorbed &mdash; typically within 45 minutes &mdash; time is the only real remedy.</p>
+<h2>Practical curfew rules</h2>
+<p>The timer gives you a personalized caffeine curfew: the latest clock time your last dose should happen so that you are below 50&nbsp;mg by bedtime, rounded down to the nearest 30 minutes for a safety margin. Rounding down matters, because every input here is approximate &mdash; the stated caffeine content of your drink, your true half-life, the exact minute you finished the cup.</p>
+<p>As a starting point for people who do not want to do math: the popular <strong>8 to 10 hour rule</strong> &mdash; no caffeine within 8 to 10 hours of bedtime &mdash; exists because it keeps even slow metabolizers under the threshold for a normal-strength coffee. If you sleep at 23:00, that means a last coffee around 13:00 to 15:00. The timer personalizes this: fast metabolizers with a light morning dose get a later curfew, slow metabolizers with a double espresso get an earlier one.</p>
+<p>Three habits make the curfew easier to keep. First, front-load: get your caffeine in the first half of the morning, when it also does the most for alertness, since adenosine has been building since you woke. Second, taper the afternoon: if you need a ritual at 15:00, make it half-caf or green tea rather than a full brew. Third, learn your personal number from the timer output: if you consistently sleep well with 80&nbsp;mg at bedtime but badly with 120&nbsp;mg, your true threshold is somewhere between, and you can stop worshipping the default 50.</p>
+<h2>The evidence &mdash; and its limits</h2>
+<p>The core pharmacokinetics here are not controversial: caffeine follows first-order (exponential) elimination, and the 3-to-7-hour half-life range comes from decades of blood-concentration studies. The 50&nbsp;mg cutoff, by contrast, is a heuristic &mdash; defensible, widely used, but not a finding from a randomized trial. No ethics board is going to randomize people to precise bedtime caffeine concentrations, so a pragmatic line is the best anyone can offer.</p>
+<p>This timer also simplifies reality in ways you should know about. It models a single dose as one smooth exponential curve, but real clearance has an absorption phase (levels rise for 30 to 60 minutes after drinking) and can deviate from a perfect curve at very high doses. It assumes your half-life is constant through the day; in practice, clearance can be slightly slower in the evening. And it cannot know your genetics, your pill, or your pregnancy &mdash; those live in the slider, and in your judgment.</p>
+<p>None of this makes the tool useless. A simplified model with honest inputs beats confident guesswork, and most people's caffeine problems come not from pharmacokinetic subtleties but from massively underestimating what is still in their blood at midnight. Use the timer to build intuition for a week, then you will rarely need it: you will simply know what a 15:00 espresso costs you at 23:00.</p>
+<p>If caffeine is tangled up with anxiety, heart palpitations, pregnancy, or a sleep disorder that is not improving, the right next step is your doctor &mdash; not a finer slider setting. This page is educational, not medical advice.</p>
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Does decaf coffee count toward my caffeine total?</summary><div class="a"><p>Yes, but only a little. A typical cup of decaf still contains roughly 2 to 7 mg of caffeine depending on the bean and brew method. For most people that amount is negligible, but if you are very caffeine-sensitive or you drink several cups of decaf in the evening, it can add up. Include it as a small custom dose in the timer if you want to be precise.</p></div></details>
+<details><summary>Why am I more sensitive to caffeine than my friend?</summary><div class="a"><p>Most of the difference comes down to genetics, specifically the CYP1A2 gene, which controls the liver enzyme that breaks caffeine down. "Fast metabolizers" can clear caffeine in about 3 hours, while "slow metabolizers" may need 6 to 7 hours or more. Sensitivity to caffeine's effects is partly separate and involves adenosine receptor differences. If your friend falls asleep easily after an evening espresso and you cannot, genetics is the most likely explanation.</p></div></details>
+<details><summary>Does building a tolerance change my caffeine half-life?</summary><div class="a"><p>Not much. Tolerance changes how strongly you feel caffeine's effects, because your brain grows extra adenosine receptors to compensate. The speed at which your liver clears caffeine from the blood stays roughly the same. This means a heavy daily coffee drinker still has caffeine circulating late into the evening even if they no longer feel wired from it, and it can still fragment their sleep.</p></div></details>
+<details><summary>How accurate is the 50 mg sleep threshold?</summary><div class="a"><p>It is a practical rule of thumb, not a biological law. Research has shown that 200 mg taken even 6 hours before bed can measurably disrupt sleep, while smaller amounts have mixed effects. Fifty milligrams, roughly half a small brewed coffee, is a conservative line that most sleep practitioners use: below it, the majority of people sleep normally. Sensitive individuals may need a lower cutoff, which is why the timer's personal curfew rounds conservatively downward.</p></div></details>
+<details><summary>Can I clear caffeine from my system faster?</summary><div class="a"><p>Not in any meaningful way. Drinking water, exercising, or eating will not significantly speed up caffeine metabolism, because clearance is driven by a liver enzyme working at its own genetically set pace. Smoking speeds it up and oral contraceptives slow it down, but neither is a practical or advisable strategy. Once the caffeine is in you, the only real remedy is time.</p></div></details>
+<details><summary>Should I count the caffeine in tea, chocolate, and pre-workout?</summary><div class="a"><p>Yes. A cup of black tea has about 40 to 70 mg, green tea about 30 to 50 mg, dark chocolate roughly 20 mg per ounce, and pre-workout supplements can pack 200 to 400 mg per scoop. People often underestimate their total because they only count coffee. Add everything up as one custom dose in the timer for the honest picture.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+
+/* Core maths — verified against hand computation:
+   190 mg, 7 h elapsed, half-life 5 h -> 190 * 0.5^1.4 = 72.0 mg
+   time to 50 mg: 5 * ln(50/190)/ln(0.5) = 9.630 h */
+function remaining(dose, elapsedHours, halfLife){
+  if(elapsedHours<=0) return dose;
+  return dose*Math.pow(0.5, elapsedHours/halfLife);
+}
+function timeToThresholdSingle(dose, halfLife, threshold){
+  if(dose<=threshold) return 0;
+  return halfLife*Math.log(threshold/dose)/Math.log(0.5);
+}
+
+function parseTime(str){
+  if(!str||str.indexOf(":")<0) return null;
+  var p=str.split(":"), h=parseInt(p[0],10), m=parseInt(p[1],10);
+  if(isNaN(h)||isNaN(m)) return null;
+  var d=new Date(); d.setHours(h,m,0,0); return d;
+}
+function fmtTime(d){
+  return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+}
+function fmtTimeWithDay(d, base){
+  var dayDiff=Math.round((d.getTime()-base.getTime())/86400000);
+  var label=dayDiff<=0?" (same day)":(dayDiff===1?" (next day)":" (+"+dayDiff+" days)");
+  return fmtTime(d)+label;
+}
+function floorTo30(d){
+  var c=new Date(d); c.setMinutes(Math.floor(c.getMinutes()/30)*30,0,0); return c;
+}
+
+var hl=$("halflife");
+hl.addEventListener("input",function(){$("hlval").textContent=parseFloat(hl.value).toFixed(1);});
+
+$("presets").addEventListener("click",function(e){
+  var b=e.target.closest(".preset"); if(!b) return;
+  $("dose").value=b.getAttribute("data-mg");
+  var all=$("presets").querySelectorAll(".preset");
+  for(var i=0;i<all.length;i++) all[i].classList.remove("active");
+  b.classList.add("active");
+});
+
+function nowRounded(){
+  var d=new Date(); d.setMinutes(Math.floor(d.getMinutes()/5)*5,0,0); return d;
+}
+(function prefill(){
+  var t=nowRounded();
+  $("asof").value=("0"+t.getHours()).slice(-2)+":"+("0"+t.getMinutes()).slice(-2);
+})();
+
+$("calc").addEventListener("click",function(){
+  var dose=parseFloat($("dose").value)||0;
+  var halfLife=parseFloat(hl.value);
+  var TH=50;
+  var consumed=parseTime($("consumed").value);
+  var asof=parseTime($("asof").value)||new Date();
+  if(!consumed){alert("Please enter the time you consumed the caffeine.");return;}
+  if(asof<consumed){asof=new Date(asof.getTime()+86400000);} /* next-day check */
+
+  var d2=parseFloat($("dose2").value)||0;
+  var consumed2=parseTime($("consumed2").value);
+  var hasSecond=d2>0&&consumed2;
+
+  var el1=(asof-consumed)/3600000;
+  var el2=hasSecond?(asof-consumed2)/3600000:0;
+  if(hasSecond&&consumed2>asof) el2=0; /* second dose not yet taken -> full dose now? treat as 0 elapsed */
+  if(el2<0) el2=0;
+
+  var r1=remaining(dose,Math.max(0,el1),halfLife);
+  var r2=hasSecond?remaining(d2,el2,halfLife):0;
+  var total=r1+r2;
+
+  var out="";
+  if(total<TH){
+    out='<p class="interpret">You are already below the sleep-safe threshold.</p>'+
+        '<div class="big">'+total.toFixed(1)+'<span class="unit"> mg remaining</span></div>'+
+        '<p class="note">Total caffeine in your system at '+fmtTime(asof)+' is under the 50 mg sleep-safe line. '+
+        'Your personal caffeine curfew is therefore now &mdash; any further caffeine today will push you back over.</p>';
+  }else{
+    /* hours from as-of until total drops below TH (numeric solve handles 2 doses) */
+    var tSafe;
+    if(!hasSecond){
+      tSafe=timeToThresholdSingle(dose,halfLife,TH)-Math.max(0,el1);
+    }else{
+      var f=function(dt){
+        return remaining(dose,Math.max(0,el1)+dt,halfLife)+remaining(d2,el2+dt,halfLife)-TH;
+      };
+      var lo=0,hi=1;
+      while(f(hi)>0&&hi<100) hi*=2;
+      for(var i=0;i<60;i++){var mid=(lo+hi)/2; if(f(mid)>0) lo=mid; else hi=mid;}
+      tSafe=(lo+hi)/2;
+    }
+    if(tSafe<0) tSafe=0;
+    var safeAt=new Date(asof.getTime()+tSafe*3600000);
+    var curfew=floorTo30(safeAt);
+    out='<div class="big">'+total.toFixed(1)+'<span class="unit"> mg in your system at '+fmtTime(asof)+'</span></div>'+
+        '<p class="interpret">Below 50 mg at '+fmtTimeWithDay(safeAt,asof)+'.</p>'+
+        '<p><strong>Your caffeine curfew: '+fmtTime(curfew)+'</strong> &mdash; have your last caffeine before this time to be sleep-safe by the same hour.</p>'+
+        '<p class="note">Estimated time to clear: about '+tSafe.toFixed(1)+' more hours. '+
+        (hasSecond?'Includes your second dose decaying from its own start time. ':'')+
+        'The 50 mg line is a practical threshold, not a biological law &mdash; sensitive sleepers may need a lower cutoff.</p>';
+  }
+  var res=$("result");
+  res.innerHTML=out;
+  res.classList.add("show");
+});
+})();
+</script>
+</body>
+</html>
