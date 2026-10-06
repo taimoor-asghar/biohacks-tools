@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Fat Percentage Calculator (US Navy Method) — Tape-Measure Estimate | DoctorBiohacks</title>
+<meta name="description" content="Estimate your body fat percentage with the US Navy tape-measure method (Hodgdon & Beckett). Enter height, neck, waist and hip measurements for an instant, honest result with fitness categories.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/body-fat-navy/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Body Fat Percentage Calculator (US Navy Method) — Tape-Measure Estimate">
+<meta property="og:description" content="Estimate your body fat percentage with the US Navy tape-measure method (Hodgdon & Beckett). Enter height, neck, waist and hip measurements for an instant, honest result with fitness categories.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/body-fat-navy/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.rating-pill{display:inline-block;background:#0369a1;color:#fff;border-radius:20px;padding:4px 16px;font-weight:800;font-size:1.05rem;text-transform:capitalize}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.formula{background:#fff;border:1px dashed var(--primary);border-radius:4px;padding:14px 18px;margin:1em 0;font-size:1.02rem}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[{"@type":"Question","name":"How accurate is the US Navy body fat method?","acceptedAnswer":{"@type":"Answer","text":"Against lab methods like DEXA or hydrostatic weighing, the Navy tape method is typically accurate to about ±3 to 4 percentage points when measurements are taken carefully. That makes it good for tracking your own trend over time, but not precise enough for fine distinctions — a reading of 18% really means somewhere around 14–22%."}},{"@type":"Question","name":"Why does the Navy formula underestimate body fat in very lean people?","acceptedAnswer":{"@type":"Answer","text":"The equations were fitted to a broad military population, so they are least accurate at the extremes. In very lean people the formula tends to read a few points low — it can return single-digit values for people who are clearly not that lean. Treat unusually low readings with scepticism and confirm with another method if it matters."}},{"@type":"Question","name":"Is the Navy method better than BMI?","acceptedAnswer":{"@type":"Answer","text":"For most individuals, yes. BMI cannot tell muscle from fat, so muscular people are misclassified as overweight and 'skinny-fat' people are missed entirely. The Navy method estimates actual body fat percentage from circumferences, which correlates far better with metabolic risk — though it is still an estimate, not a diagnosis."}},{"@type":"Question","name":"Do I need to convert my measurements to inches?","acceptedAnswer":{"@type":"Answer","text":"No. This calculator uses the metric form of the Hodgdon–Beckett equations, whose constants are calibrated for centimetres — you enter cm directly and the maths is handled for you. (The US Navy's official inch-based linear equations give the same answers; mixing units into the wrong equation is a common source of wrong results online.)"}},{"@type":"Question","name":"How often should I re-measure my body fat?","acceptedAnswer":{"@type":"Answer","text":"Monthly is the sweet spot for most people. Body fat changes slowly — weekly measurements mostly capture water, food, and tape-placement noise. Measure under the same conditions each time (morning, before eating, relaxed) and compare the trend over 2–3 months rather than single readings."}},{"@type":"Question","name":"Who should not rely on the Navy body fat formula?","acceptedAnswer":{"@type":"Answer","text":"It was developed and validated on adults roughly aged 17–65, so it is unreliable for children and adolescents. It is not suitable during pregnancy, and it performs poorly at the extremes — competitive bodybuilders and very obese individuals should prefer DEXA or professional assessment."}}]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Body Fat % (US Navy Method)</nav>
+<h1>Body Fat % Calculator (US Navy Method)</h1>
+<p class="lede">Estimate your body fat percentage from a few tape-measure readings — height, neck, waist, and (for women) hips — using the US Navy's validated Hodgdon–Beckett equations. No calipers, no lab visit, no guesswork about what the scale really means.</p>
+<div class="tool-card">
+<form id="bff" onsubmit="return false;">
+<div class="form-grid">
+<div class="field">
+<label for="sex">Sex</label>
+<select id="sex" onchange="toggleHip()" required>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+<div class="hint">Determines which Navy equation is used</div>
+</div>
+<div class="field">
+<label for="height">Height (cm)</label>
+<input type="number" id="height" min="120" max="230" step="0.5" value="180" required>
+<div class="hint">Barefoot, standing straight — 120–230 cm</div>
+</div>
+<div class="field">
+<label for="neck">Neck circumference (cm)</label>
+<input type="number" id="neck" min="25" max="70" step="0.5" value="40" required>
+<div class="hint">Just below the Adam's apple, tape sloping slightly downward at the front</div>
+</div>
+<div class="field">
+<label for="waist">Waist circumference (cm)</label>
+<input type="number" id="waist" min="50" max="200" step="0.5" value="85" required>
+<div class="hint">Men: at navel level. Women: at the narrowest point of the torso</div>
+</div>
+<div class="field" id="hip-field" style="display:none">
+<label for="hip">Hip circumference (cm)</label>
+<input type="number" id="hip" min="60" max="220" step="0.5" value="95">
+<div class="hint">Women only: widest part of the hips/buttocks</div>
+</div>
+</div>
+<button class="btn" type="button" onclick="calcBF()">Calculate Body Fat %</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+<div class="formula">
+<strong>Navy equations used (measurements in centimetres):</strong><br>
+Men: %BF = 495 ÷ (1.0324 − 0.19077 × log<sub>10</sub>(waist − neck) + 0.15456 × log<sub>10</sub>(height)) − 450<br>
+Women: %BF = 495 ÷ (1.29579 − 0.35004 × log<sub>10</sub>(waist + hip − neck) + 0.22100 × log<sub>10</sub>(height)) − 450<br>
+<span style="font-size:.85rem;color:#737373">Metric form of the Hodgdon &amp; Beckett (Naval Health Research Center, 1984) equations — the same maths behind the US Navy's official tape test.</span>
+</div>
+</div>
+
+<h2>Why body fat percentage beats the bathroom scale</h2>
+<p>Your scale tells you one number: total mass. It cannot tell you whether the last two kilos you lost were fat, muscle, water, or glycogen — and the distinction matters enormously. Two people can both weigh 80 kg at 180 cm and have completely different health profiles: one might carry 12% body fat with substantial muscle, the other 28% with very little. The scale calls them identical. Your metabolism, your hormones, and your long-term disease risk disagree.</p>
+<p>Body fat percentage — the fraction of your total weight that is fat tissue — is the number that actually connects to health outcomes. Higher body fat, particularly around the abdomen, tracks with insulin resistance, cardiovascular risk, and systemic inflammation far better than weight alone. Meanwhile, very low body fat carries its own risks: hormonal disruption, impaired immunity, and bone loss. Knowing roughly where you sit on that spectrum turns vague scale-watching into something actionable.</p>
+<p>The problem has always been measurement. The reference methods — DEXA scans, hydrostatic (underwater) weighing, Bod Pod air displacement — are accurate but expensive, inconvenient, or simply unavailable to most people. Bioelectrical impedance scales are cheap but notoriously fickle, swinging several points with hydration, meals, and even foot moisture. That gap between "lab-grade but inaccessible" and "convenient but unreliable" is exactly where the US Navy method sits: a tape measure, three or four circumferences, and an equation validated against the lab methods. It is not perfect — nothing this cheap is — but it is honest, repeatable, and far more informative than BMI.</p>
+
+<h2>The Navy method: a tape measure and a 1984 Navy study</h2>
+<p>In the early 1980s the US Navy had a practical problem: it needed a body-composition standard for tens of thousands of sailors, and it needed a test that could be administered anywhere with no equipment beyond a tape measure. Researchers Hodgdon and Beckett at the Naval Health Research Center in San Diego took on the job, measuring circumferences and skinfolds on large samples of Navy personnel and fitting equations that predicted body fat as measured by the lab gold standard of the day, hydrostatic weighing.</p>
+<p>The result, published in 1984, was a pair of equations — one for men, one for women — that estimate body density from a handful of circumferences, converted to body fat percentage with the classic Siri equation. The Navy adopted them for its Physical Readiness Program, and they have been in continuous service use ever since, with maximum allowable body fat standards (roughly 22–23% for men and 33–34% for women, varying by age) that sailors must meet. Few fitness formulas get a four-decade field trial on that scale.</p>
+<p>Validation studies since have generally found what you would expect: the method correlates well with lab measures (typically r ≈ 0.8–0.9) with a standard error of estimate around 3–3.5 percentage points. In plain language, if the calculator says 20%, your true value is most likely somewhere between about 16% and 24%. That error band is the price of a tape measure — and it is why this page keeps saying the same thing: use the number for tracking your own trend, not as a precise medical measurement.</p>
+
+<h2>The maths inside this calculator</h2>
+<p>There is no magic here, just anthropometry. For men, the key quantity is waist minus neck: abdominal circumference captures central fat, and subtracting the neck corrects for overall frame size — a big-framed man gets a fairer reading than raw waist alone would give. For women, the equation uses waist plus hip minus neck, because female fat distribution is typically gynoid (hips and thighs) rather than android (abdomen), and the hip measurement captures that. Height enters both equations to normalise for body size.</p>
+<p>The logarithms deserve a word. Body fat does not scale linearly with circumference — doubling your waist does not double your fat percentage — so the equations use log<sub>10</sub> to model that diminishing-returns relationship. The fitted constants (1.0324, 0.19077, 0.15456 for men; 1.29579, 0.35004, 0.22100 for women) estimate body density, and the Siri equation — 495 ÷ density − 450 — converts density to a fat percentage. These constants are the metric calibration: they expect centimetres, which is why this calculator takes your measurements in cm directly.</p>
+<p>A note on units, because the internet gets this wrong constantly: many sites publish these same equations and tell you to convert to inches first, or claim "same formula, different units." That is mathematically false — feeding inches into the metric-calibrated constants shifts results by a large margin (it can understate body fat by six or more points). The US Navy's official inch-based equations are a different, linearised form of the same maths. This calculator uses the metric form with centimetre inputs, which is the correct pairing, and its results agree with the Navy's official equations.</p>
+
+<h2>How to measure yourself accurately</h2>
+<p>Here is an uncomfortable truth about this method: your technique matters more than the equation. A 2 cm error at the waist moves the result by roughly a full percentage point, so sloppy measuring swamps the formula's precision. The good news is that good technique is simple — it just requires consistency.</p>
+<p>Use a flexible, non-stretch tape measure (the soft tailor's kind, not a metal construction tape). Measure in the morning, before eating, after using the bathroom, wearing minimal clothing. Stand relaxed and breathe normally — take the reading at the end of a normal exhale, and crucially, do not suck your stomach in. The tape should be snug against the skin without compressing the tissue: you should be able to slip a finger underneath but not much more. Keep the tape horizontal all the way around; a tape that rides up at the back is the single most common error.</p>
+<p>Each site has a specific landmark. <strong>Height:</strong> barefoot, standing straight against a wall, looking forward. <strong>Neck:</strong> just below the Adam's apple (larynx), with the tape sloping slightly downward toward the front — keep your neck relaxed and look straight ahead, not up. <strong>Waist (men):</strong> horizontal at the level of the navel. <strong>Waist (women):</strong> at the narrowest point of the torso, usually just above the navel. <strong>Hips (women):</strong> at the widest point of the buttocks, feet together.</p>
+<p>Take every measurement three times and use the average — this alone eliminates most of the random error. Write the numbers down rather than trusting memory, and always measure under the same conditions when you re-test. Morning, fasted, relaxed: make it a ritual and the trend line will be meaningful.</p>
+
+<h2>Reading your result: the category table</h2>
+<p>The calculator places your estimate in one of five bands. These ranges are the widely used body-fat classification standards (associated with the American Council on Exercise), not Navy enlistment cut-offs:</p>
+<table>
+<thead><tr><th>Category</th><th>Men</th><th>Women</th></tr></thead>
+<tbody>
+<tr><td>Essential fat</td><td>2–5%</td><td>10–13%</td></tr>
+<tr><td>Athlete</td><td>6–13%</td><td>14–20%</td></tr>
+<tr><td>Fitness</td><td>14–17%</td><td>21–24%</td></tr>
+<tr><td>Average</td><td>18–24%</td><td>25–31%</td></tr>
+<tr><td>Obese</td><td>25%+</td><td>32%+</td></tr>
+</tbody>
+</table>
+<p>A word on "essential fat": the bottom band is not a target. Essential fat is the fat your body needs to function — bone marrow, organs, nerve sheaths — roughly 2–5% for men and 10–13% for women. Dropping toward or below these floors is associated with hormonal shutdown, immune suppression, and bone loss. For women, sustained very low body fat commonly disrupts the menstrual cycle, which is a clinical red flag, not a fitness achievement.</p>
+<p>The most useful reading of the table is comparative, not absolute. Moving from "average" to "fitness" over six months of training is a genuine health win regardless of the error bars, because the method's bias is consistent for the same person measured the same way. And context matters: a 55-year-old in the "fitness" band is doing well, while the same label means something different for a 22-year-old athlete. Women also carry legitimately higher healthy body fat than men — the table's offset reflects biology, not lower standards.</p>
+
+<h2>The honest limitations</h2>
+<p>No estimation method deserves blind trust, and this one has documented weaknesses you should know. First, it tends to <strong>underestimate body fat in very lean people</strong> — the equations were fitted to a general military population, and at the lean extreme they can read several points low, occasionally returning single-digit values for people who are visibly not that lean. If your result looks surprisingly low, it probably is.</p>
+<p>Second, a tape measure cannot see inside you. The method estimates total body fat but says nothing about <strong>visceral versus subcutaneous fat</strong> — and visceral fat, packed around the organs, is the metabolically dangerous kind. Two people with identical Navy readings can have meaningfully different risk profiles if one carries it viscerally and the other subcutaneously. Waist circumference on its own remains a useful independent risk signal for exactly this reason.</p>
+<p>Third, the reading is sensitive to things that are not fat: a large meal, bloating, water retention, and (for women) the menstrual cycle can all nudge circumferences by a centimetre or two. The equations were developed and validated on adults roughly aged 17 to 65, so they are unreliable for children and adolescents, unsuitable during pregnancy, and shaky at the extremes of muscularity — competitive bodybuilders will read artificially high because the formula mistakes muscle for frame-adjusted fat, and it performs poorly in severe obesity.</p>
+<p>Finally, keep the ±3–4 point error band front and centre. This tool tells you your ballpark and your trajectory. If you need a precise number — for a medical workup, a weight-class sport, or genuine curiosity — get a DEXA scan. For everyone else, a free tape measure used consistently beats an expensive gadget used once.</p>
+
+<h2>What to do with your number</h2>
+<p>Start by recording today's reading as a baseline, then re-measure monthly under identical conditions. Plot the trend, not the points: three months of readings drifting from 24% to 21% is real progress; a single reading bouncing from 22% to 23% is noise. Resist the urge to measure weekly — body fat changes slowly, and weekly readings mostly measure water, food, and tape placement.</p>
+<p>If your goal is to reduce body fat, the honest prescription is unglamorous: a modest sustained calorie deficit, plenty of protein (roughly 1.6–2.2 g per kg of body weight daily), and resistance training to protect muscle while you lose. Realistic fat loss is about 0.5–1% of body weight per week; anyone promising faster is selling water loss or muscle loss. Notably, the scale can stall while body fat falls — recomposition, where you gain muscle as you lose fat, is exactly the scenario where this calculator earns its keep over the bathroom scale.</p>
+<p>And if your reading lands in the obese band, treat it as useful information rather than a verdict. Body fat percentage is one of the most modifiable risk factors you have, and the steepest health gains come from the first improvements, not from reaching athlete levels. If you have metabolic conditions — diabetes, hypertension, sleep apnoea — or an eating-disorder history, discuss the number and any plans with your doctor rather than chasing it alone. The goal was never a prettier number; it is a body that works better.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How accurate is the US Navy body fat method?</summary><div class="a"><p>Against lab methods like DEXA or hydrostatic weighing, the Navy tape method is typically accurate to about ±3 to 4 percentage points when measurements are taken carefully. That makes it good for tracking your own trend over time, but not precise enough for fine distinctions — a reading of 18% really means somewhere around 14–22%.</p></div></details>
+<details><summary>Why does the Navy formula underestimate body fat in very lean people?</summary><div class="a"><p>The equations were fitted to a broad military population, so they are least accurate at the extremes. In very lean people the formula tends to read a few points low — it can return single-digit values for people who are clearly not that lean. Treat unusually low readings with scepticism and confirm with another method if it matters.</p></div></details>
+<details><summary>Is the Navy method better than BMI?</summary><div class="a"><p>For most individuals, yes. BMI cannot tell muscle from fat, so muscular people are misclassified as overweight and "skinny-fat" people are missed entirely. The Navy method estimates actual body fat percentage from circumferences, which correlates far better with metabolic risk — though it is still an estimate, not a diagnosis.</p></div></details>
+<details><summary>Do I need to convert my measurements to inches first?</summary><div class="a"><p>No. This calculator uses the metric form of the Hodgdon–Beckett equations, whose constants are calibrated for centimetres — you enter cm directly and the maths is handled for you. (The US Navy's official inch-based linear equations give the same answers; mixing units into the wrong equation is a common source of wrong results online.)</p></div></details>
+<details><summary>How often should I re-measure my body fat?</summary><div class="a"><p>Monthly is the sweet spot for most people. Body fat changes slowly — weekly measurements mostly capture water, food, and tape-placement noise. Measure under the same conditions each time (morning, before eating, relaxed) and compare the trend over 2–3 months rather than single readings.</p></div></details>
+<details><summary>Who should not rely on the Navy body fat formula?</summary><div class="a"><p>It was developed and validated on adults roughly aged 17–65, so it is unreliable for children and adolescents. It is not suitable during pregnancy, and it performs poorly at the extremes — competitive bodybuilders and very obese individuals should prefer DEXA or professional assessment.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+function toggleHip(){
+  var sex = document.getElementById('sex').value;
+  document.getElementById('hip-field').style.display = (sex === 'female') ? 'block' : 'none';
+}
+function catBF(bf, sex){
+  if (sex === 'male'){
+    if (bf < 6) return 'Essential fat';
+    if (bf < 14) return 'Athlete';
+    if (bf < 18) return 'Fitness';
+    if (bf < 25) return 'Average';
+    return 'Obese';
+  }
+  if (bf < 14) return 'Essential fat';
+  if (bf < 21) return 'Athlete';
+  if (bf < 25) return 'Fitness';
+  if (bf < 32) return 'Average';
+  return 'Obese';
+}
+function calcBF(){
+  var sex = document.getElementById('sex').value;
+  var h = parseFloat(document.getElementById('height').value);
+  var neck = parseFloat(document.getElementById('neck').value);
+  var waist = parseFloat(document.getElementById('waist').value);
+  var hip = parseFloat(document.getElementById('hip').value);
+  var res = document.getElementById('result');
+  function err(msg){
+    res.className = 'result show';
+    res.innerHTML = '<p class="interpret">Please check your inputs:</p><p class="note">' + msg + '</p>';
+  }
+  if (!(h >= 120 && h <= 230)) return err('Height must be 120–230 cm.');
+  if (!(neck >= 25 && neck <= 70)) return err('Neck must be 25–70 cm.');
+  if (!(waist >= 50 && waist <= 200)) return err('Waist must be 50–200 cm.');
+  var bf, expr;
+  if (sex === 'male'){
+    var d = waist - neck;
+    if (!(d > 0)) return err('Waist must be larger than neck for the male equation.');
+    bf = 495/(1.0324 - 0.19077*Math.log10(d) + 0.15456*Math.log10(h)) - 450;
+    expr = '495 / (1.0324 - 0.19077 x log10(' + d.toFixed(1) + ') + 0.15456 x log10(' + h.toFixed(0) + ')) - 450';
+  } else {
+    if (!(hip >= 60 && hip <= 220)) return err('Hip must be 60–220 cm (female measurement).');
+    var s = waist + hip - neck;
+    if (!(s > 0)) return err('Waist + hip must be larger than neck for the female equation.');
+    bf = 495/(1.29579 - 0.35004*Math.log10(s) + 0.22100*Math.log10(h)) - 450;
+    expr = '495 / (1.29579 - 0.35004 x log10(' + s.toFixed(1) + ') + 0.22100 x log10(' + h.toFixed(0) + ')) - 450';
+  }
+  var bfr = Math.round(bf*10)/10;
+  var cat = catBF(bfr, sex);
+  res.className = 'result show';
+  res.innerHTML =
+    '<div>Your estimated body fat</div>' +
+    '<div class="big">' + bfr.toFixed(1) + ' <span class="unit">%</span></div>' +
+    '<div class="interpret">Category: <span class="rating-pill">' + cat + '</span></div>' +
+    '<p class="note">Worked calculation: ' + expr + ' = ' + bfr.toFixed(1) + '%. ' +
+    'The Navy method is typically accurate to about ±3–4 percentage points versus DEXA, and it tends to read a little low for very lean people. ' +
+    'Track the trend over weeks rather than treating one reading as exact.</p>';
+}
+</script>
+</body>
+</html>
