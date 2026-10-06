@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biological Age Estimator — How Old Is Your Body Really? | DoctorBiohacks</title>
+<meta name="description" content="Estimate your biological age from 10 lifestyle factors with this honest, doctor-reviewed calculator. Lifestyle estimator — not an epigenetic clock.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/biological-age/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Biological Age Estimator — How Old Is Your Body Really?">
+<meta property="og:description" content="Estimate your biological age from 10 lifestyle factors with this honest, doctor-reviewed calculator. Lifestyle estimator — not an epigenetic clock.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/biological-age/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.caveat{background:#fff7e6;border:2px solid #e8a100;border-radius:4px;padding:16px 18px;margin-bottom:20px;font-size:.95rem}
+.caveat strong{color:#a66e00}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Is this the same as an epigenetic age test like Horvath or GrimAge?","acceptedAnswer":{"@type":"Answer","text":"No. Epigenetic clocks measure chemical tags (DNA methylation) on your blood cells in a lab. This tool uses no biological samples — it estimates aging from 10 lifestyle factors that population studies link to mortality and disease risk. It is far less precise, but also free and instant."}},
+  {"@type":"Question","name":"Can I actually lower my biological age?","acceptedAnswer":{"@type":"Answer","text":"You cannot change your chronological age, and no single test proves 'reversal.' But the inputs here are modifiable: quitting smoking, exercising regularly, sleeping 7–9 hours, and reducing waist-to-height ratio are all associated with lower mortality risk in large cohort studies. Improve the inputs, and the estimate improves — that is the honest utility of this tool."}},
+  {"@type":"Question","name":"Why does my score differ from my smartwatch's age estimate?","acceptedAnswer":{"@type":"Answer","text":"Smartwatches infer fitness mostly from heart-rate data and VO2max estimates; this tool weighs ten lifestyle domains equally, including diet, smoking, alcohol, and stress, which your watch cannot see. Different inputs, different models, different answers — neither is a medical measurement."}},
+  {"@type":"Question","name":"Is this a diagnosis of how healthy I am?","acceptedAnswer":{"@type":"Answer","text":"No. This is an educational estimate built from population-level associations. It cannot detect disease, assess genetics, or replace blood work and a physical exam. If your result concerns you, discuss real risk factors with your doctor, not your score here."}},
+  {"@type":"Question","name":"Which factor moves the number the most?","acceptedAnswer":{"@type":"Answer","text":"Smoking is the single largest modifier: current smoking adds 3 years. Exercise (0 days) and poor sleep add 2 each. These weights reflect how strongly each factor associates with mortality in epidemiological studies, not precise individual effects."}},
+  {"@type":"Question","name":"How often should I retake this?","acceptedAnswer":{"@type":"Answer","text":"No more than every 3–6 months. Lifestyle factors change slowly, and obsessing over a monthly number is counterproductive. Use it as a coarse progress check alongside real metrics: waist measurement, resting heart rate trends, blood pressure, and lab results."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Biological Age Estimator</nav>
+<h1>Biological Age Estimator</h1>
+<p class="lede">Answer 10 honest lifestyle questions and get a straight-talking estimate of your biological age versus your chronological age — with the caveats stated up front.</p>
+<div class="tool-card">
+<div class="caveat"><strong>&#9888; Read this first.</strong> This is an <strong>estimate, not a medical measurement</strong>. It uses lifestyle factors associated with aging in population studies — it is NOT an epigenetic clock (no blood, no DNA). Your score does not diagnose disease or predict your lifespan. See "What this estimator cannot tell you" below for the full honest picture.</div>
+<form id="bioage-form">
+<div class="form-grid">
+<div class="field"><label for="age">Chronological age (years)</label><input type="number" id="age" min="18" max="100" required></div>
+<div class="field"><label for="exercise">Exercise days per week (0&ndash;7)</label><input type="number" id="exercise" min="0" max="7" required></div>
+<div class="field"><label for="smoking">Smoking status</label><select id="smoking"><option value="never">Never smoked</option><option value="former">Former smoker</option><option value="current">Current smoker</option></select></div>
+<div class="field"><label for="sleep">Sleep per night (hours)</label><input type="number" id="sleep" min="3" max="14" step="0.5" required><span class="hint">Your typical night, not your record.</span></div>
+<div class="field"><label for="fruitveg">Fruit &amp; vegetable servings per day</label><input type="number" id="fruitveg" min="0" max="15" required></div>
+<div class="field"><label for="rhr">Resting heart rate (bpm)</label><input type="number" id="rhr" min="35" max="120" required><span class="hint">First thing in the morning, before coffee.</span></div>
+<div class="field"><label for="waist">Waist circumference (cm)</label><input type="number" id="waist" min="50" max="200" step="0.5" required><span class="hint">Around the navel.</span></div>
+<div class="field"><label for="height">Height (cm)</label><input type="number" id="height" min="130" max="230" step="0.5" required></div>
+<div class="field"><label for="alcohol">Alcoholic drinks per week</label><input type="number" id="alcohol" min="0" max="100" required><span class="hint">One standard drink = one beer, one glass of wine, or one shot.</span></div>
+<div class="field"><label for="stress">Perceived stress level</label><select id="stress"><option value="low">Low</option><option value="moderate">Moderate</option><option value="high">High</option></select></div>
+<div class="field"><label for="processed">Processed food frequency</label><select id="processed"><option value="rarely">Rarely</option><option value="sometimes">Sometimes</option><option value="daily">Daily</option></select></div>
+<div class="field"><label for="strength">Strength training (2+ sessions/week)</label><select id="strength"><option value="yes">Yes</option><option value="no">No</option></select></div>
+</div>
+<button type="submit" class="btn">Estimate my biological age</button>
+</form>
+<div class="result" id="result">
+<div class="big" id="bioage-out">— <span class="unit">years (biological age)</span></div>
+<div class="interpret" id="delta-out"></div>
+<div class="note"><strong>Your top 3 levers:</strong></div>
+<ol id="levers-out" style="margin-top:.4em"></ol>
+<p class="note">Reminder: this is an estimate from population associations, not a medical measurement. See the guide below for what it can and cannot tell you.</p>
+</div>
+</div>
+
+<h2>What "biological age" actually means</h2>
+<p>Your chronological age is simple: how many birthdays you have had. Your biological age is a slippery concept — roughly, how old your body <em>behaves</em> relative to that number. A 40-year-old with the lungs of a 50-year-old and the cardiovascular fitness of a 35-year-old does not have a single "true" biological age; different organ systems age at different rates. The phrase biological age is best understood as a shorthand for "accumulated physiological wear and tear," not a single number you can read off a dial.</p>
+<p>This distinction matters because the wellness industry loves to sell you a single magical number. In reality, aging is multi-dimensional: your arteries, your joints, your metabolism, and your cognitive function can each be at a different stage. Any tool that collapses all of that into one number — including this one — is doing so for convenience, not precision. Treat the number as a conversation starter, not a verdict.</p>
+
+<h2>The science: epigenetic clocks vs lifestyle estimators</h2>
+<p>When scientists talk about biological age seriously, they usually mean one of two things. The first is <strong>epigenetic clocks</strong>: laboratory tests that measure DNA methylation — chemical tags on your DNA — in a blood sample. The Horvath clock (2013) and later the GrimAge and PhenoAge clocks showed that methylation patterns predict mortality risk better than chronological age alone. These are real, peer-reviewed instruments. They also cost money, require a blood draw, and still do not tell you exactly what to do on Monday morning.</p>
+<p>The second category is <strong>lifestyle estimators</strong> — questionnaires like this one. They take factors known from decades of cohort studies to associate with mortality and disease (smoking, activity, sleep, diet, adiposity) and combine them into a score. They are crude. They cannot see your genetics, your blood lipids, your inflammation markers, or your family history. Their advantage is accessibility: free, instant, and — honestly applied — they tend to point at the same handful of behaviors that epidemiologists have been shouting about for forty years.</p>
+<p>This tool is firmly in the second category. <strong>It is not an epigenetic clock. It uses no blood, no DNA, no lab values.</strong> Anyone selling you a questionnaire and calling it the same thing as a Horvath clock is either confused or marketing.</p>
+
+<h2>Why this tool uses lifestyle factors</h2>
+<p>Large prospective studies — the Framingham Heart Study, the Nurses' Health Study, the Health Professionals Follow-up Study, and others following hundreds of thousands of people for decades — have repeatedly found the same lifestyle factors associated with how long and how well people live. Smoking roughly doubles all-cause mortality. Regular physical activity is associated with 20–30% lower mortality risk. Very short or very long sleep associates with higher risk. These are population-level associations: they describe what happens across thousands of people, not what will happen to you specifically.</p>
+<p>The modifiers in this calculator are weighted to roughly reflect the relative strength of those associations. Smoking gets the largest penalty because it is the largest preventable cause of premature death. Exercise and sleep get meaningful weights because the dose-response curves are strong. Things like processed food frequency and perceived stress get smaller weights because the evidence, while real, is thinner and more confounded — people with high stress also tend to sleep worse and eat worse, so teasing apart the independent effect is genuinely hard.</p>
+<p>Waist-to-height ratio deserves a word. Body mass index gets the headlines, but a growing body of research suggests waist-to-height ratio (keep it below 0.5) is a better proxy for central adiposity and cardiometabolic risk than BMI. That is why this tool asks for your waist and height rather than your weight.</p>
+
+<h2>What this estimator cannot tell you</h2>
+<p>This is the section most biological-age sites skip, and it is the most important one on this page.</p>
+<p><strong>It cannot diagnose disease.</strong> A normal score does not mean you are healthy, and a bad score does not mean you are sick. Undiagnosed hypertension, early diabetes, and a dozen other conditions are invisible to a questionnaire. If your result worries you, the correct response is to see your doctor and get real measurements — blood pressure, lipids, glucose — not to retake this quiz.</p>
+<p><strong>It cannot see your genetics.</strong> Family history of early heart disease, known genetic conditions, and the plain lottery of biology are not in the model. Two people with identical lifestyles can have very different health trajectories.</p>
+<p><strong>It cannot predict your lifespan.</strong> Population associations do not translate into individual predictions. A "biological age" five years below your real age is not a guarantee of five extra years; it is a statement that people with your habits tend to do better than average.</p>
+<p><strong>It cannot be reversed the way marketing claims.</strong> You cannot become "ten years younger in 90 days." The inputs here move slowly — cardiovascular fitness, resting heart rate, waist circumference — and the score should be viewed over months, not weeks. Beware any program that promises rapid reversal; the biology does not work that way.</p>
+<p><strong>It has not been clinically validated as a unit.</strong> The individual factors come from real research, but this specific combination of weights is a reasonable synthesis, not a validated clinical instrument. It is a tool for reflection, built honestly — not a medical device.</p>
+
+<h2>The levers that move the needle</h2>
+<p>After you run the tool, it will show you your top three levers — the answers that added the most years. Here is what the evidence says about the big ones:</p>
+<p><strong>Quitting smoking</strong> is, by a wide margin, the single highest-value change a person can make. The mortality penalty for current smoking is larger than any other lifestyle factor in the model, and it begins to fall within the first year of quitting. Former smokers still carry a small penalty in this tool — a nod to residual risk — but the gap between "current" and "former" is enormous.</p>
+<p><strong>Exercise</strong> shows a steep dose-response at the low end. Going from zero days to three days a week is worth roughly two years in this model, and the literature agrees the biggest gains go to the previously inactive. Beyond five days, the additional benefit plateaus — more is not always more.</p>
+<p><strong>Sleep</strong> follows a U-shaped curve: 7–9 hours associates with the lowest risk, while chronic short sleep (under 6) and very long sleep (over 10) both associate with higher mortality. The long-sleep association is probably confounded by underlying illness — sick people sleep more — which is exactly why a questionnaire cannot diagnose.</p>
+<p><strong>Diet quality</strong> — proxied here by fruit and vegetable servings and processed food frequency — matters, but honest quantification is hard. The evidence base is real but noisier than for smoking or exercise, which is why the weights are modest. <strong>Strength training</strong> earns its small bonus from solid evidence that muscle mass and grip strength predict healthy aging, particularly in later decades.</p>
+
+<h2>How to use your number well</h2>
+<p>The right way to use this tool is as a <strong>baseline and a compass</strong>, not a verdict. Run it once, note the levers it flags, and pick the single largest lever you can realistically change. Retake it in three to six months — lifestyle factors need that long to move meaningfully — and see whether the number shifted. Pair it with real metrics that your doctor can measure: blood pressure, fasting glucose, lipid panels, waist trend.</p>
+<p>The wrong way to use it is to retake it weekly, agonize over one point, or use it to compare yourself with friends. Day-to-day noise in sleep, stress, and even how you answer the questions will swamp any signal at that frequency. The biology of aging runs on years; your tracking should run on quarters, at most.</p>
+<p>One final honest note: a biological age estimate that comes out <em>older</em> than your chronological age is not a failure. It is information. Many of the factors in this tool are among the most modifiable things in all of medicine — that is precisely why they were chosen. The number tells you where you stand relative to population averages; the levers tell you which direction to walk. What you do with that is up to you — and, ideally, up to you and your doctor.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Is this the same as an epigenetic age test like Horvath or GrimAge?</summary><div class="a"><p>No. Epigenetic clocks measure chemical tags (DNA methylation) on your blood cells in a lab. This tool uses no biological samples — it estimates aging from 10 lifestyle factors that population studies link to mortality and disease risk. It is far less precise, but also free and instant.</p></div></details>
+<details><summary>Can I actually lower my biological age?</summary><div class="a"><p>You cannot change your chronological age, and no single test proves "reversal." But the inputs here are modifiable: quitting smoking, exercising regularly, sleeping 7–9 hours, and reducing waist-to-height ratio are all associated with lower mortality risk in large cohort studies. Improve the inputs, and the estimate improves — that is the honest utility of this tool.</p></div></details>
+<details><summary>Why does my score differ from my smartwatch's age estimate?</summary><div class="a"><p>Smartwatches infer fitness mostly from heart-rate data and VO2max estimates; this tool weighs ten lifestyle domains equally, including diet, smoking, alcohol, and stress, which your watch cannot see. Different inputs, different models, different answers — neither is a medical measurement.</p></div></details>
+<details><summary>Is this a diagnosis of how healthy I am?</summary><div class="a"><p>No. This is an educational estimate built from population-level associations. It cannot detect disease, assess genetics, or replace blood work and a physical exam. If your result concerns you, discuss real risk factors with your doctor, not your score here.</p></div></details>
+<details><summary>Which factor moves the number the most?</summary><div class="a"><p>Smoking is the single largest modifier: current smoking adds 3 years. Exercise (0 days) and poor sleep add 2 each. These weights reflect how strongly each factor associates with mortality in epidemiological studies, not precise individual effects.</p></div></details>
+<details><summary>How often should I retake this?</summary><div class="a"><p>No more than every 3–6 months. Lifestyle factors change slowly, and obsessing over a monthly number is counterproductive. Use it as a coarse progress check alongside real metrics: waist measurement, resting heart rate trends, blood pressure, and lab results.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+/*
+BIOLOGICAL AGE SCORING — weight table (years added to chronological age):
+| factor    | condition                    | mod |
+|-----------|------------------------------|-----|
+| exercise  | 5+ days/week                 | -2  |
+|           | 3-4 days                     | -1  |
+|           | 1-2 days                     |  0  |
+|           | 0 days                       | +2  |
+| smoking   | never                        |  0  |
+|           | former                       | +1  |
+|           | current                      | +3  |
+| sleep     | 7-9 h                        | -1  |
+|           | 6 or 10 h                    | +1  |
+|           | <6 or >10 h                  | +2  |
+| fruit/veg | 5+ servings                  | -1  |
+|           | 3-4 servings                 |  0  |
+|           | <3 servings                  | +1  |
+| RHR       | <60 bpm                      | -1  |
+|           | 60-75 bpm                    |  0  |
+|           | >75 bpm                      | +2  |
+| WHtR      | <0.5                         | -1  |
+|           | 0.5-0.6                      | +1  |
+|           | >0.6                         | +2  |
+| alcohol   | 0 drinks/wk                  | -1  |
+|           | 1-7 drinks/wk                |  0  |
+|           | 8-14 drinks/wk               | +1  |
+|           | >14 drinks/wk                | +2  |
+| stress    | low                          | -1  |
+|           | moderate                     |  0  |
+|           | high                         | +1  |
+| processed | rarely                       | -1  |
+|           | sometimes                    |  0  |
+|           | daily                        | +1  |
+| strength  | yes (2+ sessions/wk)         | -1  |
+|           | no                           |  0  |
+*/
+function scoreBiologicalAge(d){
+  var mods = [];
+  var e = +d.exercise;
+  mods.push({k:"exercise", v: e>=5?-2 : e>=3?-1 : e>=1?0 : 2});
+  mods.push({k:"smoking", v: d.smoking==="current"?3 : d.smoking==="former"?1 : 0});
+  var s = +d.sleep;
+  mods.push({k:"sleep", v: (s>=7&&s<=9)?-1 : (s===6||s===10)?1 : 2});
+  var f = +d.fruitveg;
+  mods.push({k:"fruitveg", v: f>=5?-1 : f>=3?0 : 1});
+  var r = +d.rhr;
+  mods.push({k:"rhr", v: r<60?-1 : r<=75?0 : 2});
+  var whtr = (+d.waist)/(+d.height);
+  mods.push({k:"whtr", v: whtr<0.5?-1 : whtr<=0.6?1 : 2});
+  var a = +d.alcohol;
+  mods.push({k:"alcohol", v: a===0?-1 : a<=7?0 : a<=14?1 : 2});
+  mods.push({k:"stress", v: d.stress==="low"?-1 : d.stress==="high"?1 : 0});
+  mods.push({k:"processed", v: d.processed==="rarely"?-1 : d.processed==="daily"?1 : 0});
+  mods.push({k:"strength", v: d.strength==="yes"?-1 : 0});
+  var total = mods.reduce(function(t,m){return t+m.v;},0);
+  return {mods:mods, total:total, bioAge:Math.round(+d.age+total)};
+}
+var LEVER_TIPS = {
+  exercise:"Add brisk cardio — aim for 3+ active days a week (5+ is ideal).",
+  smoking:"Quit smoking. Nothing else you can do moves the needle this much.",
+  sleep:"Target 7–9 hours with a consistent bedtime; fix schedule before duration.",
+  fruitveg:"Add one extra serving of vegetables at each meal.",
+  rhr:"Regular zone-2 cardio (brisk walking, cycling) lowers resting heart rate over months.",
+  whtr:"Trim waist relative to height: diet quality plus cardio is the proven path.",
+  alcohol:"Cut back toward 7 or fewer drinks per week.",
+  stress:"Build a daily decompression ritual — walks, breathing, real downtime.",
+  processed:"Swap one processed item per day for a whole-food equivalent.",
+  strength:"Add 2 strength sessions a week — muscle is longevity insurance."
+};
+var LEVER_NAMES = {
+  exercise:"Exercise frequency", smoking:"Smoking", sleep:"Sleep", fruitveg:"Fruit & vegetables",
+  rhr:"Resting heart rate", whtr:"Waist-to-height ratio", alcohol:"Alcohol", stress:"Stress",
+  processed:"Processed food", strength:"Strength training"
+};
+document.getElementById("bioage-form").addEventListener("submit",function(ev){
+  ev.preventDefault();
+  var g=function(id){return document.getElementById(id).value;};
+  var d={age:g("age"),exercise:g("exercise"),smoking:g("smoking"),sleep:g("sleep"),
+         fruitveg:g("fruitveg"),rhr:g("rhr"),waist:g("waist"),height:g("height"),
+         alcohol:g("alcohol"),stress:g("stress"),processed:g("processed"),strength:g("strength")};
+  if(!d.age||+d.age<18||+d.age>100||!d.height||+d.height<=0){alert("Please enter a valid age (18–100) and height.");return;}
+  var r=scoreBiologicalAge(d);
+  document.getElementById("bioage-out").innerHTML=r.bioAge+' <span class="unit">years (biological age)</span>';
+  var delta=+d.age-r.bioAge;
+  var dEl=document.getElementById("delta-out");
+  if(delta>0){dEl.textContent="That's "+delta+" year"+(delta>1?"s":"")+" younger than your chronological age ("+d.age+").";}
+  else if(delta<0){dEl.textContent="That's "+(-delta)+" year"+(-delta>1?"s":"")+" older than your chronological age ("+d.age+").";}
+  else{dEl.textContent="That matches your chronological age ("+d.age+").";}
+  var sorted=r.mods.slice().sort(function(a,b){return b.v-a.v;}).slice(0,3);
+  var ol=document.getElementById("levers-out");ol.innerHTML="";
+  sorted.forEach(function(m){
+    var li=document.createElement("li");
+    var status=m.v>0?"adds ~"+m.v+" yr"+(m.v>1?"s":""):m.v<0?"helps (saves ~"+(-m.v)+" yr"+(m.v<-1?"s":"")+") — keep it up":"neutral";
+    li.innerHTML="<strong>"+LEVER_NAMES[m.k]+"</strong> — "+status+". "+(m.v>0?LEVER_TIPS[m.k]:"");
+    ol.appendChild(li);
+  });
+  document.getElementById("result").classList.add("show");
+  document.getElementById("result").scrollIntoView({behavior:"smooth"});
+});
+</script>
+</body>
+</html>
