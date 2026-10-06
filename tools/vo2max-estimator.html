@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VO2 Max Estimator — Estimate Cardiorespiratory Fitness From Resting Heart Rate | DoctorBiohacks</title>
+<meta name="description" content="Estimate your VO2 max from your age and morning resting heart rate using the validated Uth–Sørensen–Overgaard formula. Instant result with age/sex fitness rating.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/vo2max-estimator/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VO2 Max Estimator — Estimate Cardiorespiratory Fitness From Resting Heart Rate">
+<meta property="og:description" content="Estimate your VO2 max from your age and morning resting heart rate using the validated Uth–Sørensen–Overgaard formula. Instant result with age/sex fitness rating.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/vo2max-estimator/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.rating-pill{display:inline-block;background:#0369a1;color:#fff;border-radius:20px;padding:4px 16px;font-weight:800;font-size:1.05rem;text-transform:capitalize}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.formula{background:#fff;border:1px dashed var(--primary);border-radius:4px;padding:14px 18px;margin:1em 0;font-size:1.02rem}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[{"@type":"Question","name":"How accurate is the Uth formula for VO2 max?","acceptedAnswer":{"@type":"Answer","text":"In the original validation study on healthy adults, the Uth–Sørensen–Overgaard formula predicted lab-measured VO2 max with a standard error of roughly ±5 ml/kg/min. It is good enough to tell you your ballpark and track trends over time, but it is not a substitute for a graded exercise test when you need a precise number — for example, to set training zones."}},{"@type":"Question","name":"Why does my smartwatch VO2 max differ from this estimate?","acceptedAnswer":{"@type":"Answer","text":"Most smartwatches estimate VO2 max during actual workouts using GPS pace and heart rate data, so their estimates reflect a different (and often better) measurement. The resting-HR formula can disagree by 5–10 ml/kg/min, especially if your resting heart rate was not a true morning measurement. Consistent tracking with one method matters more than agreement between methods."}},{"@type":"Question","name":"Does VO2 max decline with age?","acceptedAnswer":{"@type":"Answer","text":"Yes — about 5–10% per decade in sedentary adults, driven by a falling maximum heart rate and declining stroke volume. But training substantially offsets this: trained 60-year-olds often have higher VO2 max than sedentary 30-year-olds, and interval training can raise VO2 max at any age."}},{"@type":"Question","name":"How do I measure my resting heart rate correctly?","acceptedAnswer":{"@type":"Answer","text":"Measure it in the morning, right after waking, before getting out of bed, caffeine, or stress. Count beats for 60 seconds or use a chest strap or wrist device for a few consecutive mornings and take the lowest typical value. Evening or after-activity readings are too high and will understate your estimated VO2 max."}},{"@type":"Question","name":"Should I do a lab VO2 max test instead?","acceptedAnswer":{"@type":"Answer","text":"A lab test with a metabolic cart is the gold standard and worth it if you are a competitive endurance athlete, have cardiac symptoms that need evaluation, or want precise training zones. For most people, this free estimate plus a fitness rating is enough to see where you stand and whether your training is working."}},{"@type":"Question","name":"Can VO2 max predict how long I will live?","acceptedAnswer":{"@type":"Answer","text":"VO2 max is one of the strongest known predictors of all-cause and cardiovascular mortality — in large cohorts it has outperformed traditional risk factors like smoking, diabetes, and hypertension. That said, it is a marker, not a guarantee: it reflects genetics, fitness, and health habits together, and improving it is only one part of overall health."}}]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; VO2 Max Estimator</nav>
+<h1>VO2 Max Estimator</h1>
+<p class="lede">Estimate your VO2 max — the gold-standard measure of cardiorespiratory fitness — from just your age, sex, and morning resting heart rate, using the validated Uth–Sørensen–Overgaard formula.</p>
+<div class="tool-card">
+<form id="vo2form" onsubmit="return false;">
+<div class="form-grid">
+<div class="field">
+<label for="age">Age (years)</label>
+<input type="number" id="age" min="15" max="95" step="1" value="35" required>
+<div class="hint">15–95</div>
+</div>
+<div class="field">
+<label for="sex">Sex</label>
+<select id="sex" required>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+<div class="hint">Used for age/sex fitness norms</div>
+</div>
+<div class="field">
+<label for="rhr">Resting heart rate (bpm)</label>
+<input type="number" id="rhr" min="30" max="120" step="1" value="55" required>
+<div class="hint">True morning resting rate — measured in bed, before getting up</div>
+</div>
+</div>
+<button class="btn" type="button" onclick="calcVO2()">Estimate VO2 Max</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+<div class="formula">
+<strong>Formula:</strong> HR<sub>max</sub> = 208 − 0.7 × age &nbsp;→&nbsp; VO2<sub>max</sub> = 15 × HR<sub>max</sub> ÷ HR<sub>rest</sub> &nbsp;(Uth et al., 2004)
+</div>
+</div>
+
+<h2>What VO2 max actually measures</h2>
+<p>VO2 max — maximal oxygen uptake — is the highest rate at which your body can consume oxygen during intense exercise. It is expressed in millilitres of oxygen per kilogram of body weight per minute (ml/kg/min), and it captures the combined performance of your heart, lungs, blood vessels, and muscles in a single number. When you run, your heart pumps oxygen-rich blood to working muscles; the stronger the pump, the more blood per beat (stroke volume), and the better your muscles are at extracting oxygen, the higher your VO2 max.</p>
+<p>Sports physiologists have treated VO2 max as the gold-standard marker of cardiorespiratory fitness for decades, but its significance goes far beyond athletics. In a landmark 2018 study of more than 122,000 patients published in JAMA Network Open, cardiorespiratory fitness predicted all-cause mortality more powerfully than traditional risk factors such as smoking, hypertension, or diabetes. People in the lowest fitness category had roughly four to five times the mortality risk of the elite-fitness group. That finding reframed VO2 max from a sports metric into something clinicians now regard as a vital sign — arguably as informative as blood pressure or cholesterol.</p>
+<p>The catch is measurement. The gold standard is a graded exercise test in a lab with a metabolic cart measuring your exhaled gases while you run or cycle to exhaustion. It is accurate, but it is also expensive, time-consuming, and physically demanding — most people will never do one. That is where estimation formulas come in: they trade a known amount of accuracy for zero cost and zero suffering.</p>
+
+<h2>The Uth formula: surprisingly accurate for a shortcut</h2>
+<p>The formula used by this tool was developed by Niels Uth and colleagues and published in 2004. It is beautifully simple. It rests on one well-established physiological relationship: maximal cardiac output is roughly proportional to the ratio of maximum to resting heart rate. People with efficient, well-trained hearts have a large difference between resting and maximum heart rate — a low resting rate and a high maximum — and that ratio predicts oxygen delivery surprisingly well.</p>
+<p>The formula works in two steps. First it estimates your maximum heart rate from your age: HR<sub>max</sub> = 208 − 0.7 × age. Then it converts that into VO2 max: VO2<sub>max</sub> = 15 × HR<sub>max</sub> ÷ HR<sub>rest</sub>. The constant 15 was empirically fitted, and the ratio HR<sub>max</sub>/HR<sub>rest</sub> is doing the physiological heavy lifting — it is essentially a proxy for how much your cardiac output can rise above rest.</p>
+<p>In the original validation on healthy adults, the formula predicted lab-measured VO2 max with a standard error of the estimate of about 5 ml/kg/min. For context, a typical fit adult might have a VO2 max in the 40s or 50s, so ±5 is not a precision instrument — but it is remarkably good for a method that only needs your age and your pulse. Later work has largely confirmed its utility as a population-level and trend-tracking estimate, even as researchers continue to refine alternatives.</p>
+
+<h2>Why this estimate has error bars</h2>
+<p>Honesty matters here, so let us be explicit about where the error comes from. First, maximum heart rate itself is estimated. The 208 − 0.7 × age equation is one of the better population formulas (it outperforms the old 220 − age rule), but individual maxima scatter by ±10–15 bpm around it. Some 50-year-olds genuinely hit 190; others top out at 160. Since HR<sub>max</sub> sits in the numerator, that error flows straight through into the estimate.</p>
+<p>Second, the resting heart rate must be a true resting rate. This is the single biggest source of user error, not formula error. A heart rate measured at your desk at 4pm after two coffees is not your resting heart rate. The formula needs the morning number: measured lying in bed right after waking, before caffeine, stress, or movement. Measure it on several mornings and use the lowest typical value. Each extra 5 bpm of inflated resting rate understates your estimated VO2 max by several points.</p>
+<p>Third, the formula was validated on healthy adults and assumes a normal relationship between heart rate and stroke volume. It is less reliable if you take heart-rate–altering medication (beta blockers, for instance), have atrial fibrillation or other rhythm disorders, are very unfit, or have cardiac disease. And genetics sets a meaningful ceiling: trainability of VO2 max varies widely, and some of the difference between two people doing identical training is simply inherited cardiovascular plumbing.</p>
+<p>The practical upshot: treat the number as a ±5 zone rather than a precise score, and treat the trend over months as more informative than any single reading. If your estimate climbs from 42 to 47 over six months of training, that is real signal — the formula's random error does not move systematically with your fitness.</p>
+
+<h2>What the rating bands mean for your health</h2>
+<p>This tool rates your estimate against population norms for your age and sex, using bands adapted from the large normative datasets (including the Cooper Clinic cohorts) that underpin most fitness-rating tables. For example, a man aged 30–39 rates as poor below 35, fair from 35–40, good from 41–45, excellent from 46–50, and superior above 50 ml/kg/min. For a woman aged 30–39 the bands sit lower — poor below 27, fair 27–32, good 33–37, excellent 38–42, superior above 42 — reflecting real average physiological differences in heart size, haemoglobin, and muscle mass. Norms shift roughly 3–4 ml/kg/min per decade in either direction, because maximum heart rate falls with age.</p>
+<p>Do not read these labels as verdicts on your worth — read them as risk information. The mortality data shows the steepest benefit gradient at the bottom: moving from poor to fair buys more health than moving from good to excellent. If your estimate lands in the poor band, that is not a cause for shame; it is the single most actionable piece of health data on this page, because low cardiorespiratory fitness is one of the most improvable risk factors you have.</p>
+<p>Context also matters. A rating of "fair" for a 65-year-old woman represents a genuinely good outcome for her age group, while the same word for a 25-year-old man means something different. That is why the bands are age- and sex-specific: the rating answers "how fit are you for your demographic," which is the question that maps most closely onto health risk.</p>
+
+<table>
+<thead><tr><th>Age</th><th>Sex</th><th>Poor</th><th>Fair</th><th>Good</th><th>Excellent</th><th>Superior</th></tr></thead>
+<tbody>
+<tr><td>20–29</td><td>Male</td><td>&lt;38</td><td>38–43</td><td>44–48</td><td>49–53</td><td>&gt;53</td></tr>
+<tr><td>20–29</td><td>Female</td><td>&lt;30</td><td>30–35</td><td>36–40</td><td>41–45</td><td>&gt;45</td></tr>
+<tr><td>30–39</td><td>Male</td><td>&lt;35</td><td>35–40</td><td>41–45</td><td>46–50</td><td>&gt;50</td></tr>
+<tr><td>30–39</td><td>Female</td><td>&lt;27</td><td>27–32</td><td>33–37</td><td>38–42</td><td>&gt;42</td></tr>
+<tr><td>40–49</td><td>Male</td><td>&lt;32</td><td>32–37</td><td>38–42</td><td>43–47</td><td>&gt;47</td></tr>
+<tr><td>40–49</td><td>Female</td><td>&lt;24</td><td>24–29</td><td>30–34</td><td>35–39</td><td>&gt;39</td></tr>
+<tr><td>50–59</td><td>Male</td><td>&lt;29</td><td>29–34</td><td>35–39</td><td>40–44</td><td>&gt;44</td></tr>
+<tr><td>50–59</td><td>Female</td><td>&lt;21</td><td>21–26</td><td>27–31</td><td>32–36</td><td>&gt;36</td></tr>
+<tr><td>60–69</td><td>Male</td><td>&lt;26</td><td>26–31</td><td>32–36</td><td>37–41</td><td>&gt;41</td></tr>
+<tr><td>60–69</td><td>Female</td><td>&lt;18</td><td>18–23</td><td>24–28</td><td>29–33</td><td>&gt;33</td></tr>
+</tbody>
+</table>
+
+<h2>How to genuinely raise VO2 max (zone 2 + intervals)</h2>
+<p>Here is the good news: VO2 max responds to training at almost any age, and the prescription is well established. It has two components. The foundation is zone 2 aerobic work — sustained activity at roughly 60–70% of maximum heart rate, where you can still hold a conversation but it takes effort. This builds mitochondrial density and fat-oxidation capacity in your muscles. Think brisk walking, easy cycling, or light jogging for 30–60 minutes, several times a week. Most adults can accumulate 150–180 minutes of this per week without much strain.</p>
+<p>The second component is high-intensity intervals, which drive the central adaptations — bigger stroke volume, higher cardiac output — that raise the ceiling. A classic evidence-backed format is 4 × 4 minutes at about 90% of maximum heart rate with 3-minute easy recoveries, once or twice a week. Research on this Norwegian-style protocol shows 5–15% gains in VO2 max over 8–12 weeks in previously sedentary people, with meaningful gains even in older adults.</p>
+<p>Two honest caveats. First, genetics sets the ceiling and the speed of response: some people gain 20% in three months, others gain 8% doing the same work. Both are worth having. Second, beware the fitness-influencer version of this advice that promises huge gains from minimal effort — the literature supports consistent, progressive work, not shortcuts. Warm up properly, progress gradually, and if you have cardiac risk factors, get medical clearance before starting vigorous intervals.</p>
+
+<h2>When lab testing is worth it</h2>
+<p>For most people, this estimate plus consistent re-testing is plenty. But a proper cardiopulmonary exercise test (CPET) with a metabolic cart earns its cost in specific situations: competitive endurance athletes who need exact training zones, people with unexplained exercise intolerance or cardiac symptoms that need a workup, and anyone whose training has plateaued despite structured work and who wants to identify the limiter (cardiac output vs. muscle oxygen extraction). Labs at sports-medicine clinics and university exercise-physiology departments typically offer the test, and it doubles as a thorough cardiac stress test under supervision.</p>
+<p>If you do get tested, compare the lab number against this estimate. Most people land within the formula's ±5 window, and any large discrepancy is itself informative — it usually means the resting heart rate used here was off, or that individual maximum heart rate differs a lot from the age prediction.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How accurate is the Uth formula for VO2 max?</summary><div class="a"><p>In the original validation study on healthy adults, the Uth–Sørensen–Overgaard formula predicted lab-measured VO2 max with a standard error of roughly ±5 ml/kg/min. It is good enough to tell you your ballpark and track trends over time, but it is not a substitute for a graded exercise test when you need a precise number — for example, to set training zones.</p></div></details>
+<details><summary>Why does my smartwatch VO2 max differ from this estimate?</summary><div class="a"><p>Most smartwatches estimate VO2 max during actual workouts using GPS pace and heart rate data, so their estimates reflect a different (and often better) measurement. The resting-HR formula can disagree by 5–10 ml/kg/min, especially if your resting heart rate was not a true morning measurement. Consistent tracking with one method matters more than agreement between methods.</p></div></details>
+<details><summary>Does VO2 max decline with age?</summary><div class="a"><p>Yes — about 5–10% per decade in sedentary adults, driven by a falling maximum heart rate and declining stroke volume. But training substantially offsets this: trained 60-year-olds often have higher VO2 max than sedentary 30-year-olds, and interval training can raise VO2 max at any age.</p></div></details>
+<details><summary>How do I measure my resting heart rate correctly?</summary><div class="a"><p>Measure it in the morning, right after waking, before getting out of bed, caffeine, or stress. Count beats for 60 seconds or use a chest strap or wrist device for a few consecutive mornings and take the lowest typical value. Evening or after-activity readings are too high and will understate your estimated VO2 max.</p></div></details>
+<details><summary>Should I do a lab VO2 max test instead?</summary><div class="a"><p>A lab test with a metabolic cart is the gold standard and worth it if you are a competitive endurance athlete, have cardiac symptoms that need evaluation, or want precise training zones. For most people, this free estimate plus a fitness rating is enough to see where you stand and whether your training is working.</p></div></details>
+<details><summary>Can VO2 max predict how long I will live?</summary><div class="a"><p>VO2 max is one of the strongest known predictors of all-cause and cardiovascular mortality — in large cohorts it has outperformed traditional risk factors like smoking, diabetes, and hypertension. That said, it is a marker, not a guarantee: it reflects genetics, fitness, and health habits together, and improving it is only one part of overall health.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+function rateVO2(v, age, sex){
+  var base = (sex === 'female') ? [27,33,38,43] : [35,41,46,51];
+  var decade = Math.floor(age / 10) * 10;
+  if (decade < 20) decade = 20;
+  if (decade > 60) decade = 60;
+  var shift = (30 - decade) / 10 * 3;
+  var t = base.map(function(b){ return b + shift; });
+  if (v < t[0]) return 'poor';
+  if (v < t[1]) return 'fair';
+  if (v < t[2]) return 'good';
+  if (v < t[3]) return 'excellent';
+  return 'superior';
+}
+function calcVO2(){
+  var age = parseFloat(document.getElementById('age').value);
+  var sex = document.getElementById('sex').value;
+  var rhr = parseFloat(document.getElementById('rhr').value);
+  var res = document.getElementById('result');
+  if (!(age >= 15 && age <= 95) || !(rhr >= 30 && rhr <= 120)){
+    res.className = 'result show';
+    res.innerHTML = '<p class="interpret">Please check your inputs:</p><p class="note">Age must be 15–95 and resting heart rate 30–120 bpm.</p>';
+    return;
+  }
+  var hrmax = 208 - 0.7 * age;
+  var vo2 = 15 * hrmax / rhr;
+  var vo2r = Math.round(vo2 * 10) / 10;
+  var rating = rateVO2(vo2r, age, sex);
+  res.className = 'result show';
+  res.innerHTML =
+    '<div>Your estimated VO2 max</div>' +
+    '<div class="big">' + vo2r.toFixed(1) + ' <span class="unit">ml/kg/min</span></div>' +
+    '<div class="interpret">Fitness rating: <span class="rating-pill">' + rating + '</span></div>' +
+    '<p class="note">Estimated max heart rate: ' + hrmax.toFixed(1) + ' bpm (208 − 0.7 × ' + age + '). ' +
+    'This is an estimate with a typical error of ±5 ml/kg/min — most useful for tracking your own trend over time. ' +
+    'It assumes a true morning resting heart rate and no heart-rate–altering medication.</p>';
+}
+</script>
+</body>
+</html>
