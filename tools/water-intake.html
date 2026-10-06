@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Intake Calculator — How Much Water Do You Actually Need? | DoctorBiohacks</title>
+<meta name="description" content="Calculate your personal daily water target from body weight, activity, climate, pregnancy and breastfeeding. Free tool with honest, evidence-based hydration guidance.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/water-intake/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Water Intake Calculator — How Much Water Do You Actually Need?">
+<meta property="og:description" content="Calculate your personal daily water target from body weight, activity, climate, pregnancy and breastfeeding. Free tool with honest, evidence-based hydration guidance.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/water-intake/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.check-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.check-row input[type=checkbox]{width:20px;height:20px;margin-top:3px;flex-shrink:0}
+.check-row label{font-weight:700;font-size:.95rem}
+.check-row .hint{font-weight:400;font-size:.85rem;color:var(--muted)}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.result .warn{background:#fff7e6;border:1px solid #f0c36d;border-radius:4px;padding:12px 14px;margin-top:12px;font-size:.92rem}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"How much water should I drink per day?","acceptedAnswer":{"@type":"Answer","text":"For most healthy adults, total water intake of about 2.0 to 2.5 litres per day for women and 2.5 to 3.0 litres per day for men is the reference range used by European nutrition authorities (EFSA adequate intakes), which includes water from food. A commonly used starting formula is 30 to 35 ml per kilogram of body weight per day, increased for exercise, hot climates, pregnancy and breastfeeding. Thirst is also a reasonably good signal for most healthy, active people."}},
+  {"@type":"Question","name":"Is the 8x8 rule (eight 8-ounce glasses a day) evidence-based?","acceptedAnswer":{"@type":"Answer","text":"No. The 'drink eight 8-ounce glasses of water a day' rule has no solid scientific origin; it appears to trace back to mid-20th-century nutrition recommendations that people quote while ignoring the caveat that most of the fluid was meant to come from food. Physiologist Heinz Valtin's widely cited 2002 review found no scientific evidence supporting the 8x8 rule for healthy people living in temperate climates and doing light activity. Individual needs vary far too much for a single fixed number."}},
+  {"@type":"Question","name":"Can you drink too much water?","acceptedAnswer":{"@type":"Answer","text":"Yes. Drinking far beyond thirst during prolonged endurance exercise can cause exercise-associated hyponatremia, a dangerous drop in blood sodium that has hospitalised and killed marathon runners and military recruits. Symptoms include bloating, nausea, confusion and headache during or after long events. The risk comes from drinking to a schedule rather than drinking to thirst, and it is a real, documented medical condition, not an internet myth."}},
+  {"@type":"Question","name":"Does thirst work as a signal for how much to drink?","acceptedAnswer":{"@type":"Answer","text":"For most healthy people, yes. Thirst is a finely tuned mechanism: small rises in blood osmolality trigger it well before any meaningful dehydration occurs. The exception is older adults, in whom thirst perception declines with age, and people with certain medical conditions or on medications that alter fluid balance. Pale-yellow urine is a useful secondary check, though vitamin supplements can darken it."}},
+  {"@type":"Question","name":"How much extra water do I need in hot weather or when exercising?","acceptedAnswer":{"@type":"Answer","text":"Sweat rates vary enormously, from roughly 0.5 to over 2 litres per hour depending on intensity, heat, humidity, body size and acclimatisation. As a practical guideline, add about 500 ml for moderate daily activity and about 1 litre for heavy training or a full day in the heat, then adjust by how you feel and the colour of your urine. Endurance athletes should be careful not to overdrink: drinking to thirst during events is the evidence-backed strategy."}},
+  {"@type":"Question","name":"Do coffee and tea dehydrate you?","acceptedAnswer":{"@type":"Answer","text":"Not meaningfully. Caffeine is a mild diuretic, but in habitual coffee and tea drinkers the fluid in the drink more than compensates. Controlled studies show coffee hydrates about as well as water at typical consumption levels of up to around four cups a day. All beverages, including milk, juice and soft drinks, count toward total fluid intake, though water remains the best default."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Water Intake Calculator</nav>
+<h1>Water Intake Calculator: How Much Water Should You Actually Drink?</h1>
+<p class="lede">Forget the one-size-fits-all "eight glasses" rule. This calculator estimates your personal daily water target from your body weight, activity level, climate, and whether you are pregnant or breastfeeding &mdash; then explains what the number can and cannot tell you.</p>
+<div class="tool-card">
+<form id="water-form" novalidate>
+<div class="form-grid">
+<div class="field">
+<label for="weight">Body weight (kg)</label>
+<input type="number" id="weight" name="weight" min="20" max="300" step="0.5" placeholder="e.g. 75" required>
+<p class="hint">Your weight drives the base estimate: 35&nbsp;ml per kilogram per day.</p>
+</div>
+<div class="field">
+<label for="activity">Activity level</label>
+<select id="activity" name="activity">
+<option value="low">Low &mdash; mostly sedentary day</option>
+<option value="moderate" selected>Moderate &mdash; regular movement or light training</option>
+<option value="high">High &mdash; heavy training or physical work</option>
+</select>
+<p class="hint">Moderate adds ~500&nbsp;ml; high adds ~1000&nbsp;ml for sweat losses.</p>
+</div>
+<div class="field">
+<label for="climate">Climate</label>
+<select id="climate" name="climate">
+<option value="temperate" selected>Temperate</option>
+<option value="hot">Hot &mdash; adds ~500&nbsp;ml</option>
+</select>
+<p class="hint">Heat raises sweat rates substantially, even at rest.</p>
+</div>
+</div>
+<div class="check-row">
+<input type="checkbox" id="pregnant" name="pregnant">
+<label for="pregnant">Pregnant <span class="hint">&mdash; adds 300&nbsp;ml. Please confirm your fluid intake with your doctor or midwife.</span></label>
+</div>
+<div class="check-row">
+<input type="checkbox" id="breastfeeding" name="breastfeeding">
+<label for="breastfeeding">Breastfeeding <span class="hint">&mdash; adds 700&nbsp;ml for milk production. Please confirm your fluid intake with your doctor or midwife.</span></label>
+</div>
+<button type="submit" class="btn">Calculate my water target</button>
+<div class="result" id="water-result" role="status" aria-live="polite"></div>
+</form>
+</div>
+<!--PROSE-START-->
+<h2>How this calculator works</h2>
+<p>The maths behind this tool is deliberately simple and transparent. It starts with a base estimate of <strong>35&nbsp;millilitres of water per kilogram of body weight per day</strong>, a figure widely used in clinical and sports nutrition as a starting point for adults. For a 75&nbsp;kg person that gives 2,625&nbsp;ml before any adjustments. From there, the calculator adds fixed amounts for the situations that most increase fluid needs: +500&nbsp;ml for moderate activity, +1,000&nbsp;ml for high activity or heavy physical work, +500&nbsp;ml for a hot climate, +300&nbsp;ml for pregnancy, and +700&nbsp;ml for breastfeeding.</p>
+<p>Why 35&nbsp;ml/kg? It sits in the middle of the commonly cited 30&ndash;40&nbsp;ml/kg range and lands close to the reference intakes used by nutrition authorities. The European Food Safety Authority (EFSA) sets adequate total water intakes at 2.0&nbsp;litres per day for adult women and 2.5&nbsp;litres per day for adult men, figures that include the roughly 20&ndash;30% of daily water that typically comes from food. For a 70&ndash;75&nbsp;kg adult, 35&nbsp;ml/kg gives 2.45&ndash;2.6&nbsp;litres &mdash; squarely in that territory, which is reassuring, but also a reminder that this is a population-level guideline being applied to one person. Treat the result as a sensible starting point, not a prescription.</p>
+<p>It is worth being explicit about what the number is <em>not</em>. It is not a diagnostic result. It does not account for your body composition (muscle holds more water than fat), your diet (a diet rich in fruit, vegetables, soups and yoghurt can deliver a litre or more of water), the humidity where you live, how much you sweat as an individual, or any medical condition or medication that affects fluid balance. Two people with the same weight can have meaningfully different needs, and that is normal.</p>
+<h2>Why bigger bodies need more water &mdash; and where the formula bends</h2>
+<p>The weight-based approach works because larger bodies have more tissue to maintain, more blood to keep flowing, and usually more surface area losing water through skin and breath. A 50&nbsp;kg person and a 100&nbsp;kg person genuinely do not have the same baseline requirement, which is why a flat "two litres for everyone" recommendation is one of the weakest pieces of advice in hydration.</p>
+<p>But weight alone is a crude proxy. What really drives water turnover is lean body mass and metabolic activity. A muscular 90&nbsp;kg athlete and a sedentary 90&nbsp;kg adult with high body fat will sweat different amounts, burn different amounts of energy, and lose water at different rates. The formula does not know your body composition, so it compensates by keeping the per-kilo figure moderate and letting the activity adjustment do the heavy lifting. If you are very muscular, the estimate may slightly understate your needs; if you carry a lot of body fat, it may slightly overstate them. Use the result alongside how you actually feel &mdash; which brings us to the most underrated hydration instrument you own.</p>
+<h2>Thirst: the signal everyone tells you to ignore (but mostly shouldn't)</h2>
+<p>Somewhere along the way, hydration advice took a strange turn: millions of people were told that by the time you feel thirsty, you are already dehydrated. That claim is not supported by physiology. Thirst is triggered by tiny rises in blood osmolality &mdash; on the order of 1&ndash;2% &mdash; detected by specialised cells in the brain, long before any clinically meaningful dehydration develops. For most healthy people, drinking when thirsty is a perfectly adequate strategy, and it is the strategy human beings used for all of history before anyone owned a water bottle with motivational time markers.</p>
+<p>There are genuine exceptions, and they matter. Thirst perception declines with age, so adults over about 65 may not feel thirsty even when their fluid intake is low &mdash; this is one reason dehydration is a real risk in older people, particularly in heatwaves. Certain medications, including diuretics commonly prescribed for blood pressure, change the equation. And during hard exercise, especially in the heat, thirst can lag behind sweat losses, which is why athletes are advised to drink proactively during events rather than waiting. For a healthy adult going about a normal day, though, the combination of drinking to thirst plus a glance at urine colour (pale yellow is the target; vitamin B supplements can darken it and confuse the picture) is honest, evidence-aligned guidance.</p>
+<h2>The "8&times;8" rule is not evidence-based</h2>
+<p>The rule that everyone should drink eight 8-ounce glasses (about 1.9&nbsp;litres) of water per day is probably the most repeated nutrition claim with the thinnest evidence behind it. Its likely origin is a 1945 US Food and Nutrition Board recommendation suggesting roughly 2.5&nbsp;litres of water daily &mdash; a recommendation that explicitly noted most of this fluid would come from food. The food part got dropped in retelling, the number got rounded, and a myth was born.</p>
+<p>In 2002, the physiologist Heinz Valtin published a widely cited review in the <em>American Journal of Physiology</em> examining the scientific basis for 8&times;8. His conclusion was blunt: he could find no scientific evidence supporting the rule for healthy people in temperate climates doing light activity. That does not mean 1.9&nbsp;litres is a harmful amount &mdash; for many people it is a perfectly fine intake &mdash; but it does mean the number was never derived from research on human requirements. Individual needs vary with body size, diet, activity, climate and health status far too much for any single fixed number to be "the" answer, which is exactly why a calculator that asks about <em>you</em> is more useful than a slogan.</p>
+<h2>Activity and climate: where the extra litres come from</h2>
+<p>Sweat is the biggest variable in daily water needs. At rest in a temperate room, you lose roughly 0.5&ndash;1&nbsp;litre per day through skin, breath and urine concentration processes you barely notice. Add exercise and the numbers climb fast: sweat rates during moderate exercise typically run 0.5&ndash;1.5&nbsp;litres per hour, and in hot, humid conditions or during intense prolonged effort they can exceed 2&nbsp;litres per hour in large, unacclimatised athletes.</p>
+<p>This calculator's adjustments &mdash; +500&nbsp;ml for moderate activity, +1,000&nbsp;ml for high activity, +500&nbsp;ml for hot climates &mdash; are pragmatic averages, not measurements of your sweat. They will be about right for a typical active day and conservative for a long summer training session, during which you may need several litres. If you train seriously in the heat, the honest upgrade is to weigh yourself before and after sessions: each kilogram lost is roughly a litre of fluid to replace (plus a bit extra, since you keep sweating and urinating afterwards). That single habit tells you more about your personal sweat rate than any formula can.</p>
+<h2>Pregnancy and breastfeeding need more fluid &mdash; and a conversation with your clinician</h2>
+<p>Pregnancy increases total body water substantially: blood volume rises by roughly 30&ndash;50%, amniotic fluid must be maintained, and the growing foetus and placenta are mostly water. EFSA raises its adequate intake during pregnancy by 300&nbsp;ml per day above the baseline, which is the figure this calculator uses. Breastfeeding raises it further &mdash; about 700&nbsp;ml per day &mdash; because human milk is roughly 87% water and a mother producing 750&ndash;800&nbsp;ml of milk daily is exporting a significant volume of fluid.</p>
+<p>The calculator adds these amounts automatically when you tick the boxes, and it also shows an explicit note: <strong>confirm your fluid intake with your doctor or midwife</strong>. That is not boilerplate. Pregnancy can involve conditions such as pre-eclampsia or gestational hypertension where fluid advice is individualised, and some pregnancy complications involve fluid restriction rather than extra fluids. The calculator gives you a reasonable starting figure for the conversation; your clinician gives you the answer that applies to your pregnancy.</p>
+<h2>Overhydration is real: the danger of drinking too much</h2>
+<p>Almost all public hydration messaging warns about drinking too little, which has created a blind spot around drinking too much. <strong>Exercise-associated hyponatremia</strong> &mdash; a dangerous dilution of blood sodium caused by drinking far beyond thirst during prolonged exercise &mdash; is a documented, studied medical condition. It has hospitalised marathon runners, triathletes and military recruits, and it has killed people. The typical pattern is a slower athlete, out on the course for many hours, diligently drinking at every aid station "to stay ahead of dehydration," sometimes gaining weight during the race as fluid accumulates. Symptoms include bloating, nausea, headache, confusion and, in severe cases, seizures.</p>
+<p>The unsettling part is that the early symptoms can resemble dehydration, tempting bystanders to give the person <em>more</em> water &mdash; exactly the wrong move. This is why sports medicine consensus has shifted toward <strong>drinking to thirst</strong> during endurance events rather than drinking to a schedule. The risk applies overwhelmingly to prolonged exercise (typically four hours or more), not to normal daily life: a healthy person's kidneys can excrete roughly 0.8&ndash;1&nbsp;litre of water per hour, so acute water intoxication at rest requires truly extreme intake. But the myth that "you can't drink too much water" is false, and endurance athletes in particular should know that more is not always better.</p>
+<h2>Who should not rely on a calculator alone</h2>
+<p>For most healthy adults, the number this tool produces is a reasonable target. But several groups need individualised guidance from a doctor rather than a formula:</p>
+<ul>
+<li><strong>People with kidney disease.</strong> Impaired kidneys may not handle either too much or too little fluid well, and fluid advice in chronic kidney disease is deliberately individualised.</li>
+<li><strong>People with heart failure.</strong> Fluid restriction is sometimes part of heart failure management; extra water is not automatically helpful.</li>
+<li><strong>People taking diuretics or other medications affecting fluid balance</strong> (including some blood pressure drugs, lithium, and certain diabetes medications). Ask your prescriber.</li>
+<li><strong>Older adults</strong>, whose thirst sensation and kidney concentrating ability both decline with age. A scheduled drinking routine is often more reliable than thirst alone.</li>
+<li><strong>Anyone with a condition causing abnormal thirst, urination or swelling</strong> &mdash; these are symptoms to discuss with a doctor, not to self-manage with a water target.</li>
+</ul>
+<p>If any of these describe you, treat this calculator as background information for a medical conversation, not as a plan.</p>
+<h2>What counts toward your total (it is not just water)</h2>
+<p>One of the quieter truths in hydration science is that "water intake" and "drinking water" are not the same thing. Roughly a fifth to a third of most people's daily water arrives in food: fruit and vegetables are 80&ndash;95% water, cooked rice and pasta are mostly water by weight, and soups, yoghurts and stews all contribute. The EFSA reference intakes this calculator is calibrated against are <em>total</em> water intakes, food included &mdash; so if your diet is rich in watery foods, your drinking-water target is effectively lower than the headline number.</p>
+<p>And yes, coffee and tea count. Caffeine is a mild diuretic, but in habitual drinkers the fluid in the cup far outweighs the extra urine output; controlled trials find coffee hydrates comparably to water at intakes up to about four cups a day. Milk, juice and even soft drinks contribute fluid too, though water remains the best default choice for reasons that have nothing to do with hydration &mdash; namely sugar, acidity and cost. The practical upshot: if you drink several cups of tea and eat plenty of vegetables, you are already covering a large share of your target before you touch a water glass.</p>
+<h2>Making your target actually happen</h2>
+<p>Knowing your number is the easy part; the behavioural part is where most people stall. A few strategies that hold up:</p>
+<ul>
+<li><strong>Front-load the day.</strong> A large glass with breakfast and one mid-morning covers a surprising fraction of most targets before willpower is needed.</li>
+<li><strong>Anchor drinking to existing habits</strong> &mdash; a glass with each meal, one when you sit down to work. Habit stacking beats reminders.</li>
+<li><strong>Keep water visible.</strong> A bottle on the desk gets drunk from; a bottle in the cupboard does not. This sounds trivial because it is, and it works.</li>
+<li><strong>Do not try to "catch up" at night.</strong> Cramming a litre before bed buys you interrupted sleep, which costs you more than the water gains you. Spread intake across the day.</li>
+<li><strong>Adjust, don't obey.</strong> Hot day, hard session, salty meal, alcohol in the evening &mdash; drink a bit more. Cool, restful day, watery meals &mdash; a bit less is fine. The target is a centre of gravity, not a quota with penalties.</li>
+</ul>
+<p>Finally, keep perspective on what hydration can and cannot do for you. Drinking enough water reliably prevents the headaches, sluggishness and poor concentration of genuine dehydration, and it supports training and heat tolerance. It will not detoxify anything (your liver and kidneys do that regardless), melt fat, or transform your skin beyond what adequate &mdash; not excessive &mdash; hydration provides. Biohacking works best when it respects the body's own regulatory systems, and few systems are as competently self-regulating as thirst. Use the calculator to calibrate your intuition, then trust the instrument you were born with.</p>
+<!--PROSE-END-->
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How much water should I drink per day?</summary><div class="a"><p>For most healthy adults, total water intake of about 2.0 to 2.5 litres per day for women and 2.5 to 3.0 litres per day for men matches the adequate intakes set by the European Food Safety Authority (including water from food). A practical formula is 30&ndash;35&nbsp;ml per kilogram of body weight, increased for exercise, heat, pregnancy and breastfeeding. Use the calculator above for a personalised estimate, and remember that thirst is a reliable guide for most healthy people.</p></div></details>
+<details><summary>Is the 8&times;8 rule (eight glasses a day) evidence-based?</summary><div class="a"><p>No. The eight-glasses rule has no solid scientific origin &mdash; it appears to be a garbled version of a 1945 nutrition recommendation that counted water from food. Physiologist Heinz Valtin's 2002 review in the <em>American Journal of Physiology</em> found no scientific evidence supporting 8&times;8 for healthy people. Individual needs vary far too much for a single fixed number.</p></div></details>
+<details><summary>Can you drink too much water?</summary><div class="a"><p>Yes. Exercise-associated hyponatremia &mdash; dangerously low blood sodium from drinking far beyond thirst during prolonged endurance exercise &mdash; has hospitalised and killed marathon runners and military recruits. Symptoms include bloating, nausea, headache and confusion during or after long events. Sports medicine consensus now favours drinking to thirst rather than to a fixed schedule during endurance events.</p></div></details>
+<details><summary>Does thirst work as a signal for how much to drink?</summary><div class="a"><p>For most healthy people, yes. Thirst is triggered by very small rises in blood osmolality, well before meaningful dehydration. The main exceptions are older adults, whose thirst perception declines with age, people on medications such as diuretics, and athletes during hard exercise in the heat. Pale-yellow urine is a useful secondary check.</p></div></details>
+<details><summary>How much extra water do I need in hot weather or when exercising?</summary><div class="a"><p>Sweat rates range from about 0.5 to over 2 litres per hour depending on intensity, heat, humidity and body size. As a guideline, add roughly 500&nbsp;ml for moderate activity, 1&nbsp;litre for heavy training, and 500&nbsp;ml for hot climates &mdash; the adjustments this calculator applies. Serious athletes can weigh themselves before and after sessions: each kilogram lost is about a litre of fluid to replace.</p></div></details>
+<details><summary>Do coffee and tea dehydrate you?</summary><div class="a"><p>Not meaningfully. Caffeine is a mild diuretic, but in habitual drinkers the fluid in the drink more than compensates &mdash; studies show coffee hydrates about as well as water at up to roughly four cups a day. All beverages count toward fluid intake, though water is the best default.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+function calcWaterIntake(weightKg, activity, climate, pregnant, breastfeeding) {
+  var ml = weightKg * 35;
+  if (activity === 'moderate') ml += 500;
+  else if (activity === 'high') ml += 1000;
+  if (climate === 'hot') ml += 500;
+  if (pregnant) ml += 300;
+  if (breastfeeding) ml += 700;
+  var litres = (Math.round(ml / 100 + 1e-9) / 10).toFixed(1); // round-half-up to 1dp
+  var glassesRaw = ml / 250;
+  var frac = glassesRaw % 1;
+  var glassesText;
+  if (Math.abs(frac - 0.5) <= 0.1) {
+    glassesText = '~' + Math.floor(glassesRaw) + '\u2013' + Math.ceil(glassesRaw) + ' glasses';
+  } else {
+    glassesText = '~' + Math.round(glassesRaw) + ' glasses';
+  }
+  return { ml: ml, litres: litres, glassesRaw: glassesRaw, glassesText: glassesText };
+}
+document.getElementById('water-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var w = parseFloat(document.getElementById('weight').value);
+  var box = document.getElementById('water-result');
+  if (isNaN(w) || w < 20 || w > 300) {
+    box.innerHTML = '<p class="interpret">Please enter a body weight between 20 and 300&nbsp;kg.</p>';
+    box.classList.add('show');
+    return;
+  }
+  var activity = document.getElementById('activity').value;
+  var climate = document.getElementById('climate').value;
+  var preg = document.getElementById('pregnant').checked;
+  var bf = document.getElementById('breastfeeding').checked;
+  var r = calcWaterIntake(w, activity, climate, preg, bf);
+  var html = '<p class="interpret">Your estimated daily water target:</p>'
+    + '<p class="big">' + r.litres + ' <span class="unit">litres / day</span></p>'
+    + '<p class="interpret">' + r.ml.toLocaleString('en-US') + '&nbsp;ml per day &mdash; about ' + r.glassesText + ' (250&nbsp;ml each).</p>'
+    + '<p class="note">This is a guideline, not a prescription. It includes water from food and all drinks. Drinking to thirst plus pale-yellow urine is a reliable day-to-day strategy for most healthy people.</p>';
+  if (preg || bf) {
+    html += '<div class="warn"><strong>Important:</strong> fluid needs during pregnancy and breastfeeding vary with your individual situation. Please confirm your daily intake with your doctor or midwife.</div>';
+  }
+  box.innerHTML = html;
+  box.classList.add('show');
+});
+</script>
+</body>
+</html>
