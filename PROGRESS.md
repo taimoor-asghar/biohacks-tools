@@ -1,11 +1,10 @@
 # DoctorBiohacks Build — Progress
 Market: global English (US-first). Repo: taimoor-asghar/biohacks-tools (to be created).
 
-## Status: NOT STARTED
-Planned chain start: Tue 2026-10-06 ~08:00 CEST (after German + French translation chains, via overlap guards).
+## Status: IN PROGRESS — 1/15 tools done (chunk of 2026-10-06 14:45 CEST)
 
 ## Tools
-- [ ] 1. sleep-debt — Sleep Debt Calculator
+- [x] 1. sleep-debt — Sleep Debt Calculator (test: need 8, actuals [6,6,7,5,6,8,7] → debt 11.0h, extra 1.5h/night, ~8 nights; prose 1311 words)
 - [ ] 2. caffeine-half-life — Caffeine Half-Life Timer
 - [ ] 3. bedtime-finder — Optimal Bedtime Finder
 - [ ] 4. biological-age — Biological Age Estimator
@@ -24,3 +23,4 @@ Planned chain start: Tue 2026-10-06 ~08:00 CEST (after German + French translati
 
 ## Log
 - 2026-10-05: Taimoor: "Yes do it plan everything" — biohacks suite spec'd (15 tools), chain scheduled after translation chains.
+- 2026-10-06 14:45 chunk: overlap guards clear (german-translation-chunks disabled/succeeded; french-translation-chunks disabled, no running runs; one stale queued entry). Built tool 1 sleep-debt (1311 words prose, maths test passed: debt 11.0h, extra 1.5h/night, ~8 nights). Delegated tools 2–5 to 4 subagents in parallel.
