@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protein Intake Calculator: How Much Protein Do You Need? | DoctorBiohacks</title>
+<meta name="description" content="How much protein do you need per day? Doctor-reviewed calculator: enter your weight and goal to get your optimal daily protein target, per-meal goals, and example foods.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/protein-intake/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Protein Intake Calculator: How Much Protein Do You Need?">
+<meta property="og:description" content="How much protein do you need per day? Doctor-reviewed calculator: enter your weight and goal to get your optimal daily protein target, per-meal goals, and example foods.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/protein-intake/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"How much protein do I need per day?","acceptedAnswer":{"@type":"Answer","text":"Most adults need 1.2 to 2.2 grams of protein per kilogram of body weight per day, depending on activity level and goals. Sedentary adults need around 1.2 g/kg, active people about 1.6 g/kg, people building muscle around 2.0 g/kg, and people dieting to preserve muscle about 2.2 g/kg. These targets come from the International Society of Sports Nutrition position stand and sit above the official RDA of 0.8 g/kg, which is the minimum to avoid deficiency rather than the optimum."}},
+  {"@type":"Question","name":"How much protein should I eat per meal?","acceptedAnswer":{"@type":"Answer","text":"Aim for roughly 0.25 to 0.4 grams of protein per kilogram of body weight per meal, spread across 3 to 5 meals. For an 80 kg person targeting 160 g per day, that is about 40 g per meal across 4 meals. This range supplies enough leucine (about 2.5 to 3 g per meal) to trigger muscle protein synthesis."}},
+  {"@type":"Question","name":"Is a high-protein diet bad for your kidneys?","acceptedAnswer":{"@type":"Answer","text":"In healthy people, there is no strong evidence that higher protein intakes (up to 2.2 g/kg or more) damage healthy kidneys. However, if you have chronic kidney disease or reduced kidney function, you should not increase protein intake without talking to your doctor, because damaged kidneys handle protein waste less efficiently."}},
+  {"@type":"Question","name":"Can I get enough protein on a vegetarian or vegan diet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Lentils, chickpeas, beans, tofu, tempeh, edamame, quinoa, seitan, Greek yoghurt, and eggs (if vegetarian) are strong sources. Plant proteins are often lower in some essential amino acids, so vegans may aim for the higher end of their protein range and combine different sources through the day."}},
+  {"@type":"Question","name":"Is there any benefit to eating more than 2.2 grams of protein per kilogram?","acceptedAnswer":{"@type":"Answer","text":"The evidence above about 2.2 g/kg is thin. A large meta-analysis (Morton et al., 2018) found that muscle-building benefits level off around 1.6 g/kg per day in trained individuals, and there is no reliable evidence that going beyond 2.2 g/kg builds extra muscle. Higher intakes can still help with appetite control while dieting, but the muscle advantage is not proven."}},
+  {"@type":"Question","name":"Does protein timing matter, or only the daily total?","acceptedAnswer":{"@type":"Answer","text":"Daily total matters far more than timing. Once you hit your daily target, small extra benefits come from spreading protein across meals and eating 20 to 40 g within a few hours after resistance training. So-called anabolic windows measured in minutes are mostly a myth."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Protein Intake Calculator</nav>
+<h1>Protein Intake Calculator</h1>
+<p class="lede">Enter your body weight and your goal, and get a research-backed daily protein target plus per-meal targets and concrete food examples. Based on the International Society of Sports Nutrition (ISSN) position stand &mdash; honest numbers, no miracle claims.</p>
+<div class="tool-card">
+<form id="protein-form">
+<div class="form-grid">
+<div class="field">
+<label for="weight">Body weight (kg)</label>
+<input type="number" id="weight" name="weight" min="30" max="300" step="0.5" value="80" required>
+<div class="hint">Use your current body weight. If you are significantly overweight, consider using your lean body mass or a target weight.</div>
+</div>
+<div class="field">
+<label for="goal">Your goal</label>
+<select id="goal" name="goal">
+<option value="1.2">Sedentary &mdash; general health (1.2 g/kg)</option>
+<option value="1.6">Active &mdash; regular exercise (1.6 g/kg)</option>
+<option value="2.0" selected>Muscle gain &mdash; building muscle (2.0 g/kg)</option>
+<option value="2.2">Cutting &mdash; fat loss, keep muscle (2.2 g/kg)</option>
+</select>
+<div class="hint">These targets come from the ISSN position stand on protein and exercise.</div>
+</div>
+<div class="field">
+<label for="meals">Meals per day</label>
+<select id="meals" name="meals">
+<option value="3">3 meals</option>
+<option value="4" selected>4 meals</option>
+<option value="5">5 meals</option>
+</select>
+<div class="hint">Your daily target is split evenly across meals.</div>
+</div>
+</div>
+<button type="submit" class="btn">Calculate my protein target</button>
+</form>
+<div class="result" id="result" role="status" aria-live="polite">
+<div class="big"><span id="daily-g">0</span> <span class="unit">grams / day</span></div>
+<p><strong><span id="permeal-g">0</span> g per meal</strong> across <span id="meals-n">4</span> meals.</p>
+<p class="interpret" id="interpret"></p>
+<p class="note" id="food-examples"></p>
+</div>
+</div>
+<h2>Why protein intake matters more than most people think</h2>
+<p>Protein is the one macronutrient that fitness culture got mostly right. It builds and repairs muscle, keeps you full for longer than carbohydrates or fat, and costs your body more energy to digest. But the conversation around protein is full of extremes: some sources still quote the bare-minimum RDA, while supplement marketing implies that more is always better and that timing windows measured in minutes decide your results. The honest picture, as the research currently stands, is somewhere in between &mdash; and much more reassuring than either extreme.</p>
+<p>This calculator gives you a daily protein target in grams per kilogram of body weight, a per-meal target, and concrete food examples. The targets are based on the <strong>International Society of Sports Nutrition (ISSN) position stand on protein and exercise</strong> (Jäger et al., 2017), one of the most widely cited evidence reviews in sports nutrition, along with the large meta-analysis by Morton and colleagues (2018) on protein supplementation and resistance training. Where the evidence is thin, we say so.</p>
+<h2>How much protein do you actually need?</h2>
+<p>The official Recommended Dietary Allowance (RDA) for protein is 0.8 grams per kilogram of body weight per day. For an 80 kg adult that is 64 grams per day. It is important to understand what the RDA actually is: the <em>minimum</em> intake that keeps most healthy people out of deficiency. It is not the intake optimised for muscle, satiety, healthy ageing, or an active lifestyle. Nobody sets out to eat exactly the minimum of anything, and protein is no exception.</p>
+<p>Here is where the evidence-based targets used by this calculator sit:</p>
+<ul>
+<li><strong>Sedentary adults &mdash; 1.2 g/kg/day.</strong> Even without structured exercise, this level supports muscle maintenance, immune function, and appetite control better than the RDA minimum. An 80 kg sedentary adult targets about 96 g per day.</li>
+<li><strong>Active adults &mdash; 1.6 g/kg/day.</strong> If you exercise regularly &mdash; running, cycling, team sports, recreational lifting &mdash; this is the sweet spot where most research sees the best balance of muscle support and practicality. The Morton et al. (2018) meta-analysis of 49 studies found that the muscle-building benefit of extra protein levels off at around 1.6 g/kg/day in people doing resistance training.</li>
+<li><strong>Muscle gain &mdash; 2.0 g/kg/day.</strong> When you are deliberately trying to build muscle, going a bit above the 1.6 g/kg plateau gives you margin. Individual responses vary, and hard gainers or people in a calorie surplus often land here comfortably. The ISSN position stand recommends 1.4&ndash;2.0 g/kg for building and maintaining muscle mass in exercising individuals.</li>
+<li><strong>Cutting (fat loss) &mdash; 2.2 g/kg/day.</strong> In a calorie deficit, your body is more inclined to break down muscle along with fat. Higher protein &mdash; around 2.0&ndash;2.4 g/kg in the literature &mdash; protects lean mass while dieting. Protein also helps more with hunger control when calories are restricted, which makes a diet far easier to stick to.</li>
+</ul>
+<p>To put those numbers in perspective: an 80 kg person aiming to build muscle needs about 160 g of protein per day, or roughly 40 g per meal across four meals. That is very achievable with real food, no powders required &mdash; although protein powder is simply convenient food, not magic.</p>
+<h2>What the research actually says (and where it goes quiet)</h2>
+<p>The ISSN position stand is the backbone of these targets. Its key conclusions: 1.4&ndash;2.0 g/kg/day is sufficient for most exercising individuals; protein quality matters (complete amino acid profiles); and evenly distributing protein across the day supports muscle protein synthesis better than back-loading it all into dinner.</p>
+<p>The Morton et al. (2018) meta-analysis added an important ceiling: across 1,863 participants, protein intakes above roughly 1.6 g/kg/day did not produce additional gains in fat-free mass from resistance training. That does not mean 2.0 g/kg is pointless &mdash; individual studies vary, and appetite and dieting benefits continue past that point &mdash; but it does mean you should be sceptical of anyone selling you on 3 or 4 g/kg for extra muscle.</p>
+<p>Which brings us to the honest caveat: <strong>the evidence for intakes above about 2.2 g/kg per day is weak.</strong> A few small studies suggest possible satiety or recomposition benefits, but the data are sparse and often confounded by everything else changing in the subjects' diets. If your only goal is muscle, there is no proven advantage to going that high. The calculator caps its targets at 2.2 g/kg deliberately, because that is where the credible evidence ends.</p>
+<h2>Protein per meal: distribution matters almost as much as the total</h2>
+<p>Your body cannot store protein the way it stores fat or carbohydrate. Muscle protein synthesis &mdash; the process of building and repairing muscle &mdash; is triggered meal by meal, and each trigger needs enough of the amino acid <strong>leucine</strong> (about 2.5&ndash;3 g) to flip the switch. In practice, that translates to roughly <strong>0.25&ndash;0.4 g of protein per kilogram of body weight per meal</strong>.</p>
+<p>For an 80 kg person, that is 20&ndash;32 g minimum per meal, and 40 g (our calculator's output at the muscle-gain setting with four meals) sits comfortably in the effective range. Eating 160 g in one giant dinner and 10 g at breakfast does not trigger synthesis as efficiently as four balanced meals &mdash; although the daily total still matters far more than perfection in distribution. If your schedule only allows three meals, simply make each one bigger; the calculator adjusts automatically.</p>
+<p>There is also an upper bound worth knowing: individual meals beyond about 0.5 g/kg (40+ g for most adults) do not trigger meaningfully more synthesis in a single sitting, though the extra protein is still digested and used &mdash; nothing is "wasted", a persistent myth worth retiring. Your body is not a bucket with a 30-gram hole in it.</p>
+<h2>Cutting vs. bulking: why the targets differ</h2>
+<p>When you are eating at maintenance or in a surplus, protein's job is straightforward: supply the building blocks for new muscle. When you are in a calorie deficit, its job gets harder &mdash; it must protect the muscle you already have while your body is looking for tissue to burn. That is why the cutting target (2.2 g/kg) is the highest in the calculator.</p>
+<p>Research on dieting athletes consistently shows that higher protein preserves more lean mass during fat loss. Helms and colleagues' work on natural bodybuilders, for instance, supports 2.3&ndash;3.1 g per kilogram of <em>lean</em> body mass during contest preparation. Our calculator uses total body weight with a 2.2 g/kg cap, which lands in a similar place for most people without requiring a body-fat measurement.</p>
+<p>The second reason the cutting target is high: satiety. Protein reduces the hunger hormone ghrelin and increases fullness hormones more effectively than carbohydrate or fat. In a deficit, that difference can be the entire ballgame &mdash; the best diet is the one you can actually follow for twelve weeks.</p>
+<h2>Protein quality: not all grams are equal</h2>
+<p>A gram of protein from whey and a gram from wheat are not equivalent for muscle building, because what matters is the <strong>essential amino acid profile</strong> &mdash; particularly leucine. Animal proteins (meat, fish, eggs, dairy) are "complete": they contain all essential amino acids in good proportions. Most plant proteins are lower in one or more, usually lysine (grains) or methionine (legumes).</p>
+<p>That does not mean plant proteins are inadequate &mdash; it means variety and quantity matter more. Combining legumes with grains across the day covers the gaps, and soy is a genuinely complete plant protein. Vegans aiming for muscle gain may sensibly target the higher end of their protein range (toward 2.0 g/kg) to compensate for slightly lower digestibility, which the research supports as a reasonable strategy.</p>
+<p>For reference, here is the approximate protein content of common foods:</p>
+<table>
+<tr><th>Food</th><th>Serving</th><th>Protein (approx.)</th></tr>
+<tr><td>Chicken breast, cooked</td><td>150 g</td><td>46 g</td></tr>
+<tr><td>Greek yoghurt (plain, 2%)</td><td>200 g</td><td>20 g</td></tr>
+<tr><td>Eggs</td><td>3 large</td><td>18 g</td></tr>
+<tr><td>Lentils, cooked</td><td>200 g</td><td>18 g</td></tr>
+<tr><td>Canned tuna</td><td>100 g drained</td><td>24 g</td></tr>
+<tr><td>Tofu, firm</td><td>150 g</td><td>18 g</td></tr>
+<tr><td>Cottage cheese</td><td>150 g</td><td>17 g</td></tr>
+<tr><td>Oats, dry</td><td>80 g</td><td>10 g</td></tr>
+<tr><td>Almonds</td><td>30 g handful</td><td>6 g</td></tr>
+<tr><td>Whey protein powder</td><td>1 scoop (30 g)</td><td>24 g</td></tr>
+</table>
+<h2>Protein and kidneys: what the evidence really says</h2>
+<p>This is the question that worries people most, so let us be precise. In <strong>healthy individuals with normal kidney function</strong>, there is no strong evidence that protein intakes up to 2.2 g/kg &mdash; or even somewhat higher &mdash; damage the kidneys. Multiple reviews and trials, including studies of bodybuilders habitually eating very high protein for years, have found no decline in kidney function markers. The myth traces back to a misapplication of findings from people who already had kidney disease.</p>
+<p>The crucial qualifier: <strong>if you have chronic kidney disease, reduced kidney function, or a single kidney, talk to your doctor before increasing protein intake.</strong> Damaged kidneys clear protein waste products (like urea) less efficiently, and protein restriction is a genuine part of CKD management. This calculator is not for you without medical supervision &mdash; that is not legal boilerplate, it is the one group for whom the evidence clearly points the other way.</p>
+<p>One practical note for everyone: higher protein intake means drinking enough water. Urea excretion requires fluid, and while "drink more water" is overprescribed as health advice generally, it is genuinely relevant here. If your urine is consistently dark yellow, drink more.</p>
+<h2>Special cases: older adults, endurance athletes, and vegetarians</h2>
+<p><strong>Older adults</strong> may benefit most of all. After about age 60, the body becomes less responsive to protein's muscle-building signal (anabolic resistance), and sarcopenia &mdash; age-related muscle loss &mdash; accelerates. Current geriatric nutrition research increasingly supports 1.2&ndash;1.5 g/kg/day for older adults, paired with resistance training, which remains the single most effective intervention against muscle loss at any age.</p>
+<p><strong>Endurance athletes</strong> &mdash; runners, cyclists, triathletes &mdash; often under-eat protein because the culture emphasises carbohydrate. Yet prolonged endurance work breaks down muscle, and the ISSN recommends 1.2&ndash;1.6 g/kg for endurance athletes, rising toward 2.0 g/kg during heavy training blocks. If you run marathons on 60 g of protein a day, you are leaving recovery on the table.</p>
+<p><strong>Vegetarians and vegans</strong> can absolutely hit these targets; it just takes more planning. A day at 160 g from plants might look like: tofu scramble with nutritional yeast, lentil and quinoa bowl, seitan stir-fry, and a soy yoghurt with hemp seeds. The calculator's food examples adapt to your per-meal target &mdash; the principles are the same regardless of dietary pattern.</p>
+<h2>Does protein timing matter?</h2>
+<p>Less than the industry wants you to believe. The old "anabolic window" &mdash; the claim that you must slam a shake within 30 minutes of your last rep &mdash; has not survived the research. Total daily intake and reasonable distribution across meals explain nearly all of the effect.</p>
+<p>That said, two timing points have modest support: eating 20&ndash;40 g of protein within a few hours after resistance training slightly improves recovery and adaptation, and a protein-rich meal or snack before bed (casein is popular here because it digests slowly) has some evidence for overnight muscle protein synthesis. Treat these as optimisations worth maybe 5% &mdash; do them if convenient, ignore them if not, and never let timing anxiety override hitting your daily total.</p>
+<h2>Practical tips for actually hitting your target</h2>
+<p>Knowing the number is the easy part; eating it daily is the skill. A few strategies that work:</p>
+<ul>
+<li><strong>Anchor each meal with a protein source first</strong>, then build the rest of the plate around it. People who plan meals around the starch consistently under-eat protein.</li>
+<li><strong>Front-load breakfast.</strong> The typical Western breakfast is the lowest-protein meal of the day. Greek yoghurt, eggs, or even last night's leftovers fix this instantly.</li>
+<li><strong>Keep emergency protein handy:</strong> tinned fish, cottage cheese, roasted chickpeas, or a simple whey shake for genuinely busy days.</li>
+<li><strong>Track for two weeks, then stop.</strong> Weighing food forever is miserable and unnecessary. Two weeks of tracking teaches you what 40 g of protein looks like; after that, eyeballing is fine.</li>
+<li><strong>Increase gradually.</strong> Jumping from 70 g to 160 g overnight is a recipe for digestive discomfort. Add 20&ndash;30 g per week and let your gut adapt.</li>
+</ul>
+<p>Use the calculator above to get your personal target, pick your meals for the day, and you will know &mdash; not guess &mdash; whether your diet is doing its job.</p>
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How much protein do I need per day?</summary><div class="a"><p>Most adults need 1.2 to 2.2 grams of protein per kilogram of body weight per day, depending on activity level and goals. Sedentary adults need around 1.2 g/kg, active people about 1.6 g/kg, people building muscle around 2.0 g/kg, and people dieting to preserve muscle about 2.2 g/kg. These targets come from the International Society of Sports Nutrition position stand and sit above the official RDA of 0.8 g/kg, which is the minimum to avoid deficiency rather than the optimum.</p></div></details>
+<details><summary>How much protein should I eat per meal?</summary><div class="a"><p>Aim for roughly 0.25 to 0.4 grams of protein per kilogram of body weight per meal, spread across 3 to 5 meals. For an 80 kg person targeting 160 g per day, that is about 40 g per meal across 4 meals. This range supplies enough leucine (about 2.5 to 3 g per meal) to trigger muscle protein synthesis.</p></div></details>
+<details><summary>Is a high-protein diet bad for your kidneys?</summary><div class="a"><p>In healthy people, there is no strong evidence that higher protein intakes (up to 2.2 g/kg or more) damage healthy kidneys. However, if you have chronic kidney disease or reduced kidney function, you should not increase protein intake without talking to your doctor, because damaged kidneys handle protein waste less efficiently.</p></div></details>
+<details><summary>Can I get enough protein on a vegetarian or vegan diet?</summary><div class="a"><p>Yes. Lentils, chickpeas, beans, tofu, tempeh, edamame, quinoa, seitan, Greek yoghurt, and eggs (if vegetarian) are strong sources. Plant proteins are often lower in some essential amino acids, so vegans may aim for the higher end of their protein range and combine different sources through the day.</p></div></details>
+<details><summary>Is there any benefit to eating more than 2.2 grams of protein per kilogram?</summary><div class="a"><p>The evidence above about 2.2 g/kg is thin. A large meta-analysis (Morton et al., 2018) found that muscle-building benefits level off around 1.6 g/kg per day in trained individuals, and there is no reliable evidence that going beyond 2.2 g/kg builds extra muscle. Higher intakes can still help with appetite control while dieting, but the muscle advantage is not proven.</p></div></details>
+<details><summary>Does protein timing matter, or only the daily total?</summary><div class="a"><p>Daily total matters far more than timing. Once you hit your daily target, small extra benefits come from spreading protein across meals and eating 20 to 40 g within a few hours after resistance training. So-called anabolic windows measured in minutes are mostly a myth.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+/* MATHS-GATE-PURE: the function below is extracted verbatim by the build harness and unit-tested in node. Do not add DOM dependencies to it. */
+function proteinCalc(weightKg, factor, mealsPerDay) {
+  var meals = mealsPerDay > 0 ? mealsPerDay : 4;
+  var daily = weightKg * factor;
+  var perMeal = daily / meals;
+  return { daily: Math.round(daily), perMeal: Math.round(perMeal), meals: meals };
+}
+(function(){
+  var form = document.getElementById('protein-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var w = parseFloat(document.getElementById('weight').value);
+    var f = parseFloat(document.getElementById('goal').value);
+    var m = parseInt(document.getElementById('meals').value, 10);
+    if (!(w > 0) || !(f > 0)) return;
+    var r = proteinCalc(w, f, m);
+    document.getElementById('daily-g').textContent = r.daily;
+    document.getElementById('permeal-g').textContent = r.perMeal;
+    document.getElementById('meals-n').textContent = r.meals;
+    var goalName = document.getElementById('goal').selectedOptions[0].textContent.split(' — ')[0];
+    document.getElementById('interpret').textContent =
+      'Goal: ' + goalName + ' (' + f.toFixed(1) + ' g/kg).';
+    var chickenG = Math.round(r.perMeal / 31 * 100);
+    var yoghurtG = Math.round(r.perMeal / 10 * 100);
+    var eggsN = (r.perMeal / 6).toFixed(1);
+    document.getElementById('food-examples').textContent =
+      'What ' + r.perMeal + ' g per meal looks like: about ' + chickenG +
+      ' g cooked chicken breast, or ' + yoghurtG + ' g Greek yoghurt, or ' + eggsN +
+      ' large eggs (plus sides). Mix sources across the day.';
+    document.getElementById('result').classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
