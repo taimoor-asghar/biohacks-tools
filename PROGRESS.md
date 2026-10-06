@@ -1,8 +1,8 @@
 # DoctorBiohacks Build — Progress
 Market: global English (US-first). Repo: taimoor-asghar/biohacks-tools.
 
-## Status: IN PROGRESS — 11/15 tools done (chunk of 2026-10-06 15:30 CEST)
-Resume point: next to build: 12. jet-lag-planner, 13. nap-optimizer, 14. hrv-baseline, 15. deep-sleep-estimator, then /tools/ hub page + sitemap.xml.
+## Status: COMPLETE — 15/15 tools done + hub + sitemap (chunk of 2026-10-06 16:15 CEST)
+Resume point: DONE. All 15 tools committed to taimoor-asghar/biohacks-tools, /tools/ hub at tools/index.html, sitemap.xml at repo root. Ready for Taimoor's upload.
 
 ## Tools
 - [x] 1. sleep-debt — Sleep Debt Calculator (test: need 8, actuals [6,6,7,5,6,8,7] → debt 11.0h, extra 1.5h/night, ~8 nights; prose 1311 words) [committed 2026-10-06 15:30 chunk — was never committed in the 14:45 chunk]
@@ -16,14 +16,15 @@ Resume point: next to build: 12. jet-lag-planner, 13. nap-optimizer, 14. hrv-bas
 - [x] 9. body-fat-navy — Body Fat % (US Navy Method) (test: male 180/85/40cm → 14.5%, cross-checked vs official Navy inch-linear form 14.52%; female 165/70/95/32 → 24.9% "Fitness"; prose 1839 words)
 - [x] 10. one-rep-max — One-Rep Max Calculator (test: 100kg×5 → Epley 116.7, Brzycki 112.5; 60kg×10 → 80.0; prose 1677 words)
 - [x] 11. water-intake — Water Intake Calculator (test: 75kg moderate temperate → 3125ml = 3.1L, ~12–13 glasses; 90kg high hot breastfeeding → 5350ml = 5.4L, ~21 glasses; prose 2154 words)
-- [ ] 12. jet-lag-planner — Jet Lag Planner
-- [ ] 13. nap-optimizer — Nap Optimizer
-- [ ] 14. hrv-baseline — HRV Baseline Tracker
-- [ ] 15. deep-sleep-estimator — Deep Sleep Estimator
-- [ ] Hub page /tools/
-- [ ] sitemap.xml
+- [x] 12. jet-lag-planner — Jet Lag Planner (test: +1→−5 = −6h westward, 3-night 1h-later pre-plan, evening light, ~4-day adaptation; prose 2623 words)
+- [x] 13. nap-optimizer — Nap Optimizer (test: 14:00/30min/alertness → 20 min, wake 14:25; 16:30/120min/full-cycle → 90 min + post-15:00 warning; prose 2485 words)
+- [x] 14. hrv-baseline — HRV Baseline Tracker (test: [62,65,60,64,61,63,40] → mean 59.3, SD 8.03, z −2.40 → "take it easy"; CSS bar chart; prose 2412 words)
+- [x] 15. deep-sleep-estimator — Deep Sleep Estimator (test: 35yo, 7.5h, exercise yes, screens yes → 19% → 86 min vs norm 81 min → "above average"; prose 2261 words)
+- [x] Hub page /tools/ (tools/index.html: card grid, 4 category filters, live search, ItemList JSON-LD)
+- [x] sitemap.xml (hub + 15 tool URLs)
 
 ## Log
 - 2026-10-05: Taimoor: "Yes do it plan everything" — biohacks suite spec'd (15 tools), chain scheduled after translation chains.
 - 2026-10-06 14:45 chunk: overlap guards clear (german-translation-chunks disabled/succeeded; french-translation-chunks disabled, no running runs; one stale queued entry). Built tool 1 sleep-debt (1311 words prose, maths test passed). Delegated tools 2–5 to 4 subagents in parallel. bh-put-file.py created (biohacks-tools-parameterized) since gh-put-file hardcodes achawaqat-calculators.
+- 2026-10-06 16:15 chunk: overlap guards clear (german-translation-chunks disabled/succeeded; french-translation-chunks disabled, no running runs). Fixed git identity (repo local config lost; set muse-agent@local). Built tools 12–15 via 4 parallel subagents (files only, parent committed): jet-lag-planner, nap-optimizer, hrv-baseline, deep-sleep-estimator — all maths gates passed on page-JS node runs, 2261–2623 words prose each, structural checks passed (1 H1, canonical, FAQPage, author line, JS syntax). Built /tools/ hub (tools/index.html) + sitemap.xml. ALL 15 TOOLS + HUB + SITEMAP COMMITTED & PUSHED. Suite complete; awaiting Taimoor's upload. Job to be disabled.
 - 2026-10-06 15:30 chunk: overlap guards clear (german disabled/succeeded; french disabled, one stale 13:45 queued entry never started). FOUND: tools 1–6 from the 14:45 chunk were built but NEVER committed — repo contained only docs (no tool files); commits claimed "committed + pushed" never happened. Recovered: all 6 files verified structurally sound (one H1, FAQPage, correct canonicals) and committed this chunk. Built tools 7–11 via 5 parallel subagents (files only, parent committed to avoid push conflicts); all maths gates passed. SPEC CORRECTIONS: (a) Tool 9 — spec's "(inches; convert)" was wrong; the 1.0324/0.19077/0.15456 constants are the Hodgdon–Beckett METRIC/cm set. Builder verified against the official Navy inch-linear form (male 14.52% vs page 14.5%). The spec's old 8.3% expectation was the wrong inch-hybrid. BUILD_SPEC.md corrected; shipped page is correct. (b) Tool 8 — my brief contained an arithmetic slip ("2719.7"); true value 1755×1.55 = 2720.25 → 2720; spec text was already correct, no change. Commits "bh tool 1/15" through "bh tool 11/15" pushed. Resume: tools 12–15 + hub + sitemap.
