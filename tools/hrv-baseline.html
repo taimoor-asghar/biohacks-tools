@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRV Baseline Tracker — Is Today a Train-Hard or Take-It-Easy Day? | DoctorBiohacks</title>
+<meta name="description" content="Enter 7 morning rMSSD readings to get your HRV baseline, today's z-score, and an honest train-or-rest verdict. Understand what HRV really measures, what moves it, and when a low reading is a medical red flag.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/hrv-baseline/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HRV Baseline Tracker — Is Today a Train-Hard or Take-It-Easy Day?">
+<meta property="og:description" content="Enter 7 morning rMSSD readings to get your HRV baseline, today's z-score, and an honest train-or-rest verdict. What HRV really measures — and what it doesn't.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/hrv-baseline/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+.hrv-chart{display:flex;align-items:flex-end;justify-content:space-around;height:190px;padding:12px 8px 0 8px;position:relative;margin:1.2em 0 .4em;background:#fff;border:1px solid var(--border);border-radius:4px}
+.hrv-bar{flex:1;max-width:64px;margin:0 6px;background:#bfe7f5;border-radius:4px 4px 0 0;position:relative;min-height:4px}
+.hrv-bar.today{background:var(--primary)}
+.hrv-bar .blabel{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.78rem;font-weight:800;color:#444;white-space:nowrap}
+.hrv-bar .dlabel{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);font-size:.72rem;color:var(--muted);white-space:nowrap}
+.hrv-base-line{position:absolute;left:8px;right:8px;border-top:2px dashed #0369a1;opacity:.8}
+.hrv-base-line span{position:absolute;right:0;top:-20px;font-size:.75rem;font-weight:800;color:#0369a1}
+.chart-cap{font-size:.85rem;color:var(--muted);margin-bottom:1.4em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"What is a normal rMSSD value?","acceptedAnswer":{"@type":"Answer","text":"There is no universal normal value — rMSSD varies hugely between people (typical morning ranges span roughly 20 to 120 ms depending on age, fitness, and genetics) and between devices. Your own rolling baseline is the only number that matters for training decisions. Comparing your rMSSD to a stranger's is meaningless."}},
+  {"@type":"Question","name":"Can I measure HRV with my smartwatch or do I need a chest strap?","acceptedAnswer":{"@type":"Answer","text":"You can start with a smartwatch, but know its limits. Wrist optical sensors (PPG) estimate beat timing from blood flow and are noisier, especially with movement or dark tattoos. A Bluetooth ECG chest strap gives timing accuracy close to a clinical ECG and is the gold standard for serious tracking. Whichever you use, keep the same device for the whole baseline — switching devices mid-baseline makes the numbers incomparable."}},
+  {"@type":"Question","name":"My HRV dropped a lot today. Am I getting sick?","acceptedAnswer":{"@type":"Answer","text":"Possibly, but not necessarily. A sharp HRV drop can precede illness by a day or two — your nervous system often reacts before symptoms appear — and research during respiratory illness waves found exactly this pattern. But drops are also caused by alcohol, poor sleep, a hard workout yesterday, stress, or dehydration. One low reading is a nudge to rest and watch, not a diagnosis. If symptoms arrive, you have context; if not, it was probably one of the other causes."}},
+  {"@type":"Question","name":"My HRV is way above baseline. Should I smash today's workout?","acceptedAnswer":{"@type":"Answer","text":"Not automatically. A high reading suggests good recovery, but it is not proof of super-recovery or a license to double your training load. Training decisions should combine HRV with how you feel, sleep quality, muscle soreness, and your planned program. Some athletes see elevated HRV during parasympathetic overtraining — a state of accumulated fatigue — so very high readings paired with sluggishness deserve caution, not celebration."}},
+  {"@type":"Question","name":"Is HRV the same as resting heart rate?","acceptedAnswer":{"@type":"Answer","text":"No. Resting heart rate counts beats per minute; HRV measures the tiny timing differences between consecutive beats. They often move together — better fitness usually means lower resting heart rate and higher HRV — but HRV reacts faster to stress, illness, and recovery state, which is why athletes track it alongside, not instead of, resting heart rate."}},
+  {"@type":"Question","name":"How long should I measure before trusting the baseline?","acceptedAnswer":{"@type":"Answer","text":"This 7-day tracker is a starter baseline — good enough to begin making honest comparisons. For a robust baseline, collect at least 2 to 4 weeks of morning readings under consistent conditions, and ideally build the average from previous days only (excluding today, so today's reading is judged against history rather than pulling the average toward itself). Consistency of timing and device matters more than the exact number of days."}},
+  {"@type":"Question","name":"When is low HRV a reason to see a doctor?","acceptedAnswer":{"@type":"Answer","text":"See a doctor if your HRV stays depressed for weeks despite good sleep and low stress, or if low HRV comes with chest pain, palpitations, fainting, unusual breathlessness, or persistent fatigue. Chronically low HRV is associated with cardiovascular risk in population studies, but a wearable trend alone is not a diagnosis — it is a reason to get checked, especially if you have risk factors or symptoms."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; HRV Baseline Tracker</nav>
+<h1>HRV Baseline Tracker — Is Today a Train-Hard or Take-It-Easy Day?</h1>
+<p class="lede">Your morning heart-rate variability reading is one of the best non-invasive windows into your nervous system — but a single number means nothing without context. Enter seven mornings of rMSSD readings and this tracker builds your baseline, scores today against it, and gives you an honest train-or-rest verdict.</p>
+<div class="tool-card">
+<form id="hrvForm" aria-label="HRV baseline tracker">
+<div class="form-grid">
+<div class="field"><label for="m1">Morning 1 — rMSSD (ms)</label><input type="number" class="rmssd" id="m1" min="10" max="250" step="1" value="62"><div class="hint">Measure first thing on waking, same device, before caffeine or your phone.</div></div>
+<div class="field"><label for="m2">Morning 2 — rMSSD (ms)</label><input type="number" class="rmssd" id="m2" min="10" max="250" step="1" value="65"></div>
+<div class="field"><label for="m3">Morning 3 — rMSSD (ms)</label><input type="number" class="rmssd" id="m3" min="10" max="250" step="1" value="60"></div>
+<div class="field"><label for="m4">Morning 4 — rMSSD (ms)</label><input type="number" class="rmssd" id="m4" min="10" max="250" step="1" value="64"></div>
+<div class="field"><label for="m5">Morning 5 — rMSSD (ms)</label><input type="number" class="rmssd" id="m5" min="10" max="250" step="1" value="61"></div>
+<div class="field"><label for="m6">Morning 6 — rMSSD (ms)</label><input type="number" class="rmssd" id="m6" min="10" max="250" step="1" value="63"></div>
+<div class="field"><label for="m7">Morning 7 — rMSSD (ms), today</label><input type="number" class="rmssd" id="m7" min="10" max="250" step="1" value="40"></div>
+</div>
+<button type="button" class="btn" id="calcBtn">Check today's readiness</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+
+<h2>What HRV (rMSSD) actually measures</h2>
+<p>Your heart does not beat like a metronome. The gap between one heartbeat and the next varies by a few milliseconds, constantly, and that variation is heart rate variability. The metric this tracker uses — rMSSD, the root mean square of successive differences — is the most common time-domain measure of it. In plain language, rMSSD mostly reflects vagal tone: how actively your parasympathetic nervous system (the "rest and digest" branch) is applying the brake to your heart. Higher rMSSD generally means a more responsive, flexible autonomic nervous system; lower rMSSD means the sympathetic "fight or flight" branch is dominating, or the parasympathetic branch is withdrawing.</p>
+<p>That is genuinely useful information — which is why rMSSD is the metric behind most wearable "readiness" and "recovery" scores. But keep the interpretation honest. rMSSD is an indirect proxy for autonomic balance, not a direct readout of your health, fitness, or fatigue. It correlates with aerobic fitness at the population level and tracks recovery from training stress reasonably well, yet the evidence that day-to-day HRV-guided training produces better outcomes than well-designed fixed training is suggestive rather than ironclad. A handful of controlled trials have found small performance benefits from HRV-guided training versus predefined plans, but the effect sizes are modest and the protocols differ between studies. This tool treats your HRV as one signal among several, not a crystal ball.</p>
+
+<h2>What moves your HRV — and how noisy single-day swings are</h2>
+<p>Almost everything moves rMSSD, which is both its strength and its problem. The well-established drivers of a drop include: alcohol the previous evening (even moderate drinking reliably suppresses nighttime and morning HRV), short or fragmented sleep, acute illness or its prodrome, a hard training session the day before, psychological stress, dehydration, and late-night heavy meals. Upward movement — higher than your usual — typically follows good sleep, rest days, deload weeks, and periods of consistent aerobic training as fitness improves.</p>
+<p>Here is the caveat biohacking culture often skips: single-day swings are noisy. Your rMSSD can fall 20 to 30 percent because you slept badly, had two glasses of wine, or are mildly dehydrated — none of which requires you to cancel your workout and wrap yourself in cotton wool. The signal lives in the trend, not the day. A one-day dip is a nudge to consider context; a three-to-five-day downward drift is a real signal worth acting on. This tracker flags today against your baseline, but the verdict it gives is a starting point for your judgement, not an instruction from your heart.</p>
+
+<h2>Why morning resting measurement matters</h2>
+<p>HRV measured at random times during the day is nearly useless for tracking, because everything — posture, movement, meals, conversation, mental effort, caffeine — pushes it around. The standard that research uses, and the one this tracker assumes, is a short resting measurement first thing in the morning: lying or sitting quietly, before you get out of bed, before caffeine, before you check your phone and spike your cortisol with the news. Most wearables and apps take a one-to-five-minute reading in these conditions, and some devices capture it automatically during sleep.</p>
+<p>The deeper reason is physiological. Overnight, your autonomic nervous system settles into its most stable state of the day — minimal external stimuli, no recent meals, no movement. Morning readings therefore have the lowest noise and the highest signal for detecting genuine changes in recovery status. If you have been measuring HRV after your morning coffee, during your commute, or whenever you remember, start over: inconsistent timing will bury any real trend under measurement noise, and no tracker can rescue that.</p>
+
+<h2>How to build a real baseline</h2>
+<p>Seven mornings — what this tracker asks for — is the minimum starter baseline. It is enough to compute a meaningful average and get a first sense of where you stand, which is why this page uses it. But treat the result as provisional. A genuinely robust baseline needs two to four weeks of morning readings under consistent conditions: same device, same position, same timing relative to waking. That longer window smooths out the effect of any single unusual day and captures your normal range across good and bad weeks.</p>
+<p>There is one more methodological point worth knowing, because it affects how you read this tool's output. The strictest approach builds today's comparison from previous days only — yesterday's baseline judging today's reading — so that an extreme reading today cannot drag the baseline toward itself. This tracker uses the simpler version (all seven days, including today), which is fine for a starter tool but slightly blunts the very signal it is looking for: today's extreme value pulls the mean in its own direction. As you build a longer history in your app or spreadsheet, judge each morning against the rolling average of the previous seven to fourteen days, excluding today. That is the gold-standard home method.</p>
+
+<h2>The maths behind this tracker</h2>
+<p>The calculation is deliberately simple and fully transparent. First, the <strong>baseline</strong>: the arithmetic mean of your seven rMSSD readings. Second, the <strong>standard deviation</strong>: the population standard deviation of the same seven readings, which measures how much your mornings typically bounce around. Third, the <strong>z-score</strong> for today: (today's reading minus the mean) divided by the standard deviation. The z-score answers the only question that matters — how many of your own typical day-to-day wobbles away from your baseline is today's number?</p>
+<p>The verdict bands follow from that. A z-score between −1 and +1 means today sits within one standard deviation of your baseline — roughly the middle 68 percent of a normal distribution — so the verdict is "Normal — train as planned". Below −1, today is more than a full typical swing below baseline: "Below baseline — take it easy today". Above +1: "Above baseline — primed for a hard session". The bands are deliberately wide. Narrower bands would flag half your mornings as abnormal and train you to ignore the tool; wider bands would never flag anything. One standard deviation is the honest middle ground for a noisy biological signal — and remember the nuance from the previous section: this starter version includes today in the baseline, so borderline readings near the band edges deserve your own judgement call.</p>
+
+<h2>Reading your result honestly: drops, spikes, and noise</h2>
+<p>A big drop deserves respect, not panic. In research on respiratory illness, individual HRV often fell a day or two before symptoms appeared — your nervous system frequently reacts to an incoming infection before you feel it. That is why coaches and athletes treat a sharp, unexplained drop as an early-warning system: back off intensity, prioritise sleep, and see whether symptoms follow. But most drops have boring explanations — alcohol, poor sleep, yesterday's hard session, an argument with your boss. The honest workflow is: notice the drop, scan yesterday for causes, and only if nothing explains it, treat it as a possible illness signal and rest.</p>
+<p>Spikes deserve equal scepticism. Biohacking culture celebrates high HRV days as proof of super-recovery, and sometimes they are — a rest day and great sleep genuinely raise vagal tone. But a very high reading is not a licence to double your planned training load. Training adaptation comes from progressive overload executed consistently, and one great morning does not change that. Worse, some overtrained athletes show paradoxically elevated HRV — parasympathetic overtraining, where accumulated fatigue flips the autonomic balance the other way — so a very high reading paired with sluggish legs and flat mood should prompt caution, not a personal record attempt. Combine the verdict with how you actually feel: HRV is a vote, not a verdict.</p>
+
+<h2>HRV vs resting heart rate</h2>
+<p>These two metrics are cousins, not twins. Resting heart rate counts how many times your heart beats per minute at rest; HRV measures the millisecond-level timing differences between those beats. They often move together — improving aerobic fitness typically lowers resting heart rate and raises HRV — but they tell you different things. Resting heart rate changes slowly and reflects structural fitness adaptations; HRV reacts within hours to stress, sleep, illness, and training load.</p>
+<p>That speed difference is exactly why athletes track HRV alongside resting heart rate rather than instead of it. A resting heart rate that has crept up by five beats over a week and an HRV that has drifted down over the same period are telling the same story from two angles, and together they are more convincing than either alone. If your wearable gives you both, watch the pair. If it only gives you HRV, know that you are watching the faster, noisier of the two — which is fine, as long as you respect the noise.</p>
+
+<h2>Wearables, accuracy, and the PPG problem</h2>
+<p>Not all HRV numbers are equally trustworthy, and the difference comes down to how the beats are detected. A Bluetooth chest strap uses electrodes — essentially a single-lead ECG — and measures the electrical timing of each heartbeat directly, with accuracy close to clinical equipment. A wrist-worn device uses photoplethysmography (PPG): it shines light into your skin and infers beat timing from pulsing blood flow. PPG works reasonably well at rest but is inherently noisier — movement, loose fit, cold hands, and dark tattoos all degrade the signal, and the algorithms then have to guess which pulses were real beats.</p>
+<p>For trend tracking, a good wrist device used consistently is perfectly adequate; the noise is mostly stable, so changes still show through. For precise work — comparing against published norms, or making fine training calls — a chest strap is meaningfully better, and validation studies consistently rank ECG-based measurement above wrist PPG for rMSSD accuracy. The practical rule matters more than the hardware debate: pick one device and never switch mid-baseline. An rMSSD of 62 on your watch and 74 on a chest strap can both be "correct" for their sensor — mixing them in one baseline is comparing apples to oranges, and the tracker will happily compute nonsense from it.</p>
+
+<h2>When low HRV is a medical red flag</h2>
+<p>This tool is educational, and there is a line where education ends and medicine begins. In population studies, chronically low HRV is associated with higher cardiovascular risk — but a wearable trend is not a diagnosis, and plenty of healthy people sit at the low end of the normal range. The red flags are patterns plus symptoms. Talk to your doctor if your HRV stays depressed for weeks despite good sleep, low stress, and sensible training; if low readings arrive with chest pain, palpitations, fainting, unusual breathlessness, or persistent unexplained fatigue; or if you have known cardiovascular risk factors and your trend is steadily worsening. A single low morning — even a dramatic one — is not an emergency. Weeks of unexplained depression, especially with symptoms, is a reason to get checked, not to buy a new wearable.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>What is a normal rMSSD value?</summary><div class="a"><p>There is no universal normal value. rMSSD varies hugely between people — typical morning ranges span roughly 20 to 120 ms depending on age, fitness, and genetics — and between devices. Your own rolling baseline is the only number that matters for training decisions. Comparing your rMSSD to a stranger's is meaningless.</p></div></details>
+<details><summary>Can I measure HRV with my smartwatch, or do I need a chest strap?</summary><div class="a"><p>You can start with a smartwatch, but know its limits. Wrist optical sensors (PPG) estimate beat timing from blood flow and are noisier, especially with movement. A Bluetooth ECG chest strap gives timing accuracy close to a clinical ECG and is the gold standard for serious tracking. Whichever you use, keep the same device for the whole baseline — switching devices mid-baseline makes the numbers incomparable.</p></div></details>
+<details><summary>My HRV dropped a lot today. Am I getting sick?</summary><div class="a"><p>Possibly, but not necessarily. A sharp HRV drop can precede illness by a day or two, and research during respiratory illness waves found exactly this pattern. But drops are also caused by alcohol, poor sleep, a hard workout yesterday, stress, or dehydration. One low reading is a nudge to rest and watch, not a diagnosis. If symptoms arrive, you have context; if not, it was probably one of the other causes.</p></div></details>
+<details><summary>My HRV is way above baseline. Should I smash today's workout?</summary><div class="a"><p>Not automatically. A high reading suggests good recovery, but it is not proof of super-recovery or a licence to double your training load. Combine HRV with how you feel, sleep quality, and soreness. Some athletes see elevated HRV during parasympathetic overtraining — accumulated fatigue — so very high readings paired with sluggishness deserve caution, not celebration.</p></div></details>
+<details><summary>Is HRV the same as resting heart rate?</summary><div class="a"><p>No. Resting heart rate counts beats per minute; HRV measures the tiny timing differences between consecutive beats. They often move together — better fitness usually means lower resting heart rate and higher HRV — but HRV reacts faster to stress, illness, and recovery, which is why athletes track it alongside resting heart rate.</p></div></details>
+<details><summary>How long should I measure before trusting the baseline?</summary><div class="a"><p>This 7-day tracker is a starter baseline. For a robust baseline, collect 2 to 4 weeks of morning readings under consistent conditions, and ideally judge each morning against a rolling average of previous days only (excluding today, so today's reading does not pull the average toward itself). Consistency of timing and device matters more than the exact number of days.</p></div></details>
+<details><summary>When is low HRV a reason to see a doctor?</summary><div class="a"><p>See a doctor if your HRV stays depressed for weeks despite good sleep and low stress, or if low HRV comes with chest pain, palpitations, fainting, unusual breathlessness, or persistent fatigue. Chronically low HRV is associated with cardiovascular risk in population studies, but a wearable trend alone is not a diagnosis — it is a reason to get checked, especially with risk factors or symptoms.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+function fmt(n){return (Math.round(n*10)/10).toString();}
+document.getElementById('calcBtn').addEventListener('click',function(){
+  var days=[];var ok=true;
+  for(var i=1;i<=7;i++){
+    var v=parseFloat(document.getElementById('m'+i).value);
+    if(isNaN(v)||v<10||v>250){ok=false;break;}
+    days.push(v);
+  }
+  if(!ok){alert('Please enter 10\u2013250 ms for each morning reading.');return;}
+  var n=days.length;
+  var sum=days.reduce(function(s,v){return s+v;},0);
+  var mean=sum/n;
+  var sqsum=days.reduce(function(s,v){return s+(v-mean)*(v-mean);},0);
+  var sd=Math.sqrt(sqsum/n);
+  var z=sd>0?(days[n-1]-mean)/sd:0;
+  var verdict,cls;
+  if(Math.abs(z)<=1){verdict='Normal \u2014 train as planned';cls='good';}
+  else if(z<-1){verdict='Below baseline \u2014 take it easy today';cls='warn';}
+  else{verdict='Above baseline \u2014 primed for a hard session';cls='good';}
+  var mx=Math.max.apply(null,days);
+  var html='<div class="big">'+fmt(mean)+'<span class="unit"> ms baseline</span></div>';
+  html+='<p class="interpret">Today\'s z-score: '+fmt(z)+' &mdash; '+verdict+'.</p>';
+  html+='<p class="note">Population SD of your 7 mornings: '+fmt(sd)+' ms. Today\'s reading ('+fmt(days[n-1])+' ms) sits '+fmt(Math.abs(z))+' of your typical day-to-day swings '+(z<0?'below':'above')+' your baseline.</p>';
+  html+='<div class="hrv-chart" role="img" aria-label="Bar chart of 7 morning rMSSD readings">';
+  for(var d=0;d<7;d++){
+    var h=Math.max(3,Math.round(days[d]/mx*100));
+    html+='<div class="hrv-bar'+(d===6?' today':'')+'" style="height:'+h+'%"><span class="blabel">'+fmt(days[d])+'</span><span class="dlabel">'+(d===6?'Today':'Day '+(d+1))+'</span></div>';
+  }
+  html+='<div class="hrv-base-line" style="bottom:'+(mean/mx*100)+'%"><span>baseline '+fmt(mean)+' ms</span></div>';
+  html+='</div>';
+  html+='<p class="chart-cap">Today\'s bar is highlighted. The dashed line marks your 7-day baseline ('+fmt(mean)+' ms). Bands: within &plusmn;1 SD = normal; beyond = below/above baseline.</p>';
+  if(cls==='warn'){html+='<p class="interpret" style="color:#b00020">A sharp unexplained drop can precede illness by a day or two. Rest today, check yesterday\'s sleep, alcohol, and training for boring explanations — and if symptoms develop or low readings persist for weeks, talk to your doctor.</p>';}
+  var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+});
+})();
+</script>
+</body>
+</html>
