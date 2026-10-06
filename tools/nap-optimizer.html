@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nap Optimizer — The Perfect Nap Length, Timed | DoctorBiohacks</title>
+<meta name="description" content="Stop waking up groggy from naps that backfire. Enter your time and goal — get the ideal nap length (20 or 90 minutes, never the groggy 30–60 zone), your wake-up time, and when daytime sleepiness is a medical question.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/nap-optimizer/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nap Optimizer — The Perfect Nap Length, Timed">
+<meta property="og:description" content="Stop waking up groggy from naps that backfire. Enter your time and goal — get the ideal nap length (20 or 90 minutes, never the groggy 30–60 zone), your wake-up time, and when daytime sleepiness is a medical question.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/nap-optimizer/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Is a 20-minute nap really better than a 40-minute nap?","acceptedAnswer":{"@type":"Answer","text":"For alertness, usually yes. A 20-minute nap keeps you in light sleep (stages N1 and N2), which is easy to wake from. Around 30 to 40 minutes you descend into deep slow-wave sleep, and waking from it causes sleep inertia — grogginess that can last 30 to 60 minutes. Forty minutes is not double the refreshment; it is often the nap backfiring."}},
+  {"@type":"Question","name":"Why do I wake up groggy after a 45-minute nap?","acceptedAnswer":{"@type":"Answer","text":"You almost certainly woke from deep (slow-wave) sleep. The first 20 minutes of a nap are spent in light stages, but by 30 to 60 minutes most people have descended into N3 deep sleep, where the brain is hardest to rouse. The groggy, disoriented feeling is called sleep inertia, and it can impair performance more than the tiredness you napped to fix. Either cap the nap at 20 minutes or complete a full 90-minute cycle so you wake at a light-sleep boundary."}},
+  {"@type":"Question","name":"Can naps replace a full night's sleep?","acceptedAnswer":{"@type":"Answer","text":"No. Naps reduce subjective sleepiness and give short-term alertness gains, but they do not replicate the architecture of nighttime sleep — especially the concentrated deep slow-wave sleep of the first half of the night, when growth hormone release and much of the brain's metabolic clearance occur, and the REM-rich later cycles important for memory consolidation. Naps are a bridge over an afternoon, not a substitute for the night."}},
+  {"@type":"Question","name":"Are caffeine naps real, or just biohacking folklore?","acceptedAnswer":{"@type":"Answer","text":"They have real but modest evidence. A few small studies, including one by Hayashi and colleagues in 2003, found that drinking coffee immediately before a 15 to 20 minute nap improved alertness slightly more than either alone — the idea being the nap ends around the time the caffeine starts taking effect. The effect sizes are small, the studies are few, and caffeine sensitivity varies enormously. It is a reasonable trick to try, not a proven protocol."}},
+  {"@type":"Question","name":"Will napping ruin my night sleep?","acceptedAnswer":{"@type":"Answer","text":"A short nap early in the afternoon usually does not. Long naps (over 30 minutes) or late naps (after about 15:00 to 16:00) reduce the sleep pressure — adenosine buildup — that makes you sleepy at night, so they can delay sleep onset and fragment nighttime sleep. If you struggle to fall asleep at night, try cutting naps entirely for a week before assuming you need the nap itself."}},
+  {"@type":"Question","name":"What is the best time of day to nap?","acceptedAnswer":{"@type":"Answer","text":"The early-afternoon dip, roughly 13:00 to 15:00, is the sweet spot: your circadian rhythm naturally lowers alertness then, so you fall asleep faster and the nap interferes least with the coming night. A 90-minute full-cycle nap started much after 15:00 pushes its wake time toward evening and can easily cost you nighttime sleep quality."}},
+  {"@type":"Question","name":"I feel exhausted every single day no matter how I nap or sleep. What should I do?","acceptedAnswer":{"@type":"Answer","text":"See your doctor rather than optimising harder. Persistent daytime exhaustion despite adequate time in bed can signal obstructive sleep apnoea (loud snoring, witnessed pauses in breathing, gasping), narcolepsy, restless legs syndrome, thyroid disorders, depression, or medication side effects. Daytime sleepiness that resists good habits is a symptom to investigate, not a willpower problem."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Nap Optimizer</nav>
+<h1>Nap Optimizer — The Perfect Nap Length, Timed</h1>
+<p class="lede">A 20-minute nap can sharpen your whole afternoon. A 45-minute nap can wreck it. The difference is not discipline — it is which sleep stage you wake up from. Tell this tool when you are napping and how much time you have, and it picks a nap length that wakes you at the right boundary, with a wake-up time that includes a realistic fall-asleep buffer.</p>
+<div class="tool-card">
+<form id="napForm" aria-label="Nap optimizer calculator">
+<div class="form-grid">
+<div class="field"><label for="nowTime">Current time (nap starts now)</label><input type="time" id="nowTime"><div class="hint">Prefilled with your current time. Set it to when you will lie down.</div></div>
+<div class="field"><label for="avail">Minutes available for the nap</label><input type="number" id="avail" min="10" max="120" value="45"><div class="hint">Between 10 and 120 minutes. Be honest — include getting settled.</div></div>
+<div class="field"><label for="goal">Your goal for this nap</label><select id="goal"><option value="recharge">Quick recharge / alertness</option><option value="fullcycle">Full cycle — memory &amp; creativity</option></select><div class="hint">Recharge = the classic power nap. Full cycle = one complete 90-minute sleep cycle.</div></div>
+</div>
+<button type="button" class="btn" id="calcBtn">Optimize my nap</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+
+<h2>Why nap length is the whole game</h2>
+<p>Nighttime sleep moves in roughly 90-minute cycles: light sleep (stages N1 and N2), then deep slow-wave sleep (N3), then REM dreaming sleep, and back up again. A nap is simply a fragment of that architecture — and the fragment you choose decides whether you wake up refreshed or feeling like you were hit by a small truck. The groggy, disoriented, can-barely-form-sentences feeling has a clinical name: sleep inertia. It happens when the alarm yanks you out of deep sleep, and it can last 30 to 60 minutes — easily worse than the tiredness you were trying to nap away.</p>
+<p>Here is the honest map, backed by decades of sleep-lab research. The first 10 to 20 minutes of a nap keep you in light sleep. Waking from N1 or N2 is easy; alertness rebounds within minutes and mood improves. This is the famous power nap, and it is famous because it works. Between roughly 30 and 60 minutes, most people descend into N3 deep sleep — the stage where the brain is hardest to rouse, where slow brain waves dominate, and where waking feels awful. This is the danger zone, and this optimizer never recommends a nap in it, no matter how much time you have. At about 90 minutes, you complete a full cycle — light, deep, REM — and wake at a natural light-sleep boundary, refreshed, with the added bonus that REM and deep sleep support memory consolidation and creative problem-solving.</p>
+<p>The counterintuitive lesson: longer is not better. A 20-minute nap beats a 40-minute nap for afternoon alertness almost every time. The sweet spot is not a duration — it is a doorway. Wake through a light-sleep doorway and you feel new; wake through a deep-sleep doorway and you feel worse. Everything this tool does is about choosing the right doorway given the time you actually have.</p>
+
+<h2>The maths behind this optimizer</h2>
+<p>The logic is deliberately simple, because the sleep science behind it is simple. Two lengths are safe: 20 minutes (stay in light sleep) and 90 minutes (complete one full cycle). Everything between 30 and 60 is the grogginess danger zone, so the tool refuses to recommend it — even when you have 45 minutes free, it will hand you 20 and tell you why.</p>
+<p>Here is the full decision tree. Choose "Quick recharge / alertness" and you get 20 minutes, always — a power nap is a power nap. Choose "Full cycle — memory &amp; creativity" with 90 or more minutes available and you get the full 90. Choose full cycle with 60 to 89 minutes available and the tool recommends 20 anyway, with a note: a 60-to-89-minute nap would likely end in deep sleep, so the safer pick is the short one unless you can find the extra minutes for a full cycle. With under 20 minutes available for either goal, the tool recommends whatever you have — a 12-minute nap is a light nap at best, but it is better than nothing.</p>
+<p>Your wake-up time is nap start plus recommended length plus a 5-minute fall-asleep buffer. That buffer is a practical allowance, not a clinical measurement — a tired person in a dark, quiet room typically drifts off within a few minutes, and without some buffer the alarm math is a fantasy. Finally, there is a timing guardrail: if a recommended 90-minute nap starts after 15:00, the tool flags it in red, because a cycle that long starting that late will likely eat into tonight's sleep pressure. In that case the honest recommendation is usually the 20-minute nap instead.</p>
+
+<h2>What the NASA nap study actually showed</h2>
+<p>You will see the NASA nap study cited everywhere in productivity culture, usually as proof that "a 26-minute nap boosts performance 34%." Let us be precise about what it actually was. In the mid-1990s, NASA researchers studied long-haul flight crews and found that planned cockpit rest periods — averaging about 25.4 minutes of actual sleep — improved subsequent performance by roughly 34% and alertness by about 54% relative to a no-nap control group on the same flights. Those are real, respectable numbers.</p>
+<p>Here is what the hype usually leaves out. It was one study, on a small group of pilots, in a highly controlled setting, measuring performance on specific aviation tasks — not a universal law about all naps for all people. It also tested naps of one length, against no nap at all; it did not compare 20 versus 40 versus 90 minutes. The honest takeaway is narrower than the legend: short, planned naps during prolonged wakefulness measurably improve alertness and performance in safety-critical work. That is genuinely useful — and it is exactly why the 20-minute power nap is the default recommendation in this optimizer — but it is not a license to claim that napping will double your output or fix chronic sleep loss.</p>
+
+<h2>Coffee naps: real, but smaller than the hype</h2>
+<p>The caffeine nap — drink a coffee, then immediately nap for 15 to 20 minutes — sounds like biohacking folklore, but it has some genuine evidence behind it. The theory is neat: caffeine takes about 20 minutes to reach effective blood levels, so if you fall asleep right after drinking it, the nap ends just as the caffeine kicks in, and you get the nap's alertness boost plus the caffeine's, with the nap also clearing some of the adenosine the caffeine would otherwise just be masking. A small study by Hayashi and colleagues in 2003 tested combinations of naps and caffeine and found the combined approach improved alertness and performance on computer tasks slightly more than either alone.</p>
+<p>Now the caveats, because they matter. "A few small studies" is the entire evidence base — this is not a robust, replicated literature. Effect sizes are modest, not transformative. Caffeine sensitivity varies enormously between people (some of it genetic), so the same coffee that one person naps through will keep another person staring at the ceiling for the full 20 minutes, defeating the purpose. And caffeine after early afternoon is a known sleep disruptor; a coffee nap at 16:00 that sharpens your evening can easily cost you an hour of nighttime sleep, which is a terrible trade. Treat the caffeine nap as a reasonable trick to try on a rough afternoon, not a daily protocol — and if you are caffeine-sensitive or anxious, skip the coffee and just take the nap.</p>
+
+<h2>When to nap — and when not to</h2>
+<p>Timing matters almost as much as length. Your circadian rhythm builds in a natural alertness dip in the early afternoon — roughly 13:00 to 15:00 — driven by the clock itself, not just by lunch. (The post-lunch dip happens even without food; it is circadian, though a heavy meal deepens it.) Napping inside that window is ideal: you fall asleep faster, the nap feels more restorative, and it interferes least with the coming night.</p>
+<p>The cutoff is the other side of the coin. A nap that ends too close to bedtime steals sleep pressure — the adenosine buildup that makes you sleepy at night — so you lie awake later, sleep more shallowly, or both. As a rule of thumb, keep naps before about 15:00 to 16:00, and never take a long nap in the late afternoon. This optimizer enforces that logic: recommend a 90-minute nap after 15:00 and you get a red warning, because a cycle starting that late pushes your wake time toward evening and will likely harm tonight's sleep.</p>
+<p>A few practical details make naps actually work. Set an alarm — two, if you sleep through the first — and include the 5-minute fall-asleep buffer when choosing your wake time, which this tool does for you. Make the room as dark, cool, and quiet as you can; an eye mask and earplugs are cheap and disproportionately effective. Give yourself a few minutes after waking before anything important: even a good nap leaves a brief fog, and a glass of water plus some light and movement clears it faster. And if you consistently need a nap to survive the afternoon despite 7 to 9 hours in bed, the problem may not be your napping technique — see the medical section below.</p>
+
+<h2>Naps for shift workers and new parents</h2>
+<p>Not all daytime sleepiness is a lifestyle choice. Shift workers and new parents accumulate sleep loss structurally, and for them naps are not optimisation — they are damage control. The evidence here is genuinely practical. Prophylactic naps — napping before a night shift rather than after — are among the best-supported strategies: a 90-minute nap in the early evening before a night shift measurably improves alertness during the shift in controlled studies. Short naps during scheduled breaks (20 to 30 minutes) also help, though workplace napping policies vary.</p>
+<p>For new parents, the honest advice is to lower the bar on purpose. Infant sleep fragments the night into 90-minute chunks, so the classic tactic — sleep when the baby sleeps — works best when you commit to at least one full 90-minute cycle rather than dozing in fragments. Trading off with a partner in shifts, so each adult gets one consolidated block, beats both adults getting the same broken night. And treat the first months as damage control rather than optimisation: the research on parental sleep deprivation is clear that fragmented sleep impairs cognition roughly like total sleep restriction, so protect one solid block however you can, and talk to your doctor if exhaustion persists beyond the newborn phase.</p>
+
+<h2>When daytime sleepiness is a medical red flag</h2>
+<p>A nap optimizer is the right tool for a healthy person with a rough afternoon. It is the wrong tool for persistent, unshakeable daytime exhaustion — and knowing the difference matters. If you sleep 7 to 9 hours a night and still feel exhausted every day, or if you fall asleep unintentionally during conversations, meetings, or driving, that is not a napping problem. Talk to your doctor.</p>
+<p>Several conditions masquerade as "just tiredness." Obstructive sleep apnoea — loud snoring with witnessed pauses in breathing or gasping — fragments sleep hundreds of times a night without you knowing; it is common, underdiagnosed, and very treatable. Narcolepsy, restless legs syndrome, thyroid disorders, depression, and a long list of medications (including some antihistamines, blood pressure drugs, and antidepressants) all produce daytime sleepiness that no nap schedule will fix. As a rough self-check, clinicians use questions like the Epworth Sleepiness Scale — rating your likelihood of dozing in eight everyday situations — but a questionnaire is a conversation starter with your doctor, not a diagnosis. The bottom line: naps are for occasional afternoons, not for a body that is exhausted every day. Persistent sleepiness deserves a medical workup, not a better calculator.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Is a 20-minute nap really better than a 40-minute nap?</summary><div class="a"><p>For alertness, usually yes. A 20-minute nap keeps you in light sleep (stages N1 and N2), which is easy to wake from. Around 30 to 40 minutes you descend into deep slow-wave sleep, and waking from it causes sleep inertia — grogginess that can last 30 to 60 minutes. Forty minutes is not double the refreshment; it is often the nap backfiring.</p></div></details>
+<details><summary>Why do I wake up groggy after a 45-minute nap?</summary><div class="a"><p>You almost certainly woke from deep (slow-wave) sleep. The first 20 minutes of a nap are spent in light stages, but by 30 to 60 minutes most people have descended into N3 deep sleep, where the brain is hardest to rouse. The groggy, disoriented feeling is called sleep inertia, and it can impair performance more than the tiredness you napped to fix. Either cap the nap at 20 minutes or complete a full 90-minute cycle so you wake at a light-sleep boundary.</p></div></details>
+<details><summary>Can naps replace a full night's sleep?</summary><div class="a"><p>No. Naps reduce subjective sleepiness and give short-term alertness gains, but they do not replicate the architecture of nighttime sleep — especially the concentrated deep slow-wave sleep of the first half of the night, when growth hormone release and much of the brain's metabolic clearance occur, and the REM-rich later cycles important for memory consolidation. Naps are a bridge over an afternoon, not a substitute for the night.</p></div></details>
+<details><summary>Are caffeine naps real, or just biohacking folklore?</summary><div class="a"><p>They have real but modest evidence. A few small studies, including one by Hayashi and colleagues in 2003, found that drinking coffee immediately before a 15 to 20 minute nap improved alertness slightly more than either alone — the idea being the nap ends around the time the caffeine starts taking effect. The effect sizes are small, the studies are few, and caffeine sensitivity varies enormously. It is a reasonable trick to try, not a proven protocol.</p></div></details>
+<details><summary>Will napping ruin my night sleep?</summary><div class="a"><p>A short nap early in the afternoon usually does not. Long naps (over 30 minutes) or late naps (after about 15:00 to 16:00) reduce the sleep pressure — adenosine buildup — that makes you sleepy at night, so they can delay sleep onset and fragment nighttime sleep. If you struggle to fall asleep at night, try cutting naps entirely for a week before assuming you need the nap itself.</p></div></details>
+<details><summary>What is the best time of day to nap?</summary><div class="a"><p>The early-afternoon dip, roughly 13:00 to 15:00, is the sweet spot: your circadian rhythm naturally lowers alertness then, so you fall asleep faster and the nap interferes least with the coming night. A 90-minute full-cycle nap started much after 15:00 pushes its wake time toward evening and can easily cost you nighttime sleep quality.</p></div></details>
+<details><summary>I feel exhausted every single day no matter how I nap or sleep. What should I do?</summary><div class="a"><p>See your doctor rather than optimising harder. Persistent daytime exhaustion despite adequate time in bed can signal obstructive sleep apnoea (loud snoring, witnessed pauses in breathing, gasping), narcolepsy, restless legs syndrome, thyroid disorders, depression, or medication side effects. Daytime sleepiness that resists good habits is a symptom to investigate, not a willpower problem.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> — reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+/*__NAPLOGIC_START__*/
+function pad2(n){return String(n).padStart(2,'0');}
+function computeNap(nowStr, avail, goal){
+  var parts=(nowStr||'').split(':');
+  var h=parseInt(parts[0],10), m=parseInt(parts[1],10);
+  if(isNaN(h)||isNaN(m)){var d=new Date();h=d.getHours();m=d.getMinutes();}
+  var startMin=h*60+m;
+  var rec, why, note='';
+  if(goal==='fullcycle'){
+    if(avail>=90){rec=90;why='A full ~90-minute cycle (light \u2192 deep \u2192 REM) ends at a light-sleep boundary, so you wake refreshed instead of drenched in sleep inertia.';}
+    else if(avail>=20){rec=20;why='You stay in light sleep (N1/N2) \u2014 easy to wake from, with none of the deep-sleep grogginess.'; if(avail>=60){note='A 60\u201389-minute nap with this goal would likely end in deep sleep \u2014 the grogginess danger zone. Twenty minutes is the safer pick unless you can find the time for a full 90-minute cycle.';}}
+    else{rec=avail;why='With under 20 minutes available, this is a light nap at best \u2014 take what the schedule allows.';}
+  }else{
+    if(avail>=20){rec=20;why='You stay in light sleep (N1/N2) \u2014 easy to wake from, with none of the deep-sleep grogginess.';}
+    else{rec=avail;why='Under 20 minutes is a light nap at best (under 10 is barely a nap) \u2014 take what the schedule allows.';}
+  }
+  var wakeMin=startMin+rec+5;
+  var wake=pad2(Math.floor(wakeMin/60)%24)+':'+pad2(wakeMin%60);
+  var lateNap=(rec===90 && startMin>15*60);
+  return {rec:rec, wake:wake, why:why, note:note, lateNap:lateNap};
+}
+/*__NAPLOGIC_END__*/
+document.getElementById('calcBtn').addEventListener('click',function(){
+  var nt=document.getElementById('nowTime').value;
+  var avail=parseFloat(document.getElementById('avail').value);
+  var goal=document.getElementById('goal').value;
+  if(isNaN(avail)||avail<10||avail>120){alert('Please enter minutes available between 10 and 120.');return;}
+  if(!nt){var d=new Date();nt=pad2(d.getHours())+':'+pad2(d.getMinutes());}
+  var r=computeNap(nt,avail,goal);
+  var html='<div class="big">'+r.rec+'<span class="unit"> minute nap</span></div>';
+  html+='<p class="interpret">Wake up at '+r.wake+' (includes a 5-minute fall-asleep buffer).</p>';
+  html+='<p class="note">'+r.why+'</p>';
+  if(r.note){html+='<p class="note">'+r.note+'</p>';}
+  if(r.lateNap){html+='<p class="interpret" style="color:#b00020">Warning: starting a 90-minute nap after 15:00 will likely harm tonight\u2019s sleep \u2014 consider a 20-minute nap instead.</p>';}
+  var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+});
+(function(){var d=new Date();var el=document.getElementById('nowTime');if(el&&!el.value){el.value=pad2(d.getHours())+':'+pad2(d.getMinutes());}})();
+})();
+</script>
+</body>
+</html>
