@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimal Bedtime Finder — Wake Up at the End of a Sleep Cycle | DoctorBiohacks</title>
+<meta name="description" content="Enter your wake-up time and the Optimal Bedtime Finder back-calculates your ideal bedtime across 90-minute sleep cycles — so you wake up refreshed, not groggy.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/bedtime-finder/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Optimal Bedtime Finder — Wake Up at the End of a Sleep Cycle">
+<meta property="og:description" content="Enter your wake-up time and the Optimal Bedtime Finder back-calculates your ideal bedtime across 90-minute sleep cycles — so you wake up refreshed, not groggy.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/bedtime-finder/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field input[type=range]{width:100%}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Is 6 hours of sleep enough if I feel fine?","acceptedAnswer":{"@type":"Answer","text":"Probably not. Genuine short sleepers who thrive on 6 hours are rare — well under 1% of people carry a gene variant linked to it. Most people who say they feel fine on 6 hours still show measurable drops in reaction time, memory and mood in laboratory tests; they simply stop noticing the impairment. If 6 hours is all you can get right now, 4 full cycles is the least-bad option, but aim to work up toward 5 cycles (7.5 hours of sleep) over time."}},
+  {"@type":"Question","name":"Should my bedtime be different on weekends?","acceptedAnswer":{"@type":"Answer","text":"Ideally, no — or at least not by much. Keeping your wake-up time within about an hour of your weekday time, even on weekends, is one of the strongest predictors of sleep quality. Shifting your schedule by two or more hours on weekends creates 'social jet lag', which is linked to worse metabolic and mood outcomes. If you are catching up on debt, a slightly later bedtime on Friday and Saturday is fine, but protect the morning anchor."}},
+  {"@type":"Question","name":"Does the 90-minute rule apply to teenagers?","acceptedAnswer":{"@type":"Answer","text":"The cycle structure is similar, but teenagers need more sleep overall — 8 to 10 hours according to the American Academy of Sleep Medicine — and their circadian rhythm runs later, making early school starts a genuine biological mismatch. For a teen waking at 06:30, 6 cycles (9 hours) with a bedtime around 21:00–21:15 is a more appropriate target than 5."}},
+  {"@type":"Question","name":"What if I can't fall asleep within 15 minutes?","acceptedAnswer":{"@type":"Answer","text":"Then adjust the fall-asleep input to your honest average — 20, 30 or even 45 minutes. The calculator adds it to every option, so an honest number keeps the cycle math correct. If you regularly lie awake for more than 30 minutes, that is worth addressing in its own right: consistent wake times, morning daylight, a wind-down routine and getting out of bed when you cannot sleep (rather than tossing) are the core of cognitive behavioral therapy for insomnia, the first-line treatment."}},
+  {"@type":"Question","name":"I often wake up just before my alarm. Is something wrong?","acceptedAnswer":{"@type":"Answer","text":"Usually the opposite — it is a good sign. Your body anticipates regular wake times: the stress hormone cortisol begins rising about an hour before your usual alarm (the cortisol awakening response), pulling you into lighter sleep so you surface naturally. It means your schedule is consistent enough for your circadian clock to lock onto it. Waking more than 30–60 minutes early every day and being unable to fall back asleep, however, is worth mentioning to your doctor."}},
+  {"@type":"Question","name":"Is waking up in the middle of the night normal?","acceptedAnswer":{"@type":"Answer","text":"Yes, within limits. Brief awakenings between cycles are normal — most people have several per night and do not remember them. What matters is whether you fall back asleep within about 20 minutes. Frequent long awakenings (30+ minutes, several nights a week) can signal stress, sleep apnoea, reflux, or an overly warm or noisy bedroom. If it is persistent, track it for two weeks and bring the log to your doctor rather than reaching for sedatives on your own."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Optimal Bedtime Finder</nav>
+<h1>Optimal Bedtime Finder</h1>
+<p class="lede">Enter your wake-up time and the Optimal Bedtime Finder back-calculates your ideal bedtime across 4, 5 or 6 full 90-minute sleep cycles — so you wake at the light end of a cycle, not in the depths of deep sleep.</p>
+<div class="tool-card">
+<style>
+.radio-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.radio{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--border);border-radius:4px;padding:9px 14px;cursor:pointer;font-weight:700}
+.radio input{accent-color:var(--primary);width:18px;height:18px}
+.radio small{color:var(--muted);font-weight:600}
+.cycle-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}
+.cycle-card{background:#fff;border:2px solid var(--border);border-radius:4px;padding:14px 12px;text-align:center}
+.cycle-card.selected{border-color:var(--primary);background:var(--result);box-shadow:0 0 0 2px rgba(4,168,208,.25)}
+.cycle-card .t{font-family:"Arvo",serif;font-size:1.75rem;color:#0369a1;font-weight:700;margin:.15em 0}
+.cycle-card .c{font-weight:800;font-size:1.02rem}
+.cycle-card .d{font-size:.88rem;color:var(--muted)}
+</style>
+<form id="bedtime-form">
+<div class="form-grid">
+<div class="field">
+<label for="wake">Wake-up time</label>
+<input type="time" id="wake" name="wake" value="06:30" required>
+<div class="hint">The time your alarm goes off — keep this fixed, even on weekends.</div>
+</div>
+<div class="field">
+<label for="fallasleep">Minutes to fall asleep</label>
+<input type="number" id="fallasleep" name="fallasleep" value="15" min="0" max="120" step="5">
+<div class="hint">Your honest average, from lights-out to asleep.</div>
+</div>
+</div>
+<div class="field">
+<label id="cycles-label">Preferred sleep cycles</label>
+<div class="radio-row" role="radiogroup" aria-labelledby="cycles-label">
+<label class="radio"><input type="radio" name="cycles" value="4"> 4 cycles <small>6 h asleep</small></label>
+<label class="radio"><input type="radio" name="cycles" value="5" checked> 5 cycles <small>7.5 h asleep</small></label>
+<label class="radio"><input type="radio" name="cycles" value="6"> 6 cycles <small>9 h asleep</small></label>
+</div>
+<div class="hint">Your pick is highlighted below; all three options are always shown.</div>
+</div>
+<button class="btn" type="submit">Find my bedtime</button>
+</form>
+<div class="result" id="result" aria-live="polite">
+<p class="interpret" id="headline"></p>
+<div class="cycle-cards" id="cards"></div>
+<p class="note">Adults need <strong>7–9 hours of sleep per night</strong> (American Academy of Sleep Medicine). That makes <strong>5 cycles (7.5 hours of sleep, plus your fall-asleep time)</strong> the sweet spot for most people. Four cycles is a workable minimum on tight days; six suits long sleepers and teenagers. Times shown are when you should be <em>asleep</em> — get into bed a few minutes earlier.</p>
+</div>
+</div>
+<h2>Why 90-minute cycles matter</h2>
+<p>There is a particular kind of tiredness that has nothing to do with how long you slept. You get seven hours, yet you wake up feeling like you were dragged out of a cave. Someone else gets six and bounces out of bed. The difference is usually not the total — it is <em>where</em> in a sleep cycle the alarm found you.</p>
+<p>Sleep is not one uniform state. It moves in repeating cycles of roughly 90 minutes, each one traveling from light sleep down into deep sleep and back up again, ending with a burst of dreaming sleep. Wake up at the end of a cycle, when your brain is already in light sleep, and the transition to alertness is smooth. Get yanked out of deep slow-wave sleep mid-cycle, and you get <strong>sleep inertia</strong>: that heavy, confused grogginess that can linger for 15 to 30 minutes — and in some studies, impair performance for over an hour.</p>
+<p>That is the entire logic behind this calculator. Instead of picking a bedtime and hoping the alarm lands well, you start from the one fixed point — your wake-up time — and work backwards in whole cycles. It is a simple scheduling trick, not magic, but it aligns your alarm with your brain's natural rhythm.</p>
+<p>One honest caveat before you use it: <strong>90 minutes is an average, not a law.</strong> Real sleep cycles range from about 70 to 120 minutes, they vary between people, and they stretch and compress across the night. Nobody's sleep runs like clockwork. The calculator gets you into the right neighborhood — within 10 to 20 minutes of a natural cycle boundary — which is enough to make a noticeable difference for most people. If you consistently wake groggy even on these times, your personal cycle length may differ, and shifting your bedtime by 15-minute steps for a week will help you find your own rhythm.</p>
+<h2>Sleep architecture across the night</h2>
+<p>Each 90-minute cycle has the same basic anatomy. You drift through <strong>N1</strong> (the drowsy transition, a few minutes), into <strong>N2</strong> (light sleep, where you spend roughly half the night), then down into <strong>N3</strong> — deep, slow-wave sleep — before surfacing into <strong>REM</strong>, the dreaming stage, at the end of the cycle. Then it repeats.</p>
+<p>But the cycles are not identical copies. The first half of the night is dominated by deep N3 sleep; the second half is dominated by REM and lighter sleep, with cycles getting slightly longer and dream-richer toward morning. This front-loading is why <strong>cutting your night short hurts REM disproportionately</strong>. Go to bed at 1 a.m. instead of 10:30 p.m. and still wake at 6:30, and you have not lost sleep evenly — you have mostly lost the REM-heavy later cycles, the ones most tied to memory consolidation, learning and emotional processing.</p>
+<p>Each stage does different work. Deep slow-wave sleep is the body's physical restoration shift: growth hormone is released, tissues repair, the immune system does maintenance, and the brain's waste-clearance system (the glymphatic system) is most active. REM sleep handles the mind: it consolidates memories, processes emotional experiences and supports creativity. N2, the workhorse stage, still matters — sleep spindles during N2 are linked to learning new motor skills.</p>
+<p>Alcohol is worth a special mention here because it is the most common "sleep aid" people reach for. A nightcap does help you fall asleep faster, but it suppresses REM in the first half of the night and fragments the second half — you get unconsciousness, not architecture. The same goes for fragmented sleep from any cause: six hours of broken sleep delivers far less deep and REM sleep than six continuous hours, because each awakening can restart the cycle from the top.</p>
+<h2>How much sleep adults actually need</h2>
+<p>The cycle math only works if you complete enough cycles. The American Academy of Sleep Medicine and the Sleep Research Society jointly recommend that adults aged 18 to 60 sleep <strong>at least 7 hours per night</strong> on a regular basis for optimal health. That is why 5 cycles — 7.5 hours of actual sleep — sits at the center of this calculator: it clears the guideline floor with a half-hour buffer.</p>
+<p>Seven to nine hours is the range where population studies consistently find the lowest risks for obesity, cardiovascular disease, diabetes, depression and all-cause mortality. Regularly sleeping under 6 hours is associated with meaningfully worse outcomes across nearly all of these — and, crucially, with impaired cognitive performance that people are bad at self-assessing. In laboratory studies of restricted sleep, participants' performance on attention and reaction-time tests deteriorated day after day while their <em>ratings of their own sleepiness</em> flattened out. They felt "used to it" while objectively getting worse. Genuine short sleepers — people who thrive on 6 hours due to rare gene variants like DEC2 — make up well under 1% of the population. If you think you are one, the odds say otherwise.</p>
+<p>Individual variation is real, though. Sleep need shifts with genetics, physical activity, illness, stress and age. Older adults often get slightly less deep sleep and may wake earlier, but they still need around 7 hours — the idea that you need less sleep as you age is a myth; what changes is the ability to get it. And regularly sleeping <em>more</em> than 9 hours is associated in observational studies with poorer health too — but the arrow of causation likely runs the other way: depression, undiagnosed illness and sleep disorders make people sleep longer, not the reverse.</p>
+<p>Practically: treat 4 cycles (6 hours) as a minimum for the occasional tight day, 5 cycles (7.5 hours) as your standard target, and 6 cycles (9 hours) as recovery sleep after debt, illness or heavy training blocks.</p>
+<h2>Fixing your schedule: consistency beats the perfect time</h2>
+<p>Here is the uncomfortable truth about bedtime calculators: the exact minute matters far less than doing the same thing every day. Your circadian clock — the roughly 24-hour rhythm that times sleepiness, alertness, hormone release and body temperature — locks onto <em>regularity</em>. A perfect 22:45 bedtime kept four nights a week and abandoned on weekends gives you most of the grogginess with little of the benefit.</p>
+<p>If you take one behavioral change from this page, make it this: <strong>fix your wake-up time first</strong>. Wake time is the stronger anchor. It sets when morning light hits your eyes — the single most powerful circadian synchronizer — which in turn sets when melatonin rises the following evening, roughly 14 to 16 hours later. Bedtime then mostly takes care of itself: a well-anchored clock makes you sleepy at the right hour without effort.</p>
+<p>The weekend problem has a name: <strong>social jet lag</strong>, the gap between your weekday and weekend sleep timing. Shifting your schedule by two or more hours on weekends is, physiologically, like flying one or two time zones west every Friday and back every Monday. Population studies link larger social jet lag to worse metabolic markers, more depressive symptoms and higher BMI. Keep the weekend shift under an hour and your clock barely notices.</p>
+<p>If your current schedule is far from your target, do not jump it all at once. Move bedtime and wake time by 15 to 30 minutes every two to three days until you arrive. And treat the calculator's output as a target <em>window</em>, not a deadline: lying in bed anxious about hitting 22:45 exactly is a fast track to insomnia. Aim for the neighborhood, wind down, and let sleep come.</p>
+<h2>Naps, caffeine and the evening wind-down</h2>
+<p>The cycle logic applies to naps too. A <strong>10 to 20 minute nap</strong> keeps you in light sleep — you wake easily and get a genuine alertness boost, confirmed in multiple controlled trials. A <strong>full 90-minute nap</strong> completes a whole cycle including REM, which benefits memory and creativity. The danger zone is 30 to 60 minutes: long enough to sink into deep sleep, too short to finish the cycle, so you wake in the worst of sleep inertia. Keep naps before mid-afternoon; a nap after about 15:00 starts stealing pressure from the coming night.</p>
+<p>Caffeine deserves respect in any bedtime plan. Its half-life averages around 5 hours but ranges from 3 to 7 depending on your genes, and a quarter of your morning coffee can still be in your system at bedtime. The practical rule: set a <strong>caffeine curfew 8 to 10 hours before bed</strong>. If your calculator says 22:45, your last coffee should be around 13:00 to 14:00 — earlier if you know you are a slow metabolizer. Afternoon "just one more" is the most common self-inflicted cause of long sleep latencies.</p>
+<p>The last hour before bed is a wind-down, not a shutdown. Dim the lights — bright light, especially from screens, suppresses melatonin — and keep the routine boring and repeatable: shower, book, stretch, whatever signals to your brain that the day is over. Keep the bedroom cool (around 18–20°C / 65–68°F), dark and quiet; your core body temperature needs to drop about a degree to initiate sleep, and a hot room fights that. If you cannot sleep after 20 to 30 minutes, get up, go somewhere dim, do something dull, and return when drowsy. The bed is for sleep — training your brain to associate it with frustrated wakefulness is exactly how acute insomnia becomes chronic.</p>
+<h2>When to talk to your doctor</h2>
+<p>A bedtime calculator is a scheduling tool. It cannot diagnose anything, and some sleep problems need a clinician, not better arithmetic. Book an appointment if any of these sound familiar: loud snoring with gasping or pauses in breathing (possible <strong>sleep apnoea</strong>, which is common, treatable and dangerous to ignore); difficulty falling or staying asleep at least three nights a week for three months or more (the clinical threshold for <strong>chronic insomnia</strong>); excessive daytime sleepiness despite spending enough time in bed; restless, crawling sensations in the legs at night; or falling asleep suddenly during the day.</p>
+<p>Two things worth knowing before that appointment. First, the first-line treatment for chronic insomnia is <strong>cognitive behavioral therapy for insomnia (CBT-I)</strong>, not sleeping pills — it outperforms medication in the long term and is now available through structured programs and apps, not just clinics. Second, if you regularly need alcohol, cannabis or over-the-counter sedatives to fall asleep, mention it openly; these fragment sleep architecture even when they feel like they help, and your doctor needs the full picture to help you.</p>
+<p>Bring data: two weeks of rough bedtimes, wake times and how you felt is more useful to a doctor than any single complaint. This page's calculator can give you the schedule; only a professional can tell you whether something deeper is going on.</p>
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details>
+<summary>Is 6 hours of sleep enough if I feel fine?</summary>
+<div class="a"><p>Probably not. Genuine short sleepers who thrive on 6 hours are rare — well under 1% of people carry a gene variant linked to it. Most people who say they feel fine on 6 hours still show measurable drops in reaction time, memory and mood in laboratory tests; they simply stop noticing the impairment. If 6 hours is all you can get right now, 4 full cycles is the least-bad option, but aim to work up toward 5 cycles (7.5 hours of sleep) over time.</p></div>
+</details>
+<details>
+<summary>Should my bedtime be different on weekends?</summary>
+<div class="a"><p>Ideally, no — or at least not by much. Keeping your wake-up time within about an hour of your weekday time, even on weekends, is one of the strongest predictors of sleep quality. Shifting your schedule by two or more hours on weekends creates "social jet lag", which is linked to worse metabolic and mood outcomes. If you are catching up on debt, a slightly later bedtime on Friday and Saturday is fine, but protect the morning anchor.</p></div>
+</details>
+<details>
+<summary>Does the 90-minute rule apply to teenagers?</summary>
+<div class="a"><p>The cycle structure is similar, but teenagers need more sleep overall — 8 to 10 hours according to the American Academy of Sleep Medicine — and their circadian rhythm runs later, making early school starts a genuine biological mismatch. For a teen waking at 06:30, 6 cycles (9 hours) with a bedtime around 21:00–21:15 is a more appropriate target than 5.</p></div>
+</details>
+<details>
+<summary>What if I can't fall asleep within 15 minutes?</summary>
+<div class="a"><p>Then adjust the fall-asleep input to your honest average — 20, 30 or even 45 minutes. The calculator adds it to every option, so an honest number keeps the cycle math correct. If you regularly lie awake for more than 30 minutes, that is worth addressing in its own right: consistent wake times, morning daylight, a wind-down routine and getting out of bed when you cannot sleep (rather than tossing) are the core of cognitive behavioral therapy for insomnia, the first-line treatment.</p></div>
+</details>
+<details>
+<summary>I often wake up just before my alarm. Is something wrong?</summary>
+<div class="a"><p>Usually the opposite — it is a good sign. Your body anticipates regular wake times: the stress hormone cortisol begins rising about an hour before your usual alarm (the cortisol awakening response), pulling you into lighter sleep so you surface naturally. It means your schedule is consistent enough for your circadian clock to lock onto it. Waking more than 30–60 minutes early every day and being unable to fall back asleep, however, is worth mentioning to your doctor.</p></div>
+</details>
+<details>
+<summary>Is waking up in the middle of the night normal?</summary>
+<div class="a"><p>Yes, within limits. Brief awakenings between cycles are normal — most people have several per night and do not remember them. What matters is whether you fall back asleep within about 20 minutes. Frequent long awakenings (30+ minutes, several nights a week) can signal stress, sleep apnoea, reflux, or an overly warm or noisy bedroom. If it is persistent, track it for two weeks and bring the log to your doctor rather than reaching for sedatives on your own.</p></div>
+</details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+function bedtimeMinutes(wakeMin, cycles, fallAsleep){
+  var total = cycles * 90 + fallAsleep;
+  return ((wakeMin - total) % 1440 + 1440) % 1440;
+}
+function fmt(m){
+  var h = Math.floor(m / 60), mm = m % 60;
+  return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm;
+}
+function fmtDur(mins){
+  var h = Math.floor(mins / 60), m = mins % 60;
+  if(h === 0) return m + ' min';
+  return h + ' h' + (m ? ' ' + m + ' min' : '');
+}
+var form = document.getElementById('bedtime-form');
+var result = document.getElementById('result');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var wakeVal = document.getElementById('wake').value;
+  if(!wakeVal) return;
+  var parts = wakeVal.split(':');
+  var wakeMin = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+  var fall = parseInt(document.getElementById('fallasleep').value, 10);
+  if(isNaN(fall) || fall < 0) fall = 0;
+  if(fall > 120) fall = 120;
+  var prefEl = document.querySelector('input[name="cycles"]:checked');
+  var pref = prefEl ? parseInt(prefEl.value, 10) : 5;
+  var cards = '';
+  [4, 5, 6].forEach(function(c){
+    var bed = bedtimeMinutes(wakeMin, c, fall);
+    var asleep = c * 90;
+    var sel = (c === pref) ? ' selected' : '';
+    var tag = (c === pref) ? ' &mdash; your pick' : '';
+    cards += '<div class="cycle-card' + sel + '">'
+      + '<div class="c">' + c + ' cycles' + tag + '</div>'
+      + '<div class="t">' + fmt(bed) + '</div>'
+      + '<div class="d">' + fmtDur(asleep) + ' asleep &middot; ' + fmtDur(asleep + fall) + ' in bed</div>'
+      + '</div>';
+  });
+  document.getElementById('cards').innerHTML = cards;
+  var best = bedtimeMinutes(wakeMin, pref, fall);
+  document.getElementById('headline').textContent =
+    'For ' + pref + ' cycles (' + fmtDur(pref * 90) + ' of sleep), be asleep by ' + fmt(best) + ' to wake at ' + fmt(wakeMin) + '.';
+  result.classList.add('show');
+  result.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+});
+})();
+</script>
+</body>
+</html>
