@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jet Lag Planner — Beat Jet Lag Before You Land | DoctorBiohacks</title>
+<meta name="description" content="Crossing time zones wrecks sleep for days. Enter your home and destination time zones, and this planner builds a pre-shift schedule, timed light-exposure advice, and an honest recovery timeline.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/jet-lag-planner/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jet Lag Planner — Beat Jet Lag Before You Land">
+<meta property="og:description" content="Crossing time zones wrecks sleep for days. Enter your home and destination time zones, and this planner builds a pre-shift schedule, timed light-exposure advice, and an honest recovery timeline.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/jet-lag-planner/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=date],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1em 0}
+.related a{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+.related a:hover{border-color:var(--primary)}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Why is flying east harder than flying west?","acceptedAnswer":{"@type":"Answer","text":"Your internal clock runs slightly longer than 24 hours, so delaying it (westward) comes naturally while advancing it (eastward) fights your biology. Studies consistently show eastward travel takes about a day per hour to adapt, versus about a day per 1.5 hours westward."}},
+  {"@type":"Question","name":"Does melatonin actually help with jet lag?","acceptedAnswer":{"@type":"Answer","text":"Melatonin has modest evidence, mostly for eastward travel. Typical studied doses are 0.5 to 3 mg taken at the destination bedtime. It appears to help you fall asleep at the right local time rather than fixing the underlying clock shift, and it does not work for everyone. Talk to your doctor before using it, especially if you take other medications."}},
+  {"@type":"Question","name":"When should I start shifting my sleep before a trip?","acceptedAnswer":{"@type":"Answer","text":"Start up to 3 nights before departure, moving bedtime by one hour per night toward the destination schedule: later for westward trips, earlier for eastward trips. Shifting more than 3 days is impractical for most people and the benefit per extra day diminishes, so this planner caps the pre-shift at 3 nights."}},
+  {"@type":"Question","name":"How does light exposure fix jet lag?","acceptedAnswer":{"@type":"Answer","text":"Light is the strongest cue that sets your circadian clock. After eastward travel, get bright light in the morning and avoid bright light in the evening. After westward travel, do the opposite: seek evening light and avoid bright morning light. Sunglasses in the first hours of the day are a practical tool when travelling west."}},
+  {"@type":"Question","name":"Does drinking water on the plane prevent jet lag?","acceptedAnswer":{"@type":"Answer","text":"Staying hydrated makes the flight more comfortable, but water does not prevent jet lag. Jet lag is a circadian misalignment, not dehydration. That said, cabin air is dry and dehydration worsens the general grogginess of long flights, so drinking water is still worthwhile — just do not expect it to fix the time shift."}},
+  {"@type":"Question","name":"Should I nap when I arrive, or stay awake?","acceptedAnswer":{"@type":"Answer","text":"If you arrive in the morning, stay awake until a reasonable local bedtime and get daylight. If you arrive exhausted late in the day, a short nap of 20 to 30 minutes is fine, but set an alarm — a long evening nap delays your clock shift. On arrival night, go to bed at the local bedtime even if you are not yet sleepy."}},
+  {"@type":"Question","name":"When is jet lag a sign of something medical?","acceptedAnswer":{"@type":"Answer","text":"Jet lag symptoms normally fade within a week. See a doctor if severe insomnia or daytime impairment lasts beyond 2 to 3 weeks, if you fly constantly and never feel recovered, or if you snore loudly, fall asleep unintentionally, or feel exhausted despite sleeping 7 to 9 hours — those point to sleep disorders beyond jet lag."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; Jet Lag Planner</nav>
+<h1>Jet Lag Planner &mdash; Beat Jet Lag Before You Land</h1>
+<p class="lede">Crossing six time zones costs most travellers four to six days of groggy mornings and wide-awake 3 a.m. stares at the ceiling. Enter your home and destination time zones and your departure date, and this planner builds your pre-flight sleep shift, tells you exactly when to seek and avoid light, and gives you an honest recovery timeline — no miracle claims, just the physiology.</p>
+<div class="tool-card">
+<form id="jetForm" aria-label="Jet lag planner">
+<div class="form-grid">
+<div class="field"><label for="homeOffset">Home UTC offset (hours)</label><input type="number" id="homeOffset" min="-12" max="14" step="1" value="1"><div class="hint">e.g. Copenhagen +1, London +0 (winter) / +1 (summer), New York &minus;5.</div></div>
+<div class="field"><label for="destOffset">Destination UTC offset (hours)</label><input type="number" id="destOffset" min="-12" max="14" step="1" value="-5"><div class="hint">Use the offset in force on your travel dates (watch out for daylight saving).</div></div>
+<div class="field"><label for="depDate">Departure date</label><input type="date" id="depDate" value="2026-11-15"><div class="hint">Your pre-shift plan is counted back from this date.</div></div>
+<div class="field"><label for="struggle">Do you usually struggle with jet lag?</label><select id="struggle"><option value="no">No, usually fine</option><option value="yes">Yes, it hits me hard</option></select><div class="hint">Adds one extra tip — it does not change the maths.</div></div>
+</div>
+<button type="button" class="btn" id="calcBtn">Build my jet lag plan</button>
+<div class="result" id="result" role="status" aria-live="polite"></div>
+</form>
+</div>
+
+<h2>Why jet lag happens: your clock, your hormones, and the light</h2>
+<p>Jet lag is not tiredness. It is a disagreement between two clocks: the one on the wall at your destination and the one inside your head. That internal clock is the suprachiasmatic nucleus, a cluster of about 20,000 neurons sitting just above your optic nerves. It runs on a cycle slightly longer than 24 hours — about 24.2 for most people — and every morning it uses daylight to reset itself to exactly 24. This daily resetting is called entrainment, and when you cross time zones faster than your clock can re-entrain, you get the classic package: insomnia at local bedtime, sleepiness at local midday, fuzzy concentration, gut trouble, and a general sense that your body is on strike.</p>
+<p>Two messengers carry the clock's instructions. Melatonin, released by the pineal gland, rises in the evening and tells the body that night has begun — it is the "darkness signal," not a sedative. Cortisol rises in the early morning and promotes alertness. When you land six hours behind home, your melatonin surge still arrives on home time, which is the middle of the afternoon at your destination. You feel drowsy at 3 p.m. and then, at midnight local time, your body insists it is only 6 p.m. and refuses to wind down. Everything downstream — digestion, body temperature, cognitive performance — follows the same wrong schedule until the clock re-entrains.</p>
+<p>Light is by far the strongest resetting cue. Retinal cells containing melanopsin detect brightness and report directly to the suprachiasmatic nucleus, which is why a bright morning outdoors does more for jet lag than almost anything you can swallow. Food timing, exercise, and social cues matter too, but they are junior partners. Any honest jet lag strategy is therefore a light strategy first and a sleep-timing strategy second — which is exactly how this planner is built.</p>
+
+<h2>Why eastward is harder than westward</h2>
+<p>Fly from Copenhagen to New York and most people recover in about four days. Fly the same six hours in reverse, New York to Copenhagen, and it takes closer to six. This asymmetry is one of the most consistent findings in chronobiology, and it has a clean explanation: because your internal cycle is a little longer than 24 hours, <em>delaying</em> your clock (staying up later, which westward travel requires) works with your biology, while <em>advancing</em> it (falling asleep earlier, which eastward travel requires) works against it. Asking your body to sleep at 10 p.m. when it thinks it is 4 p.m. is physiologically harder than asking it to stay awake a few hours longer.</p>
+<p>There is also a practical factor. After westward travel, evening light — which is abundant simply because you are out and about — delays your clock in the right direction, so the environment cooperates. After eastward travel, you need morning light and must avoid evening light, which means actively managing your exposure: sunglasses on late-afternoon walks, seeking bright light at breakfast. People who ignore the light schedule after eastward flights often drift the wrong way entirely. The planner accounts for the asymmetry twice: the recovery estimate assumes roughly one day per time-zone hour eastward but only one day per 1.5 hours westward, and the light advice flips depending on direction.</p>
+
+<h2>The pre-shift strategy and its limits</h2>
+<p>The most effective thing you can do about jet lag happens before you leave. By moving your bedtime one hour per night toward the destination schedule in the days before departure, you arrive with the clock already partway shifted. Flying west, you go to bed an hour later each night; flying east, an hour earlier. Research on pre-flight shifting shows it meaningfully shortens the adjustment period, and one hour per night is the rate your clock can actually track — larger jumps just create insomnia at home instead of insomnia abroad.</p>
+<p>The honest limits matter too. Most people cannot start this two weeks before a trip, and the planner caps the pre-shift at three nights because that is the realistic, evidence-consistent sweet spot: three hours of pre-shift covers half of a typical six-hour crossing, and each additional day of pre-shifting yields diminishing returns while costing real sleep at home. Shifting bedtime earlier (eastward) is also the harder direction to pre-shift, because falling asleep early fights the same long-clock biology described above. If you can only manage one or two nights, do those — partial shifting still helps. And if your trip is under three time zones, skip the pre-shift entirely; the clock adjusts within a day or two on its own.</p>
+
+<h2>Light exposure timing, explained simply</h2>
+<p>Think of light as a steering wheel for your body clock: morning light pushes the clock earlier, evening light pushes it later. After eastward travel you need the clock to move earlier, so you want bright light in the morning and dim evenings — sunglasses on late-afternoon strolls, dim lights in your hotel room after dinner. After westward travel you need the clock to move later, so you want evening light and should dim the mornings — sunglasses on the morning commute, a bright-lit dinner terrace.</p>
+<p>Bright means bright: outdoor daylight, ideally 30 minutes or more, not the glow of a laptop. A light-therapy box (10,000 lux) works when daylight is unavailable, especially in Nordic winter travel, and it is the evidence-backed fallback rather than a gimmick. Timing beats dose, though — morning light after a westward flight actually delays your adjustment, pushing you the wrong way. This is the most common self-inflicted jet lag error: people assume "get sunlight" is always good, get it at the wrong time of day, and slow their own recovery. Follow the direction-specific schedule from the planner and you avoid that trap.</p>
+
+<h2>Melatonin: modest evidence, honest caveats</h2>
+<p>Melatonin has real but modest evidence for jet lag, and the details matter. Systematic reviews find it helps travellers fall asleep at the destination bedtime, particularly on eastward trips crossing five or more zones — which is consistent with its role as a "night is coming" signal. Typical studied doses range from 0.5 to 3 mg taken at the desired local bedtime, starting on arrival (some protocols start the night before). It appears to help with sleep onset rather than resetting the clock itself, and it does not work for everyone.</p>
+<p>The caveats deserve equal billing. Melatonin is sold over the counter in some countries and prescription-only in others (including Denmark), which tells you something about how regulators view it. Long-term safety data are thin, quality varies between supplement brands, and it interacts with some medications, including blood thinners and immunosuppressants. Pregnant people and teenagers should not self-experiment. Talk to your doctor before using it — it is a hormone, not a vitamin, and it deserves a conversation rather than a casual purchase. The planner mentions it as an option, not a recommendation.</p>
+
+<h2>In-flight tactics that actually help</h2>
+<p>Set your watch to destination time the moment you board and start living on it: eat and sleep on the plane according to when it is night and day where you are going, not where you left. On an eastbound overnight flight, that means actually trying to sleep; on a westbound daytime flight, it means staying awake. An eye mask, earplugs, and a neck pillow are unglamorous but genuinely effective — fragmented airplane sleep barely counts toward anything.</p>
+<p>Caffeine has a legitimate, tactical role: it is a clock-shifter in its own right, with one study showing that correctly timed caffeine can meaningfully move the circadian phase. Use it to stay awake when destination time says daytime, and cut it off at least eight hours before your planned destination bedtime so it does not sabotage the sleep you are trying to protect. Alcohol does the opposite of what tired travellers hope: it sedates you briefly, then fragments the second half of your sleep and worsens dehydration.</p>
+<p>On hydration, let us be honest: cabin air is dry (10 to 20 percent humidity), and dehydration makes everything about flying feel worse — headache, grogginess, dry eyes. Drink water steadily through the flight. But water does not prevent jet lag, and no amount of hydration shifts your circadian clock. Anyone selling you an "anti-jet-lag hydration formula" is selling you comfort, not chronobiology. Comfort matters on a ten-hour flight; just do not mistake it for a cure.</p>
+
+<h2>What to do on arrival, day by day</h2>
+<p>Day one sets the trajectory. If you land in the morning, stay awake until a reasonable local bedtime — get outside, get daylight at the times the planner specifies, eat meals on local time, and consider one short nap (20 to 30 minutes, alarm set) if you are genuinely unsafe to function. If you land in the evening, have dinner on local time and go to bed at the local bedtime even if you are not sleepy; lying awake in a dark room still teaches the clock. Resist the temptation to "just rest your eyes" for three hours at 4 p.m. — that long evening nap is the single fastest way to anchor yourself to home time.</p>
+<p>Days two to four are about consistency, not heroics. Keep meals and wake times on local schedule, keep following the light guidance, and accept that you will feel roughly 70 percent for a few days. Exercise helps — a morning workout after eastward travel doubles as light exposure and alertness — but avoid hard training late in the evening, which raises core temperature and delays sleep onset. Most travellers turn the corner around the day the planner estimates; if symptoms linger well beyond it, the clock may have been pushed the wrong way by mistimed light, and doubling down on the correct schedule usually fixes it.</p>
+
+<h2>The maths behind this planner</h2>
+<p>The calculation is deliberately simple, because the physiology it encodes is well established. The tool computes the time-zone shift as destination offset minus home offset. A negative result means westward travel (your body clock must delay — bedtime moves later), a positive result means eastward (the clock must advance — bedtime moves earlier), and zero means no shift at all. The pre-shift plan takes up to three nights before departure — the minimum of the absolute shift and three — moving bedtime one hour per night toward the destination. So a six-hour westward trip gets three nights of one-hour-later bedtimes, and a two-hour eastward trip gets two nights of one-hour-earlier bedtimes.</p>
+<p>The recovery estimate uses the classic rule of thumb from sleep medicine: roughly one day per hour of shift for eastward travel, and roughly one day per 1.5 hours for westward travel, reflecting the biological asymmetry described above. This is a population average, not a personal prediction — age, individual clock type, and how well you follow the light schedule all move it. Pre-shifting does not change the total adaptation time in the estimate; it front-loads part of the work so the miserable days happen partly at home, in your own bed, instead of in a hotel.</p>
+
+<h2>When frequent flyers should see a doctor</h2>
+<p>Normal jet lag resolves within about a week and leaves no residue. But some frequent travellers never fully recover between trips — chronic short sleep, rotating schedules, and repeated clock shifts compound into something closer to a sleep disorder than jet lag. If you fly across zones constantly and feel permanently foggy, that is not a jet lag problem anymore; it is a cumulative sleep-debt and circadian-disruption problem, and it deserves a proper evaluation.</p>
+<p>See a doctor if severe insomnia or daytime impairment persists more than two to three weeks after a trip, if you rely on sedatives to sleep on every flight, or if you have red-flag symptoms regardless of travel: loud snoring with breathing pauses, falling asleep unintentionally during the day, or exhaustion despite seven to nine hours of sleep. Cabin crew and pilots have occupational-health pathways for exactly these issues — use them. And a final honest note for the frequent flyer: no supplement, gadget, or planner fully neutralises the cost of chronic circadian disruption. The best biohack for jet lag, unglamorously, is flying less across zones — or at least protecting sleep fiercely between trips.</p>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details><summary>Why is flying east harder than flying west?</summary><div class="a"><p>Your internal clock runs slightly longer than 24 hours, so delaying it (westward) comes naturally while advancing it (eastward) fights your biology. Studies consistently show eastward travel takes about a day per hour to adapt, versus about a day per 1.5 hours westward.</p></div></details>
+<details><summary>Does melatonin actually help with jet lag?</summary><div class="a"><p>Melatonin has modest evidence, mostly for eastward travel. Typical studied doses are 0.5 to 3 mg taken at the destination bedtime. It appears to help you fall asleep at the right local time rather than fixing the underlying clock shift, and it does not work for everyone. Talk to your doctor before using it, especially if you take other medications.</p></div></details>
+<details><summary>When should I start shifting my sleep before a trip?</summary><div class="a"><p>Start up to 3 nights before departure, moving bedtime by one hour per night toward the destination schedule: later for westward trips, earlier for eastward trips. Shifting more than 3 days is impractical for most people and the benefit per extra day diminishes, so this planner caps the pre-shift at 3 nights.</p></div></details>
+<details><summary>How does light exposure fix jet lag?</summary><div class="a"><p>Light is the strongest cue that sets your circadian clock. After eastward travel, get bright light in the morning and avoid bright light in the evening. After westward travel, do the opposite: seek evening light and avoid bright morning light. Sunglasses in the first hours of the day are a practical tool when travelling west.</p></div></details>
+<details><summary>Does drinking water on the plane prevent jet lag?</summary><div class="a"><p>Staying hydrated makes the flight more comfortable, but water does not prevent jet lag. Jet lag is a circadian misalignment, not dehydration. That said, cabin air is dry and dehydration worsens the general grogginess of long flights, so drinking water is still worthwhile — just do not expect it to fix the time shift.</p></div></details>
+<details><summary>Should I nap when I arrive, or stay awake?</summary><div class="a"><p>If you arrive in the morning, stay awake until a reasonable local bedtime and get daylight. If you arrive exhausted late in the day, a short nap of 20 to 30 minutes is fine, but set an alarm — a long evening nap delays your clock shift. On arrival night, go to bed at the local bedtime even if you are not yet sleepy.</p></div></details>
+<details><summary>When is jet lag a sign of something medical?</summary><div class="a"><p>Jet lag symptoms normally fade within a week. See a doctor if severe insomnia or daytime impairment lasts beyond 2 to 3 weeks, if you fly constantly and never feel recovered, or if you snore loudly, fall asleep unintentionally, or feel exhausted despite sleeping 7 to 9 hours — those point to sleep disorders beyond jet lag.</p></div></details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+(function(){
+function computeJetLag(home,dest){
+  var shift=dest-home;
+  var mag=Math.abs(shift);
+  var dir=shift<0?'westward':(shift>0?'eastward':'none');
+  var nights=Math.min(mag,3);
+  var move=dir==='westward'?'later':(dir==='eastward'?'earlier':'');
+  var adapt=dir==='eastward'?mag:(dir==='westward'?Math.round(mag/1.5*10)/10:0);
+  return {shift:shift,mag:mag,dir:dir,nights:nights,move:move,adapt:adapt};
+}
+document.getElementById('calcBtn').addEventListener('click',function(){
+  var home=parseFloat(document.getElementById('homeOffset').value);
+  var dest=parseFloat(document.getElementById('destOffset').value);
+  var struggle=document.getElementById('struggle').value;
+  if(isNaN(home)||home<-12||home>14){alert('Please enter a home UTC offset between -12 and +14.');return;}
+  if(isNaN(dest)||dest<-12||dest>14){alert('Please enter a destination UTC offset between -12 and +14.');return;}
+  var r=computeJetLag(home,dest);
+  var html='';
+  if(r.dir==='none'){
+    html+='<div class="big">0h<span class="unit"> — no jet lag</span></div>';
+    html+='<p class="interpret">Home and destination are in the same time zone, so there is no clock shift to manage. Pack sunscreen instead of a strategy.</p>';
+  }else{
+    html+='<div class="big">'+r.mag+'h <span class="unit">'+r.dir+' shift</span></div>';
+    html+='<p class="interpret">Your body clock must '+(r.dir==='westward'?'DELAY':'ADVANCE')+' — shift bedtime '+r.move+' by 1h per night for the '+r.nights+' night'+(r.nights>1?'s':'')+' before departure.</p>';
+    html+='<table><tr><th>When</th><th>Bedtime shift</th></tr>';
+    for(var i=r.nights;i>=1;i--){
+      var label=i===1?'Night before departure':(i+' nights before departure');
+      var amt=(r.nights-i+1);
+      html+='<tr><td>'+label+'</td><td>'+amt+'h '+r.move+' than usual</td></tr>';
+    }
+    html+='</table>';
+    if(r.dir==='eastward'){
+      html+='<p class="note"><strong>Light at destination:</strong> seek bright light (ideally outdoors) in the morning and avoid bright light in the evening — dim the hotel room after dinner, consider sunglasses on late-afternoon walks.</p>';
+    }else{
+      html+='<p class="note"><strong>Light at destination:</strong> seek bright light in the evening (a lit terrace, an evening walk) and avoid bright light in the morning — sunglasses on the morning commute help.</p>';
+    }
+    html+='<p class="note"><strong>Melatonin:</strong> 0.5&ndash;3 mg at the destination bedtime has modest evidence for helping you fall asleep at the right local time, mostly on eastward trips. It is a hormone, not a vitamin — talk to your doctor before using it.</p>';
+    html+='<p class="note"><strong>Recovery estimate:</strong> full adaptation takes roughly '+r.adapt+' day'+(r.adapt===1?'':'s')+' ('+(r.dir==='eastward'?'about 1 day per hour eastward':'about 1 day per 1.5 hours westward')+'). Follow the light schedule and the estimate usually holds.</p>';
+  }
+  if(struggle==='yes'&&r.dir!=='none'){
+    html+='<p class="interpret">Extra tip for sensitive travellers: be strict with the light schedule on days 1&ndash;2. Mistimed light is the top reason people who struggle with jet lag recover slowly.</p>';
+  }
+  var box=document.getElementById('result');box.innerHTML=html;box.classList.add('show');
+});
+if(typeof module!=='undefined'){module.exports=computeJetLag;}
+})();
+</script>
+</body>
+</html>
