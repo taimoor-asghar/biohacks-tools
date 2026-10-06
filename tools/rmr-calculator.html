@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resting Metabolic Rate (RMR) Calculator | DoctorBiohacks</title>
+<meta name="description" content="Calculate your resting metabolic rate with the Mifflin-St Jeor equation, plus TDEE, cutting and bulking calorie targets. Free, private, and evidence-based.">
+<link rel="canonical" href="https://doctorbiohacks.com/tools/rmr-calculator/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Resting Metabolic Rate (RMR) Calculator">
+<meta property="og:description" content="Calculate your resting metabolic rate with the Mifflin-St Jeor equation, plus TDEE, cutting and bulking calorie targets. Free, private, and evidence-based.">
+<meta property="og:url" content="https://doctorbiohacks.com/tools/rmr-calculator/">
+<meta property="og:site_name" content="DoctorBiohacks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#04a8d0;--text:#353535;--muted:#737373;--bg:#f7f8f9;--card:#ffffff;--border:#e1e1e1;--result:#e8f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+h1,h2,h3,h4{font-family:"Arvo",serif;color:#1a1a1a;line-height:1.3;margin:1.2em 0 .6em}
+h1{font-size:2.1rem;margin-top:0}
+h2{font-size:1.6rem;border-bottom:3px solid var(--primary);padding-bottom:.3em}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--primary)}
+.container{max-width:860px;margin:0 auto;padding:0 18px}
+.site-header{background:#fff;border-bottom:3px solid var(--primary);padding:14px 0}
+.site-header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:"Arvo",serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;text-decoration:none}
+.brand span{color:var(--primary)}
+.site-header nav a{margin-left:18px;text-decoration:none;font-weight:700;color:var(--text)}
+.site-header nav a:hover{color:var(--primary)}
+main{background:#fff;margin:26px auto;max-width:900px;border:1px solid var(--border);border-radius:4px;padding:34px}
+.crumb{font-size:.85rem;color:var(--muted);margin-bottom:1em}
+.crumb a{color:var(--muted)}
+.lede{font-size:1.12rem;color:#444;margin-bottom:1.4em}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:26px;margin:1.6em 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+.field input[type=number],.field input[type=time],.field input[type=text],.field select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-family:"Nunito",sans-serif;font-size:1rem}
+.field .hint{font-size:.85rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:13px 30px;font-family:"Nunito",sans-serif;font-size:1.05rem;font-weight:800;cursor:pointer;margin-top:10px}
+.btn:hover{background:#0389b4}
+.result{display:none;background:var(--result);border-left:5px solid var(--primary);border-radius:0 4px 4px 0;padding:20px 24px;margin-top:20px}
+.result.show{display:block}
+.result .big{font-family:"Arvo",serif;font-size:2.4rem;color:#0369a1;font-weight:700;margin:.2em 0}
+.result .unit{font-size:1rem;font-weight:400;color:var(--muted)}
+.result .interpret{font-weight:700;margin-top:.6em}
+.result .note{font-size:.9rem;color:#555;margin-top:.6em}
+table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left}
+th{background:var(--bg);font-weight:800}
+ul,ol{margin:0 0 1em 1.4em}
+li{margin-bottom:.4em}
+.faq details{border:1px solid var(--border);border-radius:4px;margin-bottom:10px;background:#fff}
+.faq summary{font-weight:800;cursor:pointer;padding:14px 16px;font-family:"Arvo",serif;font-size:1.02rem}
+.faq .a{padding:0 16px 16px;color:#444}
+.author-line{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:2em 0;font-size:.95rem}
+.disclaimer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2em;padding-top:1em}
+.site-footer{background:#1a1a1a;color:#ccc;padding:28px 0;margin-top:30px;font-size:.9rem}
+.site-footer a{color:#9adcf0}
+@media(max-width:640px){main{padding:20px}h1{font-size:1.6rem}.result .big{font-size:1.9rem}}
+</style>
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"What is resting metabolic rate (RMR)?","acceptedAnswer":{"@type":"Answer","text":"Resting metabolic rate is the number of calories your body burns at rest over 24 hours to keep you alive \u2014 powering your brain, heart, lungs, digestion, and body temperature. It typically accounts for 60\u201370% of your total daily energy expenditure."}},
+  {"@type":"Question","name":"How accurate is the Mifflin-St Jeor equation?","acceptedAnswer":{"@type":"Answer","text":"For most adults it predicts RMR within about \u00b110% of laboratory-measured values, which is why dietitians and researchers use it. However, it estimates from weight, height, age, and sex only, so it cannot account for body composition \u2014 two people at the same weight can have noticeably different RMRs if one carries more muscle."}},
+  {"@type":"Question","name":"What is the difference between RMR and BMR?","acceptedAnswer":{"@type":"Answer","text":"Basal metabolic rate (BMR) is measured under strict laboratory conditions: complete rest, a post-absorptive (fasted) state, and a thermoneutral room. Resting metabolic rate (RMR) is measured under less strict conditions and is usually around 10% higher. The Mifflin-St Jeor equation is technically an RMR estimate, although the two terms are often used interchangeably in fitness content."}},
+  {"@type":"Question","name":"What is TDEE and how is it different from RMR?","acceptedAnswer":{"@type":"Answer","text":"Total daily energy expenditure (TDEE) is everything you burn in 24 hours: your RMR plus all movement, exercise, and the energy cost of digesting food. This calculator multiplies your RMR by an activity factor \u2014 1.2 for sedentary up to 1.9 for very active \u2014 to estimate TDEE."}},
+  {"@type":"Question","name":"Is it safe to eat fewer calories than my RMR?","acceptedAnswer":{"@type":"Answer","text":"Eating below your RMR for extended periods can cause fatigue, muscle loss, hormonal disruption, and nutrient deficiencies. A moderate deficit of around 10\u201320% below your TDEE is the standard sustainable approach. Aggressive deficits should only be attempted with medical supervision \u2014 talk to your doctor first."}},
+  {"@type":"Question","name":"Why does my RMR decline with age?","acceptedAnswer":{"@type":"Answer","text":"RMR falls roughly 1\u20132% per decade after early adulthood, mainly because muscle mass declines with age and muscle is more metabolically active than fat. Regular strength training slows this decline and is the most reliable way to protect your metabolic rate as you age."}}
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container">
+<a class="brand" href="https://doctorbiohacks.com/">Doctor<span>Biohacks</span></a>
+<nav><a href="https://doctorbiohacks.com/">Home</a><a href="https://doctorbiohacks.com/tools/">Tools</a></nav>
+</div></header>
+<main class="container">
+<nav class="crumb"><a href="https://doctorbiohacks.com/">Home</a> &rsaquo; <a href="https://doctorbiohacks.com/tools/">Tools</a> &rsaquo; RMR Calculator</nav>
+<h1>Resting Metabolic Rate (RMR) Calculator</h1>
+<p class="lede">Find out how many calories your body burns at rest each day with the Mifflin-St Jeor equation, then estimate your total daily energy expenditure (TDEE) plus sensible cutting and bulking calorie targets.</p>
+<div class="tool-card">
+<div class="form-grid">
+<div class="field">
+<label for="r-sex">Sex</label>
+<select id="r-sex">
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+<div class="hint">The Mifflin-St Jeor equation uses different constants for men and women.</div>
+</div>
+<div class="field">
+<label for="r-age">Age (years)</label>
+<input type="number" id="r-age" min="10" max="100" value="35">
+</div>
+<div class="field">
+<label for="r-weight">Weight (kg)</label>
+<input type="number" id="r-weight" min="30" max="300" step="0.1" value="80">
+</div>
+<div class="field">
+<label for="r-height">Height (cm)</label>
+<input type="number" id="r-height" min="120" max="230" value="180">
+</div>
+<div class="field">
+<label for="r-activity">Activity level</label>
+<select id="r-activity">
+<option value="1.2">Sedentary (little or no exercise)</option>
+<option value="1.375">Light (light exercise 1&ndash;3 days/week)</option>
+<option value="1.55" selected>Moderate (moderate exercise 3&ndash;5 days/week)</option>
+<option value="1.725">Active (hard exercise 6&ndash;7 days/week)</option>
+<option value="1.9">Very active (very hard exercise, physical job)</option>
+</select>
+</div>
+</div>
+<button class="btn" type="button" onclick="calcRMR()">Calculate my RMR</button>
+<div class="result" id="r-result" aria-live="polite"></div>
+</div>
+<!-- PROSE START -->
+<h2>What is resting metabolic rate?</h2>
+<p>Your resting metabolic rate (RMR) is the number of calories your body burns in 24 hours while doing essentially nothing. It covers the energy your organs need to keep you alive: your brain thinking, your heart beating, your lungs breathing, your liver and kidneys filtering, your gut digesting, and your body holding its temperature steady. For most people, RMR accounts for roughly 60 to 70 percent of all the calories they burn in a day.</p>
+<p>The remaining 30 to 40 percent comes from everything else: planned exercise, daily movement like walking to the shops or fidgeting at your desk, and the small energy cost of digesting food itself (the thermic effect of food, which is highest for protein). Because RMR is the single largest slice of your energy expenditure, knowing it gives you a realistic anchor for any calorie target. Without it, people usually guess &mdash; and guesses in the fitness world tend to be wildly optimistic, which is how someone ends up eating 1,200 calories a day for three weeks, feeling terrible, and quitting.</p>
+<p>This calculator estimates your RMR from four simple inputs: sex, age, weight, and height. The estimate comes from the Mifflin-St Jeor equation, published in 1990 and still the formula most dietitians and researchers reach for when they cannot measure metabolism directly with lab equipment. Measuring RMR properly requires indirect calorimetry &mdash; sitting quietly with a ventilated hood over your head while a machine measures the oxygen you consume and the carbon dioxide you produce. That is accurate, but it is also expensive and impractical for everyday use. An equation that gets you within about 10 percent of the lab value, in ten seconds, is a genuinely useful substitute.</p>
+<h2>Why this calculator uses the Mifflin-St Jeor equation</h2>
+<p>Several equations exist for estimating metabolic rate. The oldest, the Harris-Benedict equation from 1919 (revised in 1984), is still floating around on many websites. The problem is that the original data came from a small group of young, lean men, and the equation tends to overestimate RMR for modern populations, sometimes by 5 to 15 percent. The Mifflin-St Jeor equation was derived from a larger and more diverse sample of adults and has been validated against measured RMR more often, with several comparison studies concluding it predicts more accurately for both normal-weight and overweight adults.</p>
+<p>The formulas are straightforward. For men: RMR = 10 &times; weight in kg + 6.25 &times; height in cm &minus; 5 &times; age in years + 5. For women, the structure is identical but the final constant is &minus;161 instead of +5: RMR = 10 &times; weight in kg + 6.25 &times; height in cm &minus; 5 &times; age in years &minus; 161. That sex difference of 166 calories per day reflects the fact that, on average, women carry a higher proportion of body fat and less muscle at the same weight, and fat tissue burns far fewer calories at rest than muscle does.</p>
+<p>Take a worked example. A 35-year-old man weighing 80 kg and standing 180 cm tall: 10 &times; 80 = 800, plus 6.25 &times; 180 = 1,125, minus 5 &times; 35 = 175, plus 5. That gives 800 + 1,125 &minus; 175 + 5 = 1,755 calories per day just to keep his body running at rest. That single number &mdash; 1,755 &mdash; is the floor of his energy needs before a single step, workout, or meal is factored in.</p>
+<h2>From RMR to TDEE: the role of activity</h2>
+<p>Your RMR is only the starting point. What actually matters for weight management is your total daily energy expenditure (TDEE): everything you burn in a full day, including movement. Because most people cannot measure their activity precisely, the standard approach is to multiply RMR by an activity factor. This calculator uses the five classic levels: sedentary (1.2), light (1.375), moderate (1.55), active (1.725), and very active (1.9).</p>
+<p>Be honest with yourself when choosing. &ldquo;Sedentary&rdquo; means a desk job with little deliberate exercise. &ldquo;Light&rdquo; covers one to three easy sessions a week. &ldquo;Moderate&rdquo; is the typical three-to-five workout week. The higher tiers are reserved for people training hard most days or doing physically demanding work. Most people overestimate their activity level by one tier &mdash; it is one of the most common reasons online calorie targets come out too high. If you are between two levels, pick the lower one; you can always adjust upward if weight is not moving after two or three weeks of consistent tracking.</p>
+<p>Continuing the example: our 35-year-old man with an RMR of 1,755 and a moderate activity level multiplies 1,755 &times; 1.55, giving about 2,720 calories per day of total expenditure. If he eats roughly that amount, his weight should stay stable. Eat more, and the surplus is stored. Eat less, and his body makes up the difference from stored fat &mdash; and that is the entire logic of fat loss, stripped of marketing.</p>
+<h2>Setting your calorie target: cutting and bulking</h2>
+<p>This calculator also shows two derived targets: a cutting target 20 percent below your TDEE and a bulking target 20 percent above it. For our example, the cutting target is roughly 2,176 calories and the bulking target roughly 3,264. These are starting points, not prescriptions, and they deserve a proper explanation.</p>
+<p>For fat loss, a deficit of 10 to 20 percent below TDEE is the range most evidence supports for sustainable progress: about 0.25 to 0.5 kg of fat loss per week for most adults. A 20 percent deficit is already fairly aggressive; going deeper usually backfires. Very large deficits increase hunger, sap training performance, raise the risk of muscle loss, and &mdash; most importantly for long-term success &mdash; make the diet psychologically unsustainable. The people who keep weight off are almost never the ones who lost it fastest; they are the ones who lost it in a way they could repeat indefinitely.</p>
+<p>For muscle gain, a surplus of around 10 to 20 percent above TDEE gives your body the extra energy it needs to build tissue, paired with progressive strength training and enough protein (roughly 1.6 to 2.2 grams per kilogram of body weight per day, per the sports nutrition literature). Going far beyond that surplus does not build muscle faster &mdash; it just adds fat alongside the muscle. This is where people waste months: they &ldquo;bulk&rdquo; on a 1,000-calorie surplus and spend the next year dieting off the excess.</p>
+<p>One more honest note on the cutting target: it should never sit at or below your RMR for extended periods. Your RMR is the cost of keeping your organs running; chronically eating below it is a signal to your body that food is scarce, and it responds with fatigue, hormonal disruption, loss of muscle, and eventually a slowdown in the very metabolic rate you are trying to work with. If your calculated cutting target lands near or under your RMR &mdash; which happens for smaller, lighter, or sedentary people &mdash; do not just accept the number. Talk to your doctor or a registered dietitian before proceeding.</p>
+<h2>Honest limitations: what this number cannot tell you</h2>
+<p>Every RMR calculator on the internet should come with caveats, so here are this one&rsquo;s, stated plainly. First, the &plusmn;10 percent accuracy: for most adults the Mifflin-St Jeor prediction lands within about 10 percent of a lab measurement, but &ldquo;most&rdquo; hides real variation. Very muscular people will read low, because the equation sees their 95 kg as average body composition when much of it is metabolically expensive muscle. Very lean or very obese individuals also fall further from the prediction. If you are a serious lifter or an athlete, an equation that ignores body composition is the wrong tool &mdash; formulas like Katch-McArdle, which use lean body mass, or a real indirect calorimetry measurement, are better choices.</p>
+<p>Second, the equation is a snapshot, not a destiny. Your metabolic rate is not a fixed number stamped on your body; it adapts. During sustained dieting, the body becomes more efficient &mdash; a phenomenon called adaptive thermogenesis or &ldquo;metabolic adaptation&rdquo; &mdash; and measured expenditure can drop 5 to 15 percent below what the equations predict. This is one reason weight loss stalls after a few months even when calories have not changed. It is normal physiology, not a broken metabolism, and it reverses with time at maintenance calories.</p>
+<p>Third, the activity multipliers are the roughest part of the whole calculation. They were developed from population averages decades ago and applied to individuals with modern lifestyles &mdash; including eight-hour desk jobs that did not exist when the multipliers were conceived. Treat the TDEE as a hypothesis to test, not a fact. The honest method: pick a target, eat consistently at it for two to three weeks, watch the scale trend and your measurements, and adjust by 100 to 200 calories based on what actually happens. The calculator gives you the starting line; your own data gives you the truth.</p>
+<h2>Getting the most from your numbers</h2>
+<p>A calorie target only works if it connects to daily life. Start by tracking your food honestly for at least a week &mdash; most people are surprised by what they find, usually in the direction of underestimating portions and forgetting snacks, oils, and drinks. You do not need to weigh everything forever, but a week or two of careful tracking calibrates your eye far better than any article can.</p>
+<p>Protect protein first. In a deficit, protein is the nutrient that preserves muscle: aim for the higher end of the 1.6 to 2.2 g/kg range when cutting, spread across three to four meals, because muscle protein synthesis responds best to repeated doses rather than one giant serving. Keep strength training in the picture for the same reason &mdash; dieting without resistance training is how people lose weight but keep the same body composition, just smaller.</p>
+<p>Then look at the low-effort levers that shift TDEE itself. Non-exercise activity &mdash; walking, taking stairs, standing, fidgeting &mdash; varies enormously between people and can differ by hundreds of calories a day. A daily walk is the single most underrated biohack in the weight-management literature: it nudges expenditure upward without triggering the compensatory hunger that intense cardio sometimes provokes, and it improves sleep and mood, which feed back into better food choices. Sleep deserves equal billing: consistently sleeping under six hours disrupts hunger hormones and can quietly add hundreds of calories of extra intake the next day.</p>
+<p>Finally, be patient with the data. Daily weight fluctuates by a kilogram or more from water, glycogen, and gut contents; judge progress on two-to-four-week trends, not single weigh-ins. And remember that this tool estimates energy, not health. How you feel, how you sleep, how you perform, and your blood markers matter more than any number on a calculator &mdash; including this one.</p>
+<h2>When to talk to your doctor</h2>
+<p>This calculator is an educational tool, not medical advice, and there are situations where you should involve a professional before acting on the numbers. Talk to your doctor or a registered dietitian if you have diabetes or take glucose-lowering medication, thyroid disease, a history of eating disorders, heart disease, or you are pregnant or breastfeeding &mdash; calorie restriction in these situations needs supervision, not a web form. The same applies if you are considering an aggressive deficit, if your weight is changing rapidly without explanation, or if dieting is affecting your mood, sleep, or menstrual cycle. A brief conversation with a clinician before a diet costs little and can prevent real harm; a formula on the internet cannot examine you, review your medication, or notice the warning sign you missed.</p>
+<!-- PROSE END -->
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<details>
+<summary>What is resting metabolic rate (RMR)?</summary>
+<div class="a"><p>Resting metabolic rate is the number of calories your body burns at rest over 24 hours to keep you alive &mdash; powering your brain, heart, lungs, digestion, and body temperature. It typically accounts for 60&ndash;70% of your total daily energy expenditure.</p></div>
+</details>
+<details>
+<summary>How accurate is the Mifflin-St Jeor equation?</summary>
+<div class="a"><p>For most adults it predicts RMR within about &plusmn;10% of laboratory-measured values, which is why dietitians and researchers use it. However, it estimates from weight, height, age, and sex only, so it cannot account for body composition &mdash; two people at the same weight can have noticeably different RMRs if one carries more muscle.</p></div>
+</details>
+<details>
+<summary>What is the difference between RMR and BMR?</summary>
+<div class="a"><p>Basal metabolic rate (BMR) is measured under strict laboratory conditions: complete rest, a fasted state, and a thermoneutral room. Resting metabolic rate (RMR) is measured under less strict conditions and is usually around 10% higher. The Mifflin-St Jeor equation is technically an RMR estimate, although the two terms are often used interchangeably in fitness content.</p></div>
+</details>
+<details>
+<summary>What is TDEE and how is it different from RMR?</summary>
+<div class="a"><p>Total daily energy expenditure (TDEE) is everything you burn in 24 hours: your RMR plus all movement, exercise, and the energy cost of digesting food. This calculator multiplies your RMR by an activity factor &mdash; 1.2 for sedentary up to 1.9 for very active &mdash; to estimate TDEE.</p></div>
+</details>
+<details>
+<summary>Is it safe to eat fewer calories than my RMR?</summary>
+<div class="a"><p>Eating below your RMR for extended periods can cause fatigue, muscle loss, hormonal disruption, and nutrient deficiencies. A moderate deficit of around 10&ndash;20% below your TDEE is the standard sustainable approach. Aggressive deficits should only be attempted with medical supervision &mdash; talk to your doctor first.</p></div>
+</details>
+<details>
+<summary>Why does my RMR decline with age?</summary>
+<div class="a"><p>RMR falls roughly 1&ndash;2% per decade after early adulthood, mainly because muscle mass declines with age and muscle is more metabolically active than fat. Regular strength training slows this decline and is the most reliable way to protect your metabolic rate as you age.</p></div>
+</details>
+</div>
+<div class="author-line">
+<strong>Reviewed by Dr Taimoor Asghar</strong> &mdash; reviewed 2026-10-06. This calculator is an educational estimate, not medical advice.
+</div>
+<p class="disclaimer"><strong>Disclaimer:</strong> The information on this page is for general educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your doctor or another qualified health provider with any questions you may have regarding a medical condition.</p>
+</main>
+<footer class="site-footer"><div class="container">
+<p><strong style="color:#fff">DoctorBiohacks</strong> &mdash; evidence-first biohacking, decoded by a doctor. &middot; <a href="https://doctorbiohacks.com/tools/">All tools</a></p>
+</div></footer>
+<script>
+function calcRMR(){
+  var sex=document.getElementById('r-sex').value;
+  var age=parseFloat(document.getElementById('r-age').value);
+  var w=parseFloat(document.getElementById('r-weight').value);
+  var h=parseFloat(document.getElementById('r-height').value);
+  var act=parseFloat(document.getElementById('r-activity').value);
+  var out=document.getElementById('r-result');
+  if(isNaN(age)||isNaN(w)||isNaN(h)||age<10||age>100||w<30||w>300||h<120||h>230){
+    out.innerHTML='<p class="interpret">Please enter valid values for age (10\u2013100), weight (30\u2013300 kg) and height (120\u2013230 cm).</p>';
+    out.classList.add('show');
+    return;
+  }
+  var rmr=sex==='male'?(10*w+6.25*h-5*age+5):(10*w+6.25*h-5*age-161);
+  var tdee=rmr*act;
+  var cut=tdee*0.8, bulk=tdee*1.2;
+  var R=Math.round;
+  out.innerHTML='<p><strong>Your resting metabolic rate (RMR)</strong></p>'+
+    '<div class="big">'+R(rmr).toLocaleString()+' <span class="unit">kcal/day</span></div>'+
+    '<table><tr><th>Measure</th><th>Calories / day</th></tr>'+
+    '<tr><td>RMR (Mifflin-St Jeor)</td><td><strong>'+R(rmr).toLocaleString()+' kcal</strong></td></tr>'+
+    '<tr><td>TDEE (activity &times; '+act+')</td><td><strong>'+R(tdee).toLocaleString()+' kcal</strong></td></tr>'+
+    '<tr><td>Cutting target (&minus;20%)</td><td>'+R(cut).toLocaleString()+' kcal</td></tr>'+
+    '<tr><td>Bulking target (+20%)</td><td>'+R(bulk).toLocaleString()+' kcal</td></tr></table>'+
+    '<p class="interpret">This is an estimate &mdash; accurate to about &plusmn;10% for most people, but it cannot see your body composition.</p>'+
+    '<p class="note">Avoid eating below your RMR for extended periods. For aggressive deficits, or if you have a medical condition, talk to your doctor first.</p>';
+  out.classList.add('show');
+}
+</script>
+</body>
+</html>
